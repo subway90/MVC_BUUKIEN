@@ -35,7 +35,7 @@
 <body>
     <!-- sa-app -->
     <?php if(is_login()) : // Nếu đăng nhập sẽ show?>
-    <div class="sa-app sa-app--desktop-sidebar-shown sa-app--mobile-sidebar-hidden sa-app--toolbar-fixed">
+    <div class="sa-app sa-app--desktop-sidebar-hidden sa-app--mobile-sidebar-hidden sa-app--toolbar-fixed">
         <!-- sa-app__sidebar -->
         <div class="sa-app__sidebar">
             <div class="sa-sidebar">
@@ -89,11 +89,38 @@
                             <i class="fas fa-bars"></i>
                         </button>
                     </div>
-                    <div class="sa-toolbar__item">
-                        Hệ thống quản lí <?= WEB_NAME ?>
+                    
+                    <div class="mx-auto d-flex my-auto flex-grow-1 justify-content-center">
+                        <?php if($page == 'post') : //Show chức năng quản lí bưu kiện ?>
+                        <div class="sa-toolbar__item flex-grow-1">
+                            <input type="text" placeholder="Nhập thông tin tìm kiếm" class="form-control form-control--search" id="table-search"/>                     
+                        </div>
+                        <div class="sa-toolbar_item my-auto ms-2">
+                            <button class="btn btn-primary">
+                                <i class="fas fa-plus me-2 small"></i>
+                                <small>Thêm bưu kiện</small>
+                            </button>
+                            <button class="btn btn-success">
+                                <i class="fa far fa-file-excel me-2"></i>
+                                <small>Nhập từ Excel</small>
+                            </button>
+                            <button class="btn btn-success">
+                                <i class="fa far fa-file-excel me-2"></i>
+                                <small>Cập nhật trạng thái</small>
+                            </button>
+                            <button class="btn btn-success">
+                                <i class="fa far fa-file-excel me-2"></i>
+                                <small>Xoá dữ liệu</small>
+                            </button>
+                            <button class="btn btn-success">
+                                <i class="fa far fa-file-excel me-2"></i>
+                                <small>Xuất</small>
+                            </button>
+                        </div>
+                        <?php endif ?>
                     </div>
-                    <div class="mx-auto"></div>
 
+                    <!-- Thông tin -->
                     <div class="dropdown sa-toolbar__item">
                         <button class="sa-toolbar-user" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
                             data-bs-offset="0,1" aria-expanded="false">
