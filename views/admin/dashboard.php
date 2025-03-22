@@ -4,34 +4,50 @@
         <div class="row g-4 g-xl-5 mt-2">
             <div class="col-12 d-flex">
                 <div class="card flex-grow-1">
-                    <div class="ms-4 mt-4 my-auto">
-                        <small class="me-2 text-muted">Xem theo : </small>
-                        <button class="btn btn-sm btn-outline-dark me-1">
-                            Ngày
-                        </button>
-                        <button class="btn btn-sm btn-outline-dark me-1 active">
-                            Tuần
-                        </button>
-                        <button class="btn btn-sm btn-outline-dark me-1">
-                            Tháng
-                        </button>
-                        <button class="btn btn-sm btn-outline-dark">
-                            Năm
-                        </button>
+                    <div class="sa-chart-toolbar mb-5 mt-n2">
+                        <div class="sa-chart-toolbar__body p-5 pb-0">
+                            <div class="sa-chart-toolbar__item ms-0 me-auto">
+                                <div class="sa-chart-toolbar__item-range">
+                                    <div class="text-muted mx-3 my-auto small">
+                                        Từ ngày
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm datepicker-here" placeholder="Từ ngày" data-auto-close="true" data-language="en" aria-label="Datepicker"/>
+                                    <div class="text-muted mx-3 my-auto small">
+                                        Đến ngày
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm datepicker-here" placeholder="Đến ngày" data-auto-close="true" data-language="en" aria-label="Datepicker" />
+                                </div>
+                            </div>
+                            <div class="sa-chart-toolbar__item">
+                                <span class="text-muted small me-2">Hiển thị theo :</span>
+                                <button class="btn btn-sm btn-outline-dark me-2 active">
+                                    Ngày
+                                </button>
+                                <button class="btn btn-sm btn-outline-dark me-2">
+                                    Tuần
+                                </button>
+                                <button class="btn btn-sm btn-outline-dark me-2">
+                                    Tháng
+                                </button>
+                                <button class="btn btn-sm btn-outline-dark">
+                                    Năm
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <canvas id="stacked-bar"></canvas>
-                        <div id="data" style="display: none;"
-                            type-chart="bar"
-                            data=
-                            '[
-                                ["Đang gửi","#92C5F9",[0,3,4,5,5,3,1,0,3,4,5,5,3,1]],
-                                ["Đang đi phát","#0066CC",[4,11,0,6,2,2,1,0,3,4,5,5,3,1]],
+                        <div id="data" style="display: none;" 
+                            type-chart='bar' 
+                            array-unit='["Ngày 2/5","Ngày 3/5","Ngày 4/5","Ngày 5/5","Ngày 6/5","Ngày 7/5","Ngày 8/5","Ngày 9/5","Ngày 10/5","Ngày 11/5","Ngày 12/5","Ngày 13/5","Ngày 14/5"]'
+                            data='[
+                                ["Đang gửi","#92C5F9",[0,3,4,5,5,3,1,5,3,4,5,5,3,1]],
+                                ["Đang đi phát","#0066CC",[4,11,0,6,2,2,1,2,3,4,5,5,3,1]],
                                 ["Chưa phát được","#F8AE54",[1,2,3,0,5,6,7,0,3,4,5,5,3,1]],
-                                ["Chuyển hoàn","#CA6C0F",[12,3,4,5,5,0,1,0,3,4,5,5,3,1]],
-                                ["Chưa nhận COD","#E0E0E0",[2,5,5,5,5,3,5,0,3,4,5,5,3,1]],
-                                ["Đã nhận COD","#AFDC8F",[6,6,4,5,0,0,12,0,3,4,5,5,3,1]],
-                                ["Đã nhận CH","#B6A6E9",[2,3,3,0,0,7,2,0,3,4,5,5,3,1]]
+                                ["Chuyển hoàn","#CA6C0F",[12,3,4,5,5,0,1,3,3,4,5,5,3,1]],
+                                ["Chưa nhận COD","#E0E0E0",[2,5,5,5,5,3,5,2,3,4,5,5,3,1]],
+                                ["Đã nhận COD","#AFDC8F",[6,6,4,5,0,0,12,2,3,4,5,5,3,1]],
+                                ["Đã nhận CH","#B6A6E9",[2,3,3,0,0,7,2,1,3,4,5,5,3,1]]
                             ]'>
                         </div>
                     </div>

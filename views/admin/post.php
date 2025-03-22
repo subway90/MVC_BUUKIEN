@@ -1,11 +1,11 @@
 <!-- sa-app__body -->
 <div id="top" class="sa-app__body">
-    <div class="mt-5">
+    <div class="my-5 pb-5">
         <div class="container-fluid">
             <div class="card">
                 <div class="sa-divider"></div>
-                <table class="sa-datatables-init table table-hover border-muted" data-order="[[ 9, &quot;asc&quot; ]]"
-                    data-sa-search-input="#table-search">
+                <!-- <table class="sa-datatables-init table table-hover border-muted" data-order="[[ 9, &quot;asc&quot; ]]" data-sa-search-input="#table-search"> -->
+                <table class="table table-hover border-muted mb-0">
                     <thead>
                         <tr class="small">
                             <!-- <th class="w-min">ID</th> -->
@@ -26,7 +26,7 @@
                     </thead>
                     <tbody>
                         <?php
-                        for ($i = 0; $i < 100; $i++): ?>
+                        for ($i = 0; $i < 50; $i++): ?>
                             <tr class="small text-muted">
                                 <td class="small align-middle">
                                     <?= '#' . rand() ?>
@@ -35,16 +35,16 @@
                                     <?= ARR_POST_BRAND[array_rand(ARR_POST_BRAND)] ?>
                                 </td>
                                 <td class="small align-middle">
-                                    EMP_<?=rand(1,999)?>
+                                    EMP_<?= rand(1, 999) ?>
                                 </td>
                                 <td class="small align-middle">
-                                    <?= rand(1,28).'/'.rand(1,12).'/20'.rand(20,25) ?>
+                                    <?= rand(1, 28) . '/' . rand(1, 12) . '/20' . rand(20, 25) ?>
                                 </td>
                                 <td class="small align-middle">
-                                    <?='TO_'.rand(1000,9999)?>
+                                    <?= 'TO_' . rand(1000, 9999) ?>
                                 </td>
                                 <td class="small align-middle">
-                                    <?='0'.rand(300000000,999999999)?>
+                                    <?= '0' . rand(300000000, 999999999) ?>
                                 </td>
                                 <td class="small align-middle">
                                     <?= ARR_PROVINCE[array_rand(ARR_PROVINCE)] ?>
@@ -56,20 +56,23 @@
                                     <?= ARR_COD[array_rand(ARR_COD)] ?>
                                 </td>
                                 <td class="small align-middle">
-                                    <?='PRO_'.rand(1000,9999)?>
+                                    <?= 'PRO_' . rand(1000, 9999) ?>
                                 </td>
                                 <td class="small align-middle">
-                                    <?= ARR_STATE_POST[array_rand(ARR_STATE_POST)] ?>
+                                    <?= ARR_STATE_POST[array_rand(ARR_STATE_POST)]['name'] ?>
                                 </td>
                                 <td class="small align-middle">
                                     Ghi chú nè
                                 </td>
                                 <td class="">
                                     <form method="post">
-                                        <button class="shadow btn btn-sm border-1 btn-primary me-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasEditPost" aria-controls="canvasEditPost">
+                                        <button class="shadow btn btn-sm border-1 btn-primary me-1" type="button"
+                                            data-bs-toggle="offcanvas" data-bs-target="#canvasEditPost"
+                                            aria-controls="canvasEditPost">
                                             <small><i class="fa fas fa-edit"></i></small>
                                         </button>
-                                        <button class="shadow btn btn-sm border-1 btn-danger" type="button" onclick="delete_force(<?= $i ?>)" >
+                                        <button class="shadow btn btn-sm border-1 btn-danger" type="button"
+                                            onclick="delete_force(<?= $i ?>)">
                                             <small><i class="fa fas fa-trash"></i></small>
                                         </button>
                                     </form>
@@ -82,6 +85,70 @@
                 </table>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- Footer Page -->
+<div class="position-fixed fixed-bottom d-flex bg-primary">
+    <div class="container-fluid">
+        <table class="table border-none my-3">
+            <thead>
+                <th class="min-w-5x p-0 border-0"></th>
+                <th style="width: 0" class="min-w-5x p-0 border-0 d-flex">
+                    <select style="width: auto" class="form-select form-select-sm border-0">
+                        <option value="0" selected disabled>- Lọc đơn vị -</option>
+                        <?php foreach (ARR_POST_BRAND as $i => $name): ?>
+                            <option value="<?= ++$i ?>"><?= $name ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </th>
+                <th class="min-w-5x p-0 border-0"></th>
+                <th class="min-w-5x p-0 border-0">
+                    <div class="dropdown sa-toolbar__item">
+                        <button class="sa-toolbar-user btn-sm bg-light small fw-normal" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+                            data-bs-offset="0,1" aria-expanded="false">
+                            - Lọc ngày gửi -
+                        </button>
+                        <ul style="width: 360px !important" class="dropdown-menu p-5" aria-labelledby="dropdownMenuButton">
+                            <li>
+                                <div class="">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text w-25">
+                                            <small>Từ ngày</small>
+                                        </span>
+                                        <input type="date" class="form-control" placeholder="Username" aria-label="Username">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text w-25">
+                                            <small>Đến ngày</small>
+                                        </span>
+                                        <input type="date" class="form-control" placeholder="Username" aria-label="Username">
+                                    </div>
+                                    <div class="text-center mt-4">
+                                        <button class="btn btn-sm btn-primary small">Xác nhận lọc</button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </th>
+                <th class="min-w-5x p-0 border-0"></th>
+                <th class="min-w-5x p-0 border-0"></th>
+                <th class="min-w-5x p-0 border-0"></th>
+                <th class="min-w-5x p-0 border-0"></th>
+                <th class="min-w-5x p-0 border-0"></th>
+                <th style="width: 0" class="min-w-5x p-0 border-0 d-flex">
+                    <select style="width: auto" class="form-select form-select-sm border-0">
+                        <option value="0" selected disabled>- Lọc trạng thái -</option>
+                        <?php foreach (ARR_STATE_POST as $i => $item): extract($item)?>
+                            <option value="<?= ++$i ?>"><?= $name ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </th>
+                <th class="min-w-5x p-0 border-0"></th>
+                <th class="min-w-5x p-0 border-0"></th>
+            </thead>
+        </table>
     </div>
 </div>
 
@@ -107,58 +174,62 @@
                             Thông tin người nhận
                         </div>
                         <div class="col-12 col-lg-6 text-start mb-3">
-                                <label class="small" for="receiver">Họ và tên</label>
-                                <input name="receiver" id="receiver" type="text" placeholder="Nhập họ và tên người nhận" class="form-control" />
+                            <label class="small" for="receiver">Họ và tên</label>
+                            <input name="receiver" id="receiver" type="text" placeholder="Nhập họ và tên người nhận"
+                                class="form-control" />
                         </div>
                         <div class="col-12 col-lg-6 text-start mb-3">
-                                <label class="small" for="phone">Số điện thoại</label>
-                                <input name="phone" id="phone" type="text" placeholder="Nhập số điện thoại người nhận" class="form-control" />
+                            <label class="small" for="phone">Số điện thoại</label>
+                            <input name="phone" id="phone" type="text" placeholder="Nhập số điện thoại người nhận"
+                                class="form-control" />
                         </div>
                         <div class="col-12 text-start mb-3">
-                                <label class="small" for="address">Địa chỉ</label>
-                                <input name="address" id="address" type="text" placeholder="Nhập địa chỉ người nhận" class="form-control" />
+                            <label class="small" for="address">Địa chỉ</label>
+                            <input name="address" id="address" type="text" placeholder="Nhập địa chỉ người nhận"
+                                class="form-control" />
                         </div>
                         <div class="col-12 text-center fw-bold my-5">
                             Thông tin bưu kiện
                         </div>
                         <div class="col-6 col-lg-3 text-start mb-3">
-                                <label class="small" for="code_post">Mã bưu kiện</label>
-                                <input name="code_post" id="code_post" type="text" placeholder="Nhập mã bưu kiện" class="form-control" />
+                            <label class="small" for="code_post">Mã bưu kiện</label>
+                            <input name="code_post" id="code_post" type="text" placeholder="Nhập mã bưu kiện"
+                                class="form-control" />
                         </div>
                         <div class="col-6 col-lg-3 text-start mb-3">
-                                <label class="small" for="shipping_unit">Đơn vị vận chuyển</label>
-                                <select name="shipping_unit" id="shipping_unit" class="form-select">
-                                    <option value="0" selected>--- Chọn đơn vị ---</option>
-                                    <?php foreach (ARR_POST_BRAND as $i => $name) : ?>
-                                    <option value="<?=++$i?>"><?= $name ?></option>
-                                    <?php endforeach ?>
-                                </select>
+                            <label class="small" for="shipping_unit">Đơn vị vận chuyển</label>
+                            <select name="shipping_unit" id="shipping_unit" class="form-select">
+                                <option value="0" selected disabled>--- Chọn đơn vị ---</option>
+                                <?php foreach (ARR_POST_BRAND as $i => $name): ?>
+                                    <option value="<?= ++$i ?>"><?= $name ?></option>
+                                <?php endforeach ?>
+                            </select>
                         </div>
                         <div class="col-6 col-lg-3 text-start mb-3">
-                                <label class="small" for="date_sent">Ngày gửi</label>
-                                <input name="date_sent" id="date_sent" type="text" class="form-control datepicker-here" data-auto-close="true" data-language="en" aria-label="Datepicker"
-                                />
+                            <label class="small" for="date_sent">Ngày gửi</label>
+                            <input name="date_sent" id="date_sent" type="text" class="form-control datepicker-here"
+                                data-auto-close="true" data-language="en" aria-label="Datepicker" />
                         </div>
                         <div class="col-6 col-lg-3 text-start mb-3">
-                                <label class="small" for="to_province">Gửi đến (Tỉnh thành)</label>
-                                <select name="to_province" id="to_province" class="form-select">
-                                    <option value="0" selected>--- Chọn địa điểm ---</option>
-                                    <?php foreach (ARR_PROVINCE as $i => $name) : ?>
-                                    <option value="<?=++$i?>"><?= $name ?></option>
-                                    <?php endforeach ?>
-                                </select>
+                            <label class="small" for="to_province">Gửi đến (Tỉnh thành)</label>
+                            <select name="to_province" id="to_province" class="form-select">
+                                <option value="0" selected disabled>--- Chọn địa điểm ---</option>
+                                <?php foreach (ARR_PROVINCE as $i => $name): ?>
+                                    <option value="<?= ++$i ?>"><?= $name ?></option>
+                                <?php endforeach ?>
+                            </select>
                         </div>
                         <div class="col-12 col-lg-6 text-start mb-3">
-                                <label class="small" for="name_post">Tên bưu kiện</label>
-                                <input name="name_post" type="text" placeholder="Nhập tên bưu kiện" class="form-control" />
+                            <label class="small" for="name_post">Tên bưu kiện</label>
+                            <input name="name_post" type="text" placeholder="Nhập tên bưu kiện" class="form-control" />
                         </div>
                         <div class="col-6 col-lg-3 text-start mb-3">
-                                <label class="small" for="fee">Phí vận chuyển</label>
-                                <input name="fee" type="text" placeholder="Nhập phí vận chuyển" class="form-control" />
+                            <label class="small" for="fee">Phí vận chuyển</label>
+                            <input name="fee" type="text" placeholder="Nhập phí vận chuyển" class="form-control" />
                         </div>
                         <div class="col-6 col-lg-3 text-start mb-3">
-                                <label class="small" for="cod">COD</label>
-                                <input name="cod" type="text" placeholder="Nhập COD" class="form-control" />
+                            <label class="small" for="cod">COD</label>
+                            <input name="cod" type="text" placeholder="Nhập COD" class="form-control" />
                         </div>
                     </div>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>

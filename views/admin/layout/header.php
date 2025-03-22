@@ -31,8 +31,40 @@
     
 </head>
     <?=toast_show();//dùng toast?>
-</div>
+
+
 <body>
+
+    <!-- Spinner -->
+    <style>
+        #spinner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white; /* Nền trắng */
+            z-index: 9999; /* Đảm bảo spinner nằm trên cùng */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            visibility: visible; /* Hiển thị spinner ban đầu */
+        }
+    </style>
+
+    <div id="spinner">
+        <div  style="width: 8px; height: 8px;" class="spinner-grow text-danger" role="status">
+        </div>
+        <div  style="width: 12px; height: 12px;" class="spinner-grow text-warning mx-2" role="status">
+        </div>
+        <div  style="width: 16px; height: 16px;" class="spinner-grow text-success" role="status">
+        </div>
+        <div  style="width: 20px; height: 20px;" class="spinner-grow text-danger mx-2" role="status">
+        </div>
+        <div  style="width: 24px; height: 24px;" class="spinner-grow text-warning" role="status">
+        </div>
+    </div>
+
     <!-- sa-app -->
     <?php if(is_login()) : // Nếu đăng nhập sẽ show?>
     <div class="sa-app sa-app--desktop-sidebar-hidden sa-app--mobile-sidebar-hidden sa-app--toolbar-fixed">
@@ -96,7 +128,7 @@
                             <input type="text" placeholder="Nhập thông tin tìm kiếm" class="form-control form-control--search" id="table-search"/>                     
                         </div>
                         <div class="sa-toolbar_item my-auto ms-2">
-                            <button class="btn btn-primary">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddPost">
                                 <i class="fas fa-plus me-2 small"></i>
                                 <small>Thêm bưu kiện</small>
                             </button>

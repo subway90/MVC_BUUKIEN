@@ -182,6 +182,7 @@
         // Lấy dữ liệu từ div
         const dataDiv = document.getElementById('data');
         const typeChart = dataDiv.getAttribute('type-chart');
+        const arrayUnit = JSON.parse(dataDiv.getAttribute('array-unit'));
         const data = JSON.parse(dataDiv.getAttribute('data')); // Phân tích dữ liệu từ thuộc tính data
     
         const datasets = data.map(item => ({
@@ -196,7 +197,7 @@
         new Chart(chartCanvas.getContext('2d'), {
             type: typeChart,
             data: {
-                labels: ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ Nhật'],
+                labels: arrayUnit,
                 datasets: datasets, // Sử dụng datasets đã tạo
             },
             options: {
@@ -322,3 +323,8 @@
         });
     });
 }(jQuery, window));
+
+// Sự kiện khi trang đã tải xong
+window.onload = function() {
+    document.getElementById('spinner').style.visibility = 'hidden'; // Ẩn spinner
+};
