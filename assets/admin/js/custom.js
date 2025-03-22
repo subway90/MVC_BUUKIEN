@@ -54,8 +54,8 @@
     */
     (function() {
         $.fn.DataTable.ext.pager.numbers_length = 5;
-        $.fn.DataTable.defaults.oLanguage.sInfo = 'Showing _START_ to _END_ of _TOTAL_';
-        $.fn.DataTable.defaults.oLanguage.sLengthMenu = 'Rows per page _MENU_';
+        $.fn.DataTable.defaults.oLanguage.sInfo = 'Dòng _START_ đến _END_ của _TOTAL_';
+        $.fn.DataTable.defaults.oLanguage.sLengthMenu = 'Số dòng trên trang _MENU_';
 
         const template = '' +
             '<"sa-datatables"' +
