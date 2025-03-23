@@ -32,10 +32,10 @@ if (isset($_FILES['file_request'])) {
             $data = $sheet->rangeToArray("A$row:D$row")[0]; // Lấy 4 cột
 
             // Gán dữ liệu vào biến
-            $id_parcel = trim($data[0]); // Mã bưu kiện
-            $new_fee = trim($data[1]); // Phí gửi
-            $new_cod = trim($data[2]); // COD
-            $new_state = trim($data[3]); // Trạng thái mới
+            $id_parcel = clear_input($data[0]); // Mã bưu kiện
+            $new_fee = clear_input($data[1]); // Phí gửi
+            $new_cod = clear_input($data[2]); // COD
+            $new_state = clear_input($data[3]); // Trạng thái mới
 
             // Gọi hàm so sánh
             $get_data_compare = compare_parcel($id_parcel, $new_fee, $new_cod, $new_state);
