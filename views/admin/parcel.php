@@ -59,7 +59,7 @@
                                 </td>
                                 <td class="small align-middle text-center text-light">
                                     <?php foreach (ARR_STATE_POST as $state) : extract($state) ?>
-                                    <?php if($name == $parcel['state_parcel']) : ?>
+                                    <?php if(strcasecmp($name,$parcel['state_parcel']) === 0) : ?>
                                         <span class="p-2 small d-block text-center" style="background-color : <?= $color ?>">
                                             <?= $name ?>
                                         </span>
