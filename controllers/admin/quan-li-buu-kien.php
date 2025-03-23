@@ -34,15 +34,17 @@ if(isset($_POST['addParcel'])) {
     // validate
     if(!$id_parcel) $error_valid[] = 'Vui lòng nhập Mã bưu kiện';
     if(!$brand_post) $error_valid[] = 'Vui lòng chọn đơn vị chuyển phát';
+    if(!$date_sent) $error_valid[] = 'Vui lòng chọn ngày gửi';
     if(!$name_receiver) $error_valid[] = 'Vui lòng nhập tên người nhận';
     if(!$phone_receiver) $error_valid[] = 'Vui lòng nhập SĐT người nhận';
     if(!$address_receiver) $error_valid[] = 'Vui lòng nhập địa chỉ người nhận';
+    if(!$name_product) $error_valid[] = 'Vui lòng nhập tên sản phẩm';
     if(!$state_parcel) $error_valid[] = 'Vui lòng chọn trạng thái bưu kiện';
 
     // nếu hợp lệ
     if (!$error_valid) {
         // insert
-        create_parcel($id_parcel,$brand_post,$id_user,$date_sent,$name_receiver,$phone_receiver,$address_receiver,$fee,$cod,$note,$state_parcel);
+        create_parcel($id_parcel,$brand_post,$id_user,$date_sent,$name_receiver,$phone_receiver,$address_receiver,$fee,$cod,$name_product,$note,$state_parcel);
         // thông báo
         toast_create('success','Thêm mới thành công');
         // chuyển route

@@ -365,7 +365,6 @@
                         </div>
                         <div class="col-12">
                             <button name="addParcel" type="submit" class="w-btn-fill btn btn-primary text-light ms-2">Xác nhận</button>
-                            <button name="editParcel" type="submit" class="w-btn-fill btn btn-primary text-light ms-2">Xác nhận</button>
                             <button type="button" class="w-btn-fill btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
                         </div>
                     </div>
