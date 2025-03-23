@@ -26,7 +26,7 @@
                     <tbody>
                         <?php if($list_parcel) : ?>
                         <?php foreach ($list_parcel as $parcel) : ?>
-                            <tr class="small" onclick="getOnePost(<?= $parcel['id_parcel'] ?>)">
+                            <tr class="small" onclick="getOnePost('<?= $parcel['id_parcel'] ?>')">
                                 <td class="small align-middle text-center">
                                     <?= $parcel['id_parcel'] ?>
                                 </td>
@@ -172,8 +172,8 @@
                         </div>
                         <div class="col-6 row align-content-start">
                             <div class="col-6 py-2 px-3 text-start mb-4">
-                                <label class="small text-muted" for="id_parcel">Mã bưu kiện</label>
-                                <input name="id_parcel" id="id_parcel" value="<?= $id_parcel ?>" type="text" placeholder="Nhập mã bưu kiện"
+                                <label class="small text-muted" for="id_parcel">Mã bưu kiện (không thể sửa)</label>
+                                <input readonly name="id_parcel" id="id_parcel" value="<?= $id_parcel ?>" type="text" placeholder="Nhập mã bưu kiện"
                                     class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
                             </div>
                             <div class="col-6 py-2 px-3 text-start mb-4">

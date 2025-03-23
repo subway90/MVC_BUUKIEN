@@ -15,7 +15,7 @@ function get_parcel_with_id($id) {
     return pdo_query_one(
         'SELECT *
         FROM parcel p
-        WHERE id_parcel ='.$id
+        WHERE id_parcel ="'.$id.'"'
     );
 }
 
