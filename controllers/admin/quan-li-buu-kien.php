@@ -17,7 +17,6 @@ $fee = $cod = 0;
 // Thêm parcel mới
 if(isset($_POST['addParcel'])) {
     
-    // test_array($_POST);
     // lấy input
     if(isset($_POST['id_parcel'])) $id_parcel = clear_input($_POST['id_parcel']);
     if(isset($_POST['id_user'])) $id_user = clear_input($_POST['id_user']);

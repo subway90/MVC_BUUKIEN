@@ -25,43 +25,46 @@
                     </thead>
                     <tbody>
                         <?php if($list_parcel) : ?>
-                        <?php foreach ($list_parcel as $parcel) : extract($parcel) ?>
+                        <?php foreach ($list_parcel as $parcel) : ?>
                             <tr class="small" onclick="getOnePost(<?= $i ?>)">
                                 <td class="small align-middle text-center">
-                                    <?= '#' . rand() ?>
+                                    <?= $parcel['id_parcel'] ?>
                                 </td>
                                 <td class="small align-middle text-center">
-                                    <?= ARR_POST_BRAND[array_rand(ARR_POST_BRAND)] ?>
+                                    <?= $parcel['brand_post'] ?>
                                 </td>
                                 <td class="small align-middle text-center">
-                                    EMP_<?= rand(1, 999) ?>
+                                    <?= $parcel['id_user'] ?>
                                 </td>
                                 <td class="small align-middle text-center">
-                                    <?= rand(1, 28) . '/' . rand(1, 12) . '/20' . rand(20, 25) ?>
+                                    <?= $parcel['date_sent'] ?>
                                 </td>
                                 <td class="small align-middle text-center">
-                                    <?= 'TO_' . rand(1000, 9999) ?>
+                                    <?= $parcel['name_receiver'] ?>
                                 </td>
                                 <td class="small align-middle text-center">
-                                    <?= '0' . rand(300000000, 999999999) ?>
+                                    <?= $parcel['phone_receiver'] ?>
                                 </td>
                                 <td class="small align-middle text-center">
-                                    <?= ARR_PROVINCE[array_rand(ARR_PROVINCE)] ?>
+                                    <?= $parcel['address_receiver'] ?>
                                 </td>
                                 <td class="small align-middle text-center">
-                                    <?= ARR_COD[array_rand(ARR_COD)] ?>
+                                    <?= $parcel['fee'] ?>
                                 </td>
                                 <td class="small align-middle text-center">
-                                    <?= ARR_COD[array_rand(ARR_COD)] ?>
+                                    <?= $parcel['cod'] ?>
                                 </td>
                                 <td class="small align-middle text-center">
-                                    <?= 'PRO_' . rand(1000, 9999) ?>
+                                    <?= $parcel['name_product'] ?>
                                 </td>
                                 <td class="small align-middle text-center text-light">
-                                    <?php $rand_order_state = array_rand(ARR_STATE_POST) ?>
-                                    <span class="p-2 small d-block text-center" style="background-color : <?= ARR_STATE_POST[$rand_order_state]['color'] ?>">
-                                        <?= ARR_STATE_POST[$rand_order_state]['name'] ?>
-                                    </span>
+                                    <?php foreach (ARR_STATE_POST as $state) : extract($state) ?>
+                                    <?php if($name == $parcel['state_parcel']) : ?>
+                                        <span class="p-2 small d-block text-center" style="background-color : <?= $color ?>">
+                                            <?= $name ?>
+                                        </span>
+                                    <?php endif ?>
+                                    <?php endforeach ?>
                                 </td>
                                 <td class="small align-middle text-center">
                                     Ghi chú nè

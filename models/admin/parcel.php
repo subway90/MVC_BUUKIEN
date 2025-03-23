@@ -25,7 +25,7 @@ function create_parcel($id_parcel,$brand_post,$id_user,$date_sent,$name_receiver
         ".$fee.",
         ".$cod.",
         '".$note."',
-        '".$state_parcel."'
+        '".$state_parcel."
         )'
     ");
 }
