@@ -19,7 +19,7 @@
                     <tbody> 
                         <?php
                         for ($i = 0; $i < 50; $i++): ?>
-                            <tr class="small" onclick="getOnePost(<?= $i ?>)">
+                            <tr class="small">
                                 <td class="small align-middle text-center">
                                     <?= 'EMP_' . rand() ?>
                                 </td>
@@ -125,31 +125,34 @@
                 <input type="hidden" name="id_force" value="">
                 <div class="modal-body text-center px-5">
                     <div class="row justify-content-between">
-                        <div class="col-12 text-center h4 fw-normal mb-5 pb-5">
+                        <div class="col-12 text-center h4 fw-normal mb-5 pb-2">
                             Thông tin nhân viên
                         </div>
+                        <div class="ps-2 col-12 text-start">
+                            <?= show_error($error_valid) ?>
+                        </div>
                         <div class="col-6 py-2 px-3 text-start mb-4">
-                                <label class="small text-muted" for="receiver">Họ tên</label>
-                                <input name="receiver" id="receiver" type="text" placeholder="Nhập họ và tên"
+                                <label class="small text-muted" for="full_name">Họ tên</label>
+                                <input name="full_name" value="<?= $full_name ?>" id="full_name" type="text" placeholder="Nhập họ và tên"
                                     class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
                             </div>
                             <div class="col-6 py-2 px-3 text-start mb-4">
                                 <label class="small text-muted" for="phone">Số điện thoại</label>
-                                <input name="phone" id="phone" type="text" placeholder="Nhập số điện thoại"
+                                <input name="phone" value="<?= $phone ?>" id="phone" type="text" placeholder="Nhập số điện thoại"
                                     class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
                             </div>
                             <div class="col-6 py-2 px-3 text-start mb-4">
-                                <label class="small text-muted" for="address">Email/Username</label>
-                                <input name="address" id="address" type="text" placeholder="Nhập email đăng nhập"
+                                <label class="small text-muted" for="username">Email/Username</label>
+                                <input name="username" value="<?= $username ?>" id="username" type="text" placeholder="Nhập email đăng nhập"
                                     class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
                             </div>
                             <div class="col-6 py-2 px-3 text-start mb-4">
-                                <label class="small text-muted" for="product">Mật khẩu</label>
-                                <input name="product" id="product" type="password" placeholder="Nhập mật khẩu"
+                                <label class="small text-muted" for="password">Mật khẩu</label>
+                                <input name="password" id="password" type="password" placeholder="Nhập mật khẩu"
                                     class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
                             </div>
                         <div class="col-12 mt-4">
-                            <button name="addPost" type="submit" class="w-btn-fill btn btn-primary text-light ms-2">Xác nhận</button>
+                            <button name="addEmployee" type="submit" class="w-btn-fill btn btn-primary text-light ms-2">Xác nhận</button>
                             <button type="button" class="w-btn-fill btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
                         </div>
                     </div>
@@ -159,22 +162,3 @@
         </div>
     </div>
 </div>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var myModal = new bootstrap.Modal(document.getElementById('modalAddEmployee'));
-        myModal.show();
-    });
-</script>
-
-<script>
-    function getOnePost(id) {
-        document.querySelector('input[name="id_post"]').value = id;
-        
-        // Xoá class d-none cho div có id btn-delete
-        var btnDelete = document.getElementById('btn-delete');
-        btnDelete.classList.remove('d-none');
-        
-        var myModal = new bootstrap.Modal(document.getElementById('modalAddEmployee'));
-        myModal.show();
-    }
-</script>
