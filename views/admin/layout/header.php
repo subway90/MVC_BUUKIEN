@@ -154,7 +154,7 @@
                         <div class="sa-toolbar_item my-auto px-3 p-2 bg-blue-light rounded rounded-fill-header">
                             <i class="fas fa-search text-light small ms-1 me-3"></i>
                             <input type="text" placeholder="Nhập thông tin tìm kiếm" class="form-search" id="table-search"/>                     
-                            <button class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header" data-bs-toggle="modal" data-bs-target="#modalAddPost">
+                            <button class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header" data-bs-toggle="modal" data-bs-target="#modalAddParcel">
                                 Thêm bưu kiện
                             </button>
                             <button class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">

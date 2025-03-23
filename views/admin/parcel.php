@@ -155,66 +155,70 @@
 </style>
 
 <!-- Modal thêm bưu kiện -->
-<div class="modal fade" id="modalAddPost" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalAddParcel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
             <form method="post">
-                <input type="hidden" name="id_force" value="">
                 <div class="modal-body text-center px-5">
                     <div class="row justify-content-between">
-                        <div class="col-12 text-center h4 fw-normal mb-5 pb-5">
+                        <div class="col-12 text-center h4 fw-normal mb-5 pb-3">
                             Thông tin bưu kiện
+                        </div>
+                        <div class="col-12 my-2 text-start">
+                            <?= show_error($error_valid) ?>
                         </div>
                         <div class="col-6 row align-content-start">
                             <div class="col-6 py-2 px-3 text-start mb-4">
-                                <label class="small text-muted" for="code_post">Mã bưu kiện</label>
-                                <input name="code_post" id="code_post" type="text" placeholder="Nhập mã bưu kiện"
+                                <label class="small text-muted" for="id_parcel">Mã bưu kiện</label>
+                                <input name="id_parcel" id="id_parcel" value="<?= $id_parcel ?>" type="text" placeholder="Nhập mã bưu kiện"
                                     class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
                             </div>
                             <div class="col-6 py-2 px-3 text-start mb-4">
-                                <label class="small text-muted" for="shipping_unit">Đơn vị vận chuyển</label>
-                                <select name="shipping_unit" id="shipping_unit" class="form-select ps-0 border-0 border-bottom border-2 outline-none">
-                                    <option value="0" selected disabled>--- Chọn đơn vị ---</option>
+                                <label class="small text-muted" for="brand_post">Đơn vị vận chuyển</label>
+                                <select name="brand_post" id="brand_post" class="form-select ps-0 border-0 border-bottom border-2 outline-none">
+                                    <option value="0" selected>--- Chọn đơn vị ---</option>
                                     <?php foreach (ARR_POST_BRAND as $i => $name): ?>
-                                        <option value="<?= ++$i ?>"><?= $name ?></option>
+                                        <option <?= $brand_post == $name ? 'selected' : '' ?> value="<?= $name ?>"><?= $name ?></option>
                                     <?php endforeach ?>
                                 </select>
                             </div>
                             <div class="col-6 py-2 px-3 text-start mb-4">
-                                <label class="small text-muted" for="to_province">Nhân viên</label>
-                                <select name="to_province" id="to_province" class="form-select ps-0 border-0 border-bottom border-2 outline-none">
-                                    <option value="0" selected disabled>--- Chọn nhân viên ---</option>
-                                    <option value="1">Adminitrator</option>
+                                <label class="small text-muted" for="id_user">Nhân viên</label>
+                                <select name="id_user" id="id_user" class="form-select ps-0 border-0 border-bottom border-2 outline-none">
+                                    <option value="0" selected>--- Chọn nhân viên ---</option>
+                                    <?php foreach ($list_employee as $employee): ?>
+                                        <option <?= $id_user == $employee['id_user'] ? 'selected' : '' ?> value="<?= $employee['id_user'] ?>"><?= $employee['username'] ?></option>
+                                    <?php endforeach ?>
                                 </select>
                             </div>
                             <div class="col-6 py-2 px-3 text-start mb-4">
                                 <label class="small text-muted" for="date_sent">Ngày gửi</label>
-                                <input name="date_sent" id="date_sent" type="date" class="form-control ps-0 border-0 border-bottom border-2 outline-none datepicker-here"
+                                <input name="date_sent" id="date_sent" value="<?= $date_sent ?>" type="date" class="form-control ps-0 border-0 border-bottom border-2 outline-none datepicker-here"
                                     data-auto-close="true" data-language="en" aria-label="Datepicker" />
                             </div>
                             <div class="col-6 py-2 px-3 text-start mb-4">
                                 <label class="small text-muted" for="fee">Phí gửi</label>
-                                <input name="fee" type="text" placeholder="Nhập phí vận chuyển" class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
+                                <input name="fee" type="number" value="<?= $fee ?>"  placeholder="Nhập phí vận chuyển" class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
                             </div>
                             <div class="col-6 py-2 px-3 text-start mb-4">
                                 <label class="small text-muted" for="cod">Tiền thu hộ COD</label>
-                                <input name="cod" type="text" placeholder="Nhập COD" class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
+                                <input name="cod" type="number" value="<?= $cod ?>"  placeholder="Nhập COD" class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
                             </div>
                             <div class="col-6 py-2 px-3 text-start mb-4">
-                                <label class="small text-muted" for="to_province">Tỉnh thành</label>
-                                <select name="to_province" id="to_province" class="form-select ps-0 border-0 border-bottom border-2 outline-none">
+                                <label class="small text-muted" for="address_receiver">Tỉnh thành</label>
+                                <select name="address_receiver" id="address_receiver" class="form-select ps-0 border-0 border-bottom border-2 outline-none">
                                     <option value="0" selected disabled>--- Chọn địa điểm ---</option>
                                     <?php foreach (ARR_PROVINCE as $i => $name): ?>
-                                        <option value="<?= ++$i ?>"><?= $name ?></option>
+                                        <option <?= $address_receiver == $name ? 'selected' : '' ?> value="<?= $name ?>"><?= $name ?></option>
                                     <?php endforeach ?>
                                 </select>
                             </div>
                             <div class="col-6 py-2 px-3 text-start mb-4">
-                                <label class="small text-muted" for="to_province">Trạng thái</label>
-                                <select name="to_province" id="to_province" class="form-select ps-0 border-0 border-bottom border-2 outline-none">
+                                <label class="small text-muted" for="state_parcel">Trạng thái</label>
+                                <select name="state_parcel" id="state_parcel" class="form-select ps-0 border-0 border-bottom border-2 outline-none">
                                     <option value="0" selected disabled>--- Chọn trạng thái ---</option>
                                     <?php foreach (ARR_STATE_POST as $i => $item): ?>
-                                        <option value="<?= ++$i ?>"><?= $item['name'] ?></option>
+                                        <option <?= $state_parcel == $item['name'] ? 'selected' : '' ?> value="<?= $item['name'] ?>"><?= $item['name'] ?></option>
                                     <?php endforeach ?>
                                 </select>
                             </div>
@@ -222,37 +226,33 @@
                         
                         <div class="col-6 row align-content-start">
                             <div class="col-6 py-2 px-3 text-start mb-4">
-                                <label class="small text-muted" for="receiver">Họ tên người nhận</label>
-                                <input name="receiver" id="receiver" type="text" placeholder="Nhập họ và tên người nhận"
+                                <label class="small text-muted" for="name_receiver">Họ tên người nhận</label>
+                                <input name="name_receiver" value="<?= $name_receiver ?>" id="name_receiver" type="text" placeholder="Nhập họ và tên người nhận"
                                     class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
                             </div>
                             <div class="col-6 py-2 px-3 text-start mb-4">
-                                <label class="small text-muted" for="phone">Số điện thoại</label>
-                                <input name="phone" id="phone" type="text" placeholder="Nhập số điện thoại người nhận"
+                                <label class="small text-muted" for="phone_receiver">Số điện thoại</label>
+                                <input name="phone_receiver" value="<?= $phone_receiver ?>" id="phone_receiver" type="text" placeholder="Nhập số điện thoại người nhận"
                                     class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
                             </div>
                             <div class="col-6 py-2 px-3 text-start mb-4">
-                                <label class="small text-muted" for="address">Địa chỉ</label>
-                                <input name="address" id="address" type="text" placeholder="Nhập địa chỉ người nhận"
+                                <label class="small text-muted" for="none">Địa chỉ</label>
+                                <input name="none" id="none" type="text" placeholder="Nhập địa chỉ người nhận"
                                     class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
                             </div>
                             <div class="col-6 py-2 px-3 text-start mb-4">
-                                <label class="small text-muted" for="product">Sản phẩm</label>
-                                <input name="product" id="product" type="text" placeholder="Nhập tên sản phẩm"
+                                <label class="small text-muted" for="name_product">Sản phẩm</label>
+                                <input name="name_product" value="<?= $name_product ?>" id="name_product" type="text" placeholder="Nhập tên sản phẩm"
                                     class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
                             </div>
                             <div class="col-12 py-2 px-3 text-start mb-4">
                                 <label class="small text-muted" for="note">Ghi chú về bưu kiện</label>
-                                <input name="note" id="note" type="text" placeholder="Nhập ghi chú về bưu kiện"
+                                <input name="note" value="<?= $note ?>" id="note" type="text" placeholder="Nhập ghi chú về bưu kiện"
                                     class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
-                            </div>
-                            <div id="btn-delete" class="d-none col-12 py-2 px-3 text-start mb-4">
-                                <div class="small text-muted mb-3">Hành động</div>
-                                <button class="ms-2 btn btn-sm btn-danger">Xoá bưu kiện</button>
                             </div>
                         </div>
                         <div class="col-12">
-                            <button name="addPost" type="submit" class="w-btn-fill btn btn-primary text-light ms-2">Xác nhận</button>
+                            <button name="addParcel" type="submit" class="w-btn-fill btn btn-primary text-light ms-2">Xác nhận</button>
                             <button type="button" class="w-btn-fill btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
                         </div>
                     </div>
@@ -272,12 +272,7 @@
 <script>
     function getOnePost(id) {
         document.querySelector('input[name="id_post"]').value = id;
-        
-        // Xoá class d-none cho div có id btn-delete
-        var btnDelete = document.getElementById('btn-delete');
-        btnDelete.classList.remove('d-none');
-        
-        var myModal = new bootstrap.Modal(document.getElementById('modalAddPost'));
+        var myModal = new bootstrap.Modal(document.getElementById('modalAddParcel'));
         myModal.show();
     }
 </script>
