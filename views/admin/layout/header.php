@@ -165,7 +165,7 @@
                             <button id="updateParcel" class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
                                 Cập nhật trạng thái
                             </button>
-                            <button class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
+                            <button id="deleteParcel" class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
                                 Xoá dữ liệu
                             </button>
                             <button class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
@@ -186,7 +186,7 @@
                             <button class="invisible min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
                                 space
                             </button>
-                            <button class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
+                            <button id="compareParcel" class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
                                 Tải XLSX
                             </button>
                             <button class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
@@ -274,6 +274,70 @@
                 const form = document.createElement('form');
                 form.method = 'POST';
                 form.action = '/admin/updateParcel'; // Đường dẫn đến controller
+                form.enctype = 'multipart/form-data'; // Đặt kiểu mã hóa để gửi tệp
+
+                // Thêm input file vào form
+                form.appendChild(fileInput);
+
+                // Thêm form vào body và gửi đi
+                document.body.appendChild(form);
+                form.submit(); // Gửi form
+            }
+        });
+
+        // Kích hoạt input file
+        fileInput.click(); // Kích hoạt dialog chọn tệp
+    });
+</script>
+
+<script>
+    document.getElementById('deleteParcel').addEventListener('click', function() {
+        // Tạo input file ẩn
+        const fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.name = 'file_request'; // Đặt tên cho input file
+        fileInput.accept = '.xls, .xlsx'; // Cho phép chỉ định định dạng xls và xlsx
+
+        // Xử lý sự kiện khi tệp được chọn
+        fileInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                // Tạo một form ẩn để gửi dữ liệu
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = '/admin/deleteParcel'; // Đường dẫn đến controller
+                form.enctype = 'multipart/form-data'; // Đặt kiểu mã hóa để gửi tệp
+
+                // Thêm input file vào form
+                form.appendChild(fileInput);
+
+                // Thêm form vào body và gửi đi
+                document.body.appendChild(form);
+                form.submit(); // Gửi form
+            }
+        });
+
+        // Kích hoạt input file
+        fileInput.click(); // Kích hoạt dialog chọn tệp
+    });
+</script>
+
+<script>
+    document.getElementById('compareParcel').addEventListener('click', function() {
+        // Tạo input file ẩn
+        const fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.name = 'file_request'; // Đặt tên cho input file
+        fileInput.accept = '.xls, .xlsx'; // Cho phép chỉ định định dạng xls và xlsx
+
+        // Xử lý sự kiện khi tệp được chọn
+        fileInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                // Tạo một form ẩn để gửi dữ liệu
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = '/admin/doi-soat'; // Đường dẫn đến controller
                 form.enctype = 'multipart/form-data'; // Đặt kiểu mã hóa để gửi tệp
 
                 // Thêm input file vào form

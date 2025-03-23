@@ -20,38 +20,41 @@
                         </tr>
                     </thead>
                     <tbody> 
-                        <?php
-                        for ($i = 0; $i < 50; $i++): ?>
+                        <?php if($list_compare) : ?>
+                        <?php foreach ($list_compare as $item) : extract($item)?>
                             <?php $index_reason = array_rand(ARR_REASON); ?>
-                            <tr class="small <?= $index_reason > 1 ? 'bg-error' : '' ?>" onclick="getOnePost(<?= $i ?>)">
+                            <tr class="small <?= $reason && $reason != 'Thay đổi trạng thái' ? 'bg-error' : '' ?>">
                                 <td class="small align-middle text-center">
-                                    <?= '#' . rand() ?>
+                                    <?= $id_parcel ?>
                                 </td>
                                 <td class="small align-middle text-center">
-                                    <?= ARR_COD[array_rand(ARR_COD)] ?>
+                                    <?= $old_fee ?>
                                 </td>
                                 <td class="small align-middle text-center">
-                                    <?= ARR_COD[array_rand(ARR_COD)] ?>
+                                    <?= $new_fee ?>
                                 </td>
                                 <td class="small align-middle text-center">
-                                    <?= ARR_COD[array_rand(ARR_COD)] ?>
+                                    <?= $old_cod ?>
                                 </td>
                                 <td class="small align-middle text-center">
-                                    <?= ARR_COD[array_rand(ARR_COD)] ?>
+                                    <?= $new_cod ?>
                                 </td>
                                 <td class="small align-middle text-center">
-                                    <?= ARR_STATE_POST[array_rand(ARR_STATE_POST)]['name'] ?>
+                                    <?= $old_state ?>
                                 </td>
                                 <td class="small align-middle text-center">
-                                    <?= ARR_STATE_POST[array_rand(ARR_STATE_POST)]['name'] ?>
+                                    <?= $new_state ?>
                                 </td>
                                 <td class="small align-middle text-center">
-                                    <?= ARR_REASON[$index_reason] ?>
+                                    <?= $reason ?>
                                 </td>
                             </tr>
-                            <?php
-                        endfor
-                        ?>
+                        <?php endforeach ?>
+                        <?php else : ?>
+                            <tr class="small text-center align-middle">
+                                <td colspan="8">Vui lòng import file để đối soát</td>
+                            </tr>
+                        <?php endif ?>
                     </tbody>
                 </table>
             </div>
@@ -239,22 +242,3 @@
         </div>
     </div>
 </div>
-<!-- <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var myModal = new bootstrap.Modal(document.getElementById('modalAddPost'));
-        myModal.show();
-    });
-</script> -->
-
-<script>
-    function getOnePost(id) {
-        document.querySelector('input[name="id_post"]').value = id;
-        
-        // Xoá class d-none cho div có id btn-delete
-        var btnDelete = document.getElementById('btn-delete');
-        btnDelete.classList.remove('d-none');
-        
-        var myModal = new bootstrap.Modal(document.getElementById('modalAddPost'));
-        myModal.show();
-    }
-</script>
