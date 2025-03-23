@@ -46,6 +46,16 @@ function create_parcel($id_parcel,$brand_post,$id_user,$date_sent,$name_receiver
     ");
 }
 
+function update_state_parcel($id_parcel,$new_state) {
+    // thực thi sql
+    pdo_execute(
+        "UPDATE parcel 
+        SET 
+        state_parcel = '".$new_state."'
+        WHERE id_parcel = '".$id_parcel."'
+    ");
+}
+
 function update_parcel($id_parcel,$brand_post,$id_user,$date_sent,$name_receiver,$phone_receiver,$address_receiver,$fee,$cod,$note,$state_parcel) {
     pdo_execute(
         "UPDATE parcel 
