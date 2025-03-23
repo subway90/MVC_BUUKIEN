@@ -43,10 +43,10 @@ if(isset($_POST['addParcel'])) {
     if (!$error_valid) {
         // insert
         create_parcel($id_parcel,$brand_post,$id_user,$date_sent,$name_receiver,$phone_receiver,$address_receiver,$fee,$cod,$note,$state_parcel);
-        // chuyển route
-        route('admin/quan-li-buu-kien');
         // thông báo
         toast_create('success','Thêm mới thành công');
+        // chuyển route
+        route('admin/quan-li-buu-kien');
     }
     // báo lỗi
     else $show_modal = 'modalAddParcel'; // bật modal lên
