@@ -23,9 +23,9 @@
                             <th class="col-1 text-center">Ghi chú</th>
                         </tr>
                     </thead>
-                    <tbody> 
-                        <?php
-                        for ($i = 0; $i < 50; $i++): ?>
+                    <tbody>
+                        <?php if($list_parcel) : ?>
+                        <?php foreach ($list_parcel as $parcel) : extract($parcel) ?>
                             <tr class="small" onclick="getOnePost(<?= $i ?>)">
                                 <td class="small align-middle text-center">
                                     <?= '#' . rand() ?>
@@ -67,9 +67,14 @@
                                     Ghi chú nè
                                 </td>
                             </tr>
-                            <?php
-                        endfor
-                        ?>
+                        <?php endforeach ?>
+                        <?php else : ?>
+                            <tr class="small">
+                                <td colspan="12" class="align-middle text-center">
+                                    Dữ liệu trống
+                                </td>
+                            </tr>
+                        <?php endif ?>
                     </tbody>
                 </table>
             </div>
