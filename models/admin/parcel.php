@@ -7,7 +7,8 @@
 function get_all_parcel() {
     return pdo_query(
         'SELECT *
-        FROM parcel p'
+        FROM parcel p
+        ORDER BY created_at DESC'
     );
 }
 
@@ -19,20 +20,20 @@ function get_parcel_with_id($id) {
     );
 }
 
-function create_parcel($id_parcel,$brand_post,$id_user,$date_sent,$name_receiver,$phone_receiver,$address_receiver,$fee,$cod,$name_product,$state_parcel,$note) {
+function create_parcel($id_parcel,$brand_post,$username,$date_sent,$name_receiver,$phone_receiver,$address_receiver,$fee,$cod,$name_product,$state_parcel,$note) {
     // custom
-    (!$id_user) ? $id_user = "NULL" :  $id_user = "'".$id_user."'";
+    (!$username) ? $username = "NULL" :  $username = "'".$username."'";
     if(!$fee)  $fee = "0";
     if(!$cod) $cod = "0";
     (!$note) ? $note = "NULL" : $note = "'".$note."'";
 
     // thực thi sql
     pdo_execute(
-        "INSERT INTO parcel (id_parcel, brand_post,id_user,date_sent,name_receiver,phone_receiver,address_receiver,fee,cod,name_product,state_parcel,note)
+        "INSERT INTO parcel (id_parcel, brand_post,username,date_sent,name_receiver,phone_receiver,address_receiver,fee,cod,name_product,state_parcel,note)
         VALUES (
         '".$id_parcel."',
         '".$brand_post."',
-        ".$id_user.",
+        ".$username.",
         '".$date_sent."',
         '".$name_receiver."',
         '".$phone_receiver."',
@@ -56,12 +57,12 @@ function update_state_parcel($id_parcel,$new_state) {
     ");
 }
 
-function update_parcel($id_parcel,$brand_post,$id_user,$date_sent,$name_receiver,$phone_receiver,$address_receiver,$fee,$cod,$note,$state_parcel) {
+function update_parcel($id_parcel,$brand_post,$username,$date_sent,$name_receiver,$phone_receiver,$address_receiver,$fee,$cod,$note,$state_parcel) {
     pdo_execute(
         "UPDATE parcel 
         SET 
         brand_post = '".$brand_post."',
-        id_user = '".$id_user."',
+        username = '".$username."',
         date_sent = '".$date_sent."',
         name_receiver = '".$name_receiver."',
         phone_receiver = '".$phone_receiver."',

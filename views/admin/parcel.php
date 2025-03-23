@@ -34,7 +34,7 @@
                                     <?= $parcel['brand_post'] ?>
                                 </td>
                                 <td class="small align-middle text-center">
-                                    <?= $parcel['id_user'] ?>
+                                    <?= $parcel['username'] ?>
                                 </td>
                                 <td class="small align-middle text-center">
                                     <?= $parcel['date_sent'] ?>
@@ -186,13 +186,9 @@
                                 </select>
                             </div>
                             <div class="col-6 py-2 px-3 text-start mb-4">
-                                <label class="small text-muted" for="id_user">Nhân viên</label>
-                                <select name="id_user" id="id_user" class="form-select ps-0 border-0 border-bottom border-2 outline-none">
-                                    <option value="0" selected>--- Chọn nhân viên ---</option>
-                                    <?php foreach ($list_employee as $employee): ?>
-                                        <option <?= $id_user == $employee['id_user'] ? 'selected' : '' ?> value="<?= $employee['id_user'] ?>"><?= $employee['username'] ?></option>
-                                    <?php endforeach ?>
-                                </select>
+                                <label class="small text-muted" for="username">Mã nhân viên</label>
+                                <input readonly name="username" id="username" value="<?= $username ?>" type="text" placeholder="Mã nhân viên"
+                                    class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
                             </div>
                             <div class="col-6 py-2 px-3 text-start mb-4">
                                 <label class="small text-muted" for="date_sent">Ngày gửi</label>
@@ -295,13 +291,9 @@
                                 </select>
                             </div>
                             <div class="col-6 py-2 px-3 text-start mb-4">
-                                <label class="small text-muted" for="id_user">Nhân viên</label>
-                                <select name="id_user" id="id_user" class="form-select ps-0 border-0 border-bottom border-2 outline-none">
-                                    <option value="0" selected>--- Chọn nhân viên ---</option>
-                                    <?php foreach ($list_employee as $employee): ?>
-                                        <option <?= $id_user == $employee['id_user'] ? 'selected' : '' ?> value="<?= $employee['id_user'] ?>"><?= $employee['username'] ?></option>
-                                    <?php endforeach ?>
-                                </select>
+                                <label class="small text-muted" for="username">Mã nhân viên</label>
+                                <input readonly name="username" id="username" value="<?= $username ?>" type="text" placeholder="Nhập mã bưu kiện"
+                                    class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
                             </div>
                             <div class="col-6 py-2 px-3 text-start mb-4">
                                 <label class="small text-muted" for="date_sent">Ngày gửi</label>
@@ -395,7 +387,7 @@
                     // Gán giá trị vào các input có ID tương ứng
                     $("#id_parcel").val(data.id_parcel || '');
                     $("#brand_post").val(data.brand_post || '');
-                    $("#id_user").val(data.id_user || '');
+                    $("#username").val(data.username || '');
                     $("#date_sent").val(data.date_sent || '');
                     $("#name_receiver").val(data.name_receiver || '');
                     $("#phone_receiver").val(data.phone_receiver || '');
