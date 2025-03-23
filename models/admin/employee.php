@@ -8,6 +8,15 @@ function get_all_employee() {
     );
 }
 
+function get_one_employee_by_id($id) {
+    return pdo_query_one(
+        'SELECT u.*, r.name_role
+        FROM user u
+        JOIN role r ON u.id_role = r.id_role
+        WHERE u.id_user ='.$id
+    );
+}
+
 /**
  * Kiểm tra username đã tồn tại chưa
  * 

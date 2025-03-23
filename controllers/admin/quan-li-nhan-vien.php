@@ -37,6 +37,27 @@ if(isset($_POST['addEmployee'])) {
     else $show_modal = 'modalAddEmployee'; // bật modal lên
 }
 
+// Xoá nhân viên
+if(isset($_POST['deleteEmployee']) && isset($_POST['id']) && $_POST['id']) {
+    /// input
+    $id = clear_input($_POST['id']);
+    // get
+    $get = get_one_employee_by_id($id);
+    
+    //validate
+    if(!$get) toast_create('danger','User này không tồn tại');
+    elseif($get['name_role'] == 'admin') toast_create('danger','Không thể xoá tài khoản admin');
+
+    //delete
+    else {
+        delete_force_one('user',$id);
+        toast_create('success','Xoá thành công user');
+    }
+    
+    // chuyển route
+    route('admin/quan-li-nhan-vien');
+}
+
 # [DATA]
 $data = [
     'full_name' => $full_name,

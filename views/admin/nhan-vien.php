@@ -41,7 +41,7 @@
                                             <small>Không thể xoá</small>
                                         </button>
                                     <?php else : ?>
-                                        <button class="btn btn-sm btn-danger p-1 px-2">
+                                        <button type="button" class="btn btn-sm btn-danger p-1 px-2" onclick="delete_employee(<?= $id_user ?>)">
                                             <small>Xoá</small>
                                         </button>
                                     <?php endif ?>
@@ -179,3 +179,34 @@
         </div>
     </div>
 </div>
+
+
+<!-- Modal xoá nhân viên -->
+<div class="modal fade" id="modalDeleteEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Xoá nhân viên</h5>
+                <button type="button" class="sa-close sa-close--modal" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <form method="post">
+                <input type="hidden" name="id" value="">
+                <div class="modal-body text-center px-5">
+                    <div class="mb-5">
+                        Bạn có chắc chắn xoá ? Việc xoá vĩnh viễn sẽ không thể khôi phục lại !
+                    </div>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                    <button name="deleteEmployee" type="submit" class="btn btn-danger">Xoá</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    function delete_employee(id) {
+        document.querySelector('input[name="id"]').value = id;
+        var myModal = new bootstrap.Modal(document.getElementById('modalDeleteEmployee'));
+        myModal.show();
+    }
+</script>
