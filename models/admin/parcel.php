@@ -19,16 +19,16 @@ function get_parcel_with_id($id) {
     );
 }
 
-function create_parcel($id_parcel,$brand_post,$id_user,$date_sent,$name_receiver,$phone_receiver,$address_receiver,$fee,$cod,$name_product,$note,$state_parcel) {
+function create_parcel($id_parcel,$brand_post,$id_user,$date_sent,$name_receiver,$phone_receiver,$address_receiver,$fee,$cod,$name_product,$state_parcel,$note) {
     // custom
-    (!$id_user) ? $id_user = "NULL" : "'".$id_user.'"';
+    (!$id_user) ? $id_user = "NULL" :  $id_user = "'".$id_user."'";
     if(!$fee)  $fee = "0";
     if(!$cod) $cod = "0";
-    (!$note) ? $note = "NULL" : "'".$note.'"';
+    (!$note) ? $note = "NULL" : $note = "'".$note."'";
 
     // thực thi sql
     pdo_execute(
-        "INSERT INTO parcel (id_parcel, brand_post,id_user,date_sent,name_receiver,phone_receiver,address_receiver,fee,cod,name_product,note,state_parcel)
+        "INSERT INTO parcel (id_parcel, brand_post,id_user,date_sent,name_receiver,phone_receiver,address_receiver,fee,cod,name_product,state_parcel,note)
         VALUES (
         '".$id_parcel."',
         '".$brand_post."',
@@ -40,8 +40,8 @@ function create_parcel($id_parcel,$brand_post,$id_user,$date_sent,$name_receiver
         ".$fee.",
         ".$cod.",
         '".$name_product."',
-        ".$note.",
-        '".$state_parcel."'
+        '".$state_parcel."',
+        ".$note."
         )
     ");
 }

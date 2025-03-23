@@ -44,7 +44,7 @@ if(isset($_POST['addParcel'])) {
     // nếu hợp lệ
     if (!$error_valid) {
         // insert
-        create_parcel($id_parcel,$brand_post,$id_user,$date_sent,$name_receiver,$phone_receiver,$address_receiver,$fee,$cod,$name_product,$note,$state_parcel);
+        create_parcel($id_parcel,$brand_post,$id_user,$date_sent,$name_receiver,$phone_receiver,$address_receiver,$fee,$cod,$name_product,$state_parcel,$note);
         // thông báo
         toast_create('success','Thêm mới thành công');
         // chuyển route

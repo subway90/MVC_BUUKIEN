@@ -159,7 +159,7 @@
                             <button class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header" data-bs-toggle="modal" data-bs-target="#modalAddParcel">
                                 Thêm bưu kiện
                             </button>
-                            <button class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
+                            <button id="importParcel" class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
                                 Nhập XLSX
                             </button>
                             <button class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
@@ -224,3 +224,36 @@
             
 <!-- Dùng toast -->
 <?=toast_show()?>
+
+
+<script>
+    document.getElementById('importParcel').addEventListener('click', function() {
+        // Tạo input file ẩn
+        const fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.name = 'file_request'; // Đặt tên cho input file
+        fileInput.accept = '.xls, .xlsx'; // Cho phép chỉ định định dạng xls và xlsx
+
+        // Xử lý sự kiện khi tệp được chọn
+        fileInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                // Tạo một form ẩn để gửi dữ liệu
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = '/admin/importParcel'; // Đường dẫn đến controller
+                form.enctype = 'multipart/form-data'; // Đặt kiểu mã hóa để gửi tệp
+
+                // Thêm input file vào form
+                form.appendChild(fileInput);
+
+                // Thêm form vào body và gửi đi
+                document.body.appendChild(form);
+                form.submit(); // Gửi form
+            }
+        });
+
+        // Kích hoạt input file
+        fileInput.click(); // Kích hoạt dialog chọn tệp
+    });
+</script>

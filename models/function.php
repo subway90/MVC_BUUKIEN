@@ -303,7 +303,7 @@ function toast_show() {
  */
 function clear_input($input) {
     // Chuyển đổi các kí tự đặc biệt thành mã code HTML
-    return filter_var($input, FILTER_SANITIZE_STRING);
+    return trim(filter_var($input, FILTER_SANITIZE_STRING));
 }
 
 /**
