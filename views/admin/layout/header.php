@@ -153,6 +153,7 @@
                     
                     <div class="mx-auto d-flex my-auto py-2 flex-grow-1 justify-content-center">
                         <?php if($page == 'parcel') : //Show chức năng quản lí bưu kiện ?>
+                        <form action="/admin/exportParcel" method="post">
                         <div class="sa-toolbar_item my-auto px-3 p-2 bg-blue-light rounded rounded-fill-header">
                             <i class="fas fa-search text-light small ms-1 me-3"></i>
                             <input type="text" placeholder="Nhập thông tin tìm kiếm" class="form-search" id="table-search"/>                     
@@ -168,10 +169,11 @@
                             <button id="deleteParcel" class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
                                 Xoá dữ liệu
                             </button>
-                            <button class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
+                            <button type="submit" name="exportParcel" class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
                                 Print
                             </button>
                         </div>
+                        </form>
                         <?php endif ?>
                         <?php if($page == 'doi-soat') : //Show chức năng quản lí bưu kiện ?>
                         <div class="sa-toolbar_item my-auto px-3 p-2 bg-blue-light rounded rounded-fill-header">
