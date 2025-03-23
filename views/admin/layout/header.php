@@ -88,11 +88,11 @@
                             <ul class="sa-nav__menu sa-nav__menu--root">
                                 <!-- Project Case -->
                                 <li class="sa-nav__menu-item sa-nav__menu-item--has-icon">
-                                    <a href="<?=URL_ADMIN?>thong-ke" class="sa-nav__link <?=($page=='dashboard') ? 'bg-dark' : ''?>">
+                                    <a href="<?=URL_ADMIN?>bieu-do" class="sa-nav__link <?=($page=='dashboard') ? 'bg-dark' : ''?>">
                                         <span class="sa-nav__icon">
-                                            <i class="fas fa-tachometer-alt"></i>
+                                            <i class="fas fa-chart-bar"></i>
                                         </span>
-                                        <span class="sa-nav__title">Thống kê</span>
+                                        <span class="sa-nav__title">Biểu đồ</span>
                                     </a>
                                 </li>
                                 <li class="sa-nav__menu-item sa-nav__menu-item--has-icon">
