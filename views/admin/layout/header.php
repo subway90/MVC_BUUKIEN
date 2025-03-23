@@ -103,6 +103,22 @@
                                         <span class="sa-nav__title">Quản lí bưu kiện</span>
                                     </a>
                                 </li>
+                                <li class="sa-nav__menu-item sa-nav__menu-item--has-icon">
+                                    <a href="<?=URL_ADMIN?>doi-soat" class="sa-nav__link <?=($page=='doi-soat') ? 'bg-dark' : ''?>">
+                                        <span class="sa-nav__icon">
+                                            <i class="fas fa-file-alt"></i>
+                                        </span>
+                                        <span class="sa-nav__title">Đối soát</span>
+                                    </a>
+                                </li>
+                                <li class="sa-nav__menu-item sa-nav__menu-item--has-icon">
+                                    <a href="<?=URL_ADMIN?>quan-li-nhan-vien" class="sa-nav__link <?=($page=='nhan-vien') ? 'bg-dark' : ''?>">
+                                        <span class="sa-nav__icon">
+                                            <i class="fas fa-user"></i>
+                                        </span>
+                                        <span class="sa-nav__title">Quản lí nhân viên</span>
+                                    </a>
+                                </li>
                                 <form action="/dang-xuat" method="post">
                                     <li class="sa-nav__menu-item sa-nav__menu-item--has-icon">
                                         <button type="submit" name="logout" href="<?=URL_ADMIN?>quan-li-buu-kien" class="sa-nav__link bg-transparent border-0 w-100">
@@ -142,7 +158,7 @@
                                 Thêm bưu kiện
                             </button>
                             <button class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
-                                Nhập từ Excel
+                                Nhập XLSX
                             </button>
                             <button class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
                                 Cập nhật trạng thái
@@ -151,7 +167,49 @@
                                 Xoá dữ liệu
                             </button>
                             <button class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
-                                Xuất
+                                Print
+                            </button>
+                        </div>
+                        <?php endif ?>
+                        <?php if($page == 'doi-soat') : //Show chức năng quản lí bưu kiện ?>
+                        <div class="sa-toolbar_item my-auto px-3 p-2 bg-blue-light rounded rounded-fill-header">
+                            <i class="fas fa-search text-light small ms-1 me-3"></i>
+                            <input type="text" placeholder="Nhập thông tin tìm kiếm" class="form-search" id="table-search"/>                     
+                            <button class="invisible min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header" data-bs-toggle="modal" data-bs-target="#modalAddPost">
+                                space
+                            </button>
+                            <button class="invisible min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
+                                space
+                            </button>
+                            <button class="invisible min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
+                                space
+                            </button>
+                            <button class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
+                                Tải XLSX
+                            </button>
+                            <button class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
+                                Print
+                            </button>
+                        </div>
+                        <?php endif ?>
+                        <?php if($page == 'nhan-vien') : //Show chức năng quản lí bưu kiện ?>
+                        <div class="sa-toolbar_item my-auto px-3 p-2 bg-blue-light rounded rounded-fill-header">
+                            <i class="fas fa-search text-light small ms-1 me-3"></i>
+                            <input type="text" placeholder="Nhập thông tin tìm kiếm" class="form-search" id="table-search"/>                     
+                            <button class="invisible min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
+                                space
+                            </button>
+                            <button class="invisible min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
+                                space
+                            </button>
+                            <button class="invisible min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
+                                space
+                            </button>
+                            <button class="invisible min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
+                                space
+                            </button>
+                            <button class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header" data-bs-toggle="modal" data-bs-target="#modalAddEmployee">
+                                Thêm
                             </button>
                         </div>
                         <?php endif ?>

@@ -5,48 +5,33 @@
             <div class="card">
                 <div class="sa-divider"></div>
                 <!-- <table class="sa-datatables-init table table-hover border-muted" data-order="[[ 9, &quot;asc&quot; ]]" data-sa-search-input="#table-search"> -->
-                <table class="table table-striped table-hover border-muted mb-5">
+                <table class="table table-hover border-muted mb-5">
                     <thead>
                         <tr class="small">
                             <!-- <th class="w-min">ID</th> -->
                             <th class="col-1 text-center">Mã bưu kiện</th>
-                            <th class="col-1 text-center">Chuyển phát</th>
-                            <th class="col-1 text-center">Mã NV</th>
-                            <th class="col-1 text-center">Ngày gửi</th>
-                            <th class="col-1 text-center">Người nhận</th>
-                            <th class="col-1 text-center">Điện thoại</th>
-                            <th class="col-1 text-center">Địa chỉ</th>
-                            <th class="col-1 text-center">Phí gửi</th>
-                            <th class="col-1 text-center">COD</th>
-                            <th class="col-1 text-center">Sản phẩm</th>
-                            <th class="col-1 text-center">Trạng thái</th>
-                            <th class="col-1 text-center">Ghi chú</th>
+                            <th class="col-1 text-center">Phí gửi cũ</th>
+                            <th class="col-1 text-center">Phí gửi mới</th>
+                            <th class="col-1 text-center">COD cũ</th>
+                            <th class="col-1 text-center">COD mới</th>
+                            <th class="col-2 text-center">Trạng thái cũ</th>
+                            <th class="col-2 text-center">Trạng thái mới</th>
+                            <th class="col-3 text-center">Nguyên nhân</th>
                         </tr>
                     </thead>
                     <tbody> 
                         <?php
                         for ($i = 0; $i < 50; $i++): ?>
-                            <tr class="small" onclick="getOnePost(<?= $i ?>)">
+                            <?php $index_reason = array_rand(ARR_REASON); ?>
+                            <tr class="small <?= $index_reason > 1 ? 'bg-error' : '' ?>" onclick="getOnePost(<?= $i ?>)">
                                 <td class="small align-middle text-center">
                                     <?= '#' . rand() ?>
                                 </td>
                                 <td class="small align-middle text-center">
-                                    <?= ARR_POST_BRAND[array_rand(ARR_POST_BRAND)] ?>
+                                    <?= ARR_COD[array_rand(ARR_COD)] ?>
                                 </td>
                                 <td class="small align-middle text-center">
-                                    EMP_<?= rand(1, 999) ?>
-                                </td>
-                                <td class="small align-middle text-center">
-                                    <?= rand(1, 28) . '/' . rand(1, 12) . '/20' . rand(20, 25) ?>
-                                </td>
-                                <td class="small align-middle text-center">
-                                    <?= 'TO_' . rand(1000, 9999) ?>
-                                </td>
-                                <td class="small align-middle text-center">
-                                    <?= '0' . rand(300000000, 999999999) ?>
-                                </td>
-                                <td class="small align-middle text-center">
-                                    <?= ARR_PROVINCE[array_rand(ARR_PROVINCE)] ?>
+                                    <?= ARR_COD[array_rand(ARR_COD)] ?>
                                 </td>
                                 <td class="small align-middle text-center">
                                     <?= ARR_COD[array_rand(ARR_COD)] ?>
@@ -55,16 +40,13 @@
                                     <?= ARR_COD[array_rand(ARR_COD)] ?>
                                 </td>
                                 <td class="small align-middle text-center">
-                                    <?= 'PRO_' . rand(1000, 9999) ?>
-                                </td>
-                                <td class="small align-middle text-center text-light">
-                                    <?php $rand_order_state = array_rand(ARR_STATE_POST) ?>
-                                    <span class="p-2 small d-block text-center" style="background-color : <?= ARR_STATE_POST[$rand_order_state]['color'] ?>">
-                                        <?= ARR_STATE_POST[$rand_order_state]['name'] ?>
-                                    </span>
+                                    <?= ARR_STATE_POST[array_rand(ARR_STATE_POST)]['name'] ?>
                                 </td>
                                 <td class="small align-middle text-center">
-                                    Ghi chú nè
+                                    <?= ARR_STATE_POST[array_rand(ARR_STATE_POST)]['name'] ?>
+                                </td>
+                                <td class="small align-middle text-center">
+                                    <?= ARR_REASON[$index_reason] ?>
                                 </td>
                             </tr>
                             <?php
@@ -78,7 +60,7 @@
 </div>
 
 <!-- Footer Page -->
-<div class="position-fixed fixed-bottom d-flex bg-primary">
+<div class="d-none position-fixed fixed-bottom d-flex bg-primary">
     <div class="container-fluid d-flex px-0 py-3">
         <div class="col-1 invisible">
             space
@@ -226,12 +208,12 @@
                                 <input name="phone" id="phone" type="text" placeholder="Nhập số điện thoại người nhận"
                                     class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
                             </div>
-                            <div class="col-6 py-2 px-3 text-start mb-4">
+                            <div class="col-8 py-2 px-3 text-start mb-4">
                                 <label class="small text-muted" for="address">Địa chỉ</label>
                                 <input name="address" id="address" type="text" placeholder="Nhập địa chỉ người nhận"
                                     class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
                             </div>
-                            <div class="col-6 py-2 px-3 text-start mb-4">
+                            <div class="col-4 py-2 px-3 text-start mb-4">
                                 <label class="small text-muted" for="product">Sản phẩm</label>
                                 <input name="product" id="product" type="text" placeholder="Nhập tên sản phẩm"
                                     class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
@@ -247,8 +229,8 @@
                             </div>
                         </div>
                         <div class="col-12">
-                            <button name="addPost" type="submit" class="w-btn-fill btn btn-primary text-light ms-2">Xác nhận</button>
-                            <button type="button" class="w-btn-fill btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                            <button name="addPost" type="submit" class="btn btn-primary text-light ms-2">Xác nhận</button>
                         </div>
                     </div>
 

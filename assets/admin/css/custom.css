@@ -2,6 +2,10 @@
     background-color: #3ea2b9 !important;
 }
 
+.bg-error {
+    background-color: #ffccc9 !important;
+}
+
 .bg-blue {
     background-color: #027594 !important;
 }
@@ -34,4 +38,8 @@
 
 .outline-none:focus {
     box-shadow: none !important;
+}
+
+.w-btn-fill {
+    width: 120px;
 }

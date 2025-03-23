@@ -183,24 +183,26 @@
         const dataDiv = document.getElementById('data');
         const typeChart = dataDiv.getAttribute('type-chart');
         const arrayUnit = JSON.parse(dataDiv.getAttribute('array-unit'));
-        const data = JSON.parse(dataDiv.getAttribute('data')); // Phân tích dữ liệu từ thuộc tính data
+        const data = JSON.parse(dataDiv.getAttribute('data'));
     
         const datasets = data.map(item => ({
-            label: item[0], // Nhãn từ item
-            backgroundColor: item[1], // Màu sắc từ item
+            label: item[0],
+            backgroundColor: item[1],
             borderColor: 'transparent',
             borderWidth: 0,
             fill: 'origin',
-            data: item[2], // Dữ liệu từ item
+            data: item[2],
         }));
     
-        new Chart(chartCanvas.getContext('2d'), {
+        const myChart = new Chart(chartCanvas.getContext('2d'), {
             type: typeChart,
             data: {
                 labels: arrayUnit,
-                datasets: datasets, // Sử dụng datasets đã tạo
+                datasets: datasets,
             },
             options: {
+                responsive: true,
+                maintainAspectRatio: false, // Cho phép chiều cao thay đổi
                 plugins: {
                     legend: {
                         display: true,
@@ -213,16 +215,13 @@
                             fontFamily: 'Roboto',
                             fontSize: 13,
                             fontColor: '#828f99',
-                            callback: function (value) {
+                            callback: function(value) {
                                 return value + ' đơn';
                             },
                         },
-                        gridLines: {
-                            lineWidth: 1,
-                            color: 'rgba(0, 0, 0, 0.1)',
-                            zeroLineWidth: 1,
-                            zeroLineColor: 'rgba(0, 0, 0, 0.1)',
+                        grid: {
                             drawBorder: false,
+                            color: 'rgba(0, 0, 0, 0.1)',
                         },
                     },
                     x: {
@@ -232,7 +231,7 @@
                             fontSize: 13,
                             fontColor: '#828f99',
                         },
-                        gridLines: {
+                        grid: {
                             display: false,
                         },
                     },
@@ -268,6 +267,7 @@
                 ],
             },
             options: {
+                responsive: true,
                 maintainAspectRatio: false,
 
                 plugins: {
