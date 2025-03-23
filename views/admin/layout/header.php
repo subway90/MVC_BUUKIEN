@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="<?=URL?>assets/admin/vendor/nouislider/nouislider.min.css" />
     <link rel="stylesheet" href="<?=URL?>assets/admin/vendor/fullcalendar/main.min.css" />
     <link rel="stylesheet" href="<?=URL?>assets/admin/css/style.css" />
+    <link rel="stylesheet" href="<?=URL?>assets/admin/css/custom.css" />
     <!-- cdn bootstrap icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
     <!-- cdn google -->
@@ -76,7 +77,7 @@
                         <!-- logo -->
                         <div class="sa-sidebar-logo text-center">
                                 <img width="32" src="<?= WEB_LOGO ?>" alt="">
-                                <div class="ms-3 text-muted"><?= WEB_NAME ?></div>
+                                <div class="ms-3 text-light"><?= WEB_NAME ?></div>
                         </div>
                         <!-- logo / end -->
                     </a>
@@ -102,6 +103,16 @@
                                         <span class="sa-nav__title">Quản lí bưu kiện</span>
                                     </a>
                                 </li>
+                                <form action="/dang-xuat" method="post">
+                                    <li class="sa-nav__menu-item sa-nav__menu-item--has-icon">
+                                        <button type="submit" name="logout" href="<?=URL_ADMIN?>quan-li-buu-kien" class="sa-nav__link bg-transparent border-0 w-100">
+                                            <span class="sa-nav__icon">
+                                                <i class="fas fa-sign-out-alt"></i>
+                                            </span>
+                                            <span class="sa-nav__title text-start">Đăng xuất</span>
+                                        </button>
+                                    </li>
+                                </form>
                             </ul>
                         </li>
                     </ul>
@@ -115,68 +126,35 @@
         <div class="sa-app__content">
             <!-- sa-app__toolbar -->
             <div class="sa-toolbar sa-toolbar--search-hidden sa-app__toolbar">
-                <div class="sa-toolbar__body">
+                <div class="sa-toolbar__body bg-primary">
                     <div class="sa-toolbar__item">
-                        <button class="sa-toolbar__button" type="button" aria-label="Menu" data-sa-toggle-sidebar="">
+                        <button class="sa-toolbar__button text-light bg-transparent" type="button" aria-label="Menu" data-sa-toggle-sidebar="">
                             <i class="fas fa-bars"></i>
                         </button>
                     </div>
                     
-                    <div class="mx-auto d-flex my-auto flex-grow-1 justify-content-center">
+                    <div class="mx-auto d-flex my-auto py-2 flex-grow-1 justify-content-center">
                         <?php if($page == 'post') : //Show chức năng quản lí bưu kiện ?>
-                        <div class="sa-toolbar__item flex-grow-1">
-                            <input type="text" placeholder="Nhập thông tin tìm kiếm" class="form-control form-control--search" id="table-search"/>                     
-                        </div>
-                        <div class="sa-toolbar_item my-auto ms-2">
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddPost">
-                                <i class="fas fa-plus me-2 small"></i>
-                                <small>Thêm bưu kiện</small>
+                        <div class="sa-toolbar_item my-auto px-3 p-2 bg-blue-light rounded rounded-fill-header">
+                            <i class="fas fa-search text-light small ms-1 me-3"></i>
+                            <input type="text" placeholder="Nhập thông tin tìm kiếm" class="form-search" id="table-search"/>                     
+                            <button class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header" data-bs-toggle="modal" data-bs-target="#modalAddPost">
+                                Thêm bưu kiện
                             </button>
-                            <button class="btn btn-success">
-                                <i class="fa far fa-file-excel me-2"></i>
-                                <small>Nhập từ Excel</small>
+                            <button class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
+                                Nhập từ Excel
                             </button>
-                            <button class="btn btn-success">
-                                <i class="fa far fa-file-excel me-2"></i>
-                                <small>Cập nhật trạng thái</small>
+                            <button class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
+                                Cập nhật trạng thái
                             </button>
-                            <button class="btn btn-success">
-                                <i class="fa far fa-file-excel me-2"></i>
-                                <small>Xoá dữ liệu</small>
+                            <button class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
+                                Xoá dữ liệu
                             </button>
-                            <button class="btn btn-success">
-                                <i class="fa far fa-file-excel me-2"></i>
-                                <small>Xuất</small>
+                            <button class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
+                                Xuất
                             </button>
                         </div>
                         <?php endif ?>
-                    </div>
-
-                    <!-- Thông tin -->
-                    <div class="dropdown sa-toolbar__item">
-                        <button class="sa-toolbar-user" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
-                            data-bs-offset="0,1" aria-expanded="false">
-                            <span class="sa-toolbar-user__avatar sa-symbol sa-symbol--shape--rounded">
-                                <img src="<?= DEFAULT_AVATAR ?>" width="64" height="64">
-                            </span>
-                            <span class="sa-toolbar-user__info">
-                                <span class="sa-toolbar-user__title text-danger">
-                                <?=$_SESSION['user']['full_name']?>
-                                </span>
-                                <span class="sa-toolbar-user__subtitle">
-                                <?=$_SESSION['user']['email']?>
-                                </span>
-                            </span>
-                        </button>
-                        <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
-                            <li>
-                                <form action="/dang-xuat" method="post">
-                                    <button type="submit" name="logout" class="dropdown-item text-danger" href="<?=URL."dang-xuat"?>">
-                                        <i class="fas fa-sign-out-alt me-3"></i><small>Đăng xuất</small>
-                                    </button>
-                                </form>
-                            </li>
-                        </ul>
                     </div>
                 </div>
                 <div class="sa-toolbar__shadow"></div>

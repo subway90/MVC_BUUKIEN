@@ -39,7 +39,7 @@
                         <canvas id="stacked-bar"></canvas>
                         <div id="data" style="display: none;" 
                             type-chart='bar' 
-                            array-unit='["Ngày 2/5","Ngày 3/5","Ngày 4/5","Ngày 5/5","Ngày 6/5","Ngày 7/5","Ngày 8/5","Ngày 9/5","Ngày 10/5","Ngày 11/5","Ngày 12/5","Ngày 13/5","Ngày 14/5"]'
+                            array-unit='[ <?= EXAMPLE_ARRAY_UNIT ?> ]'
                             data='[
                                 ["Đang gửi","#92C5F9",[0,3,4,5,5,3,1,5,3,4,5,5,3,1]],
                                 ["Đang đi phát","#0066CC",[4,11,0,6,2,2,1,2,3,4,5,5,3,1]],

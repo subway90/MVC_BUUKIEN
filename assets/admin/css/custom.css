@@ -1,0 +1,37 @@
+.bg-blue-light {
+    background-color: #3ea2b9 !important;
+}
+
+.bg-blue {
+    background-color: #027594 !important;
+}
+
+.form-search  {
+    background-color: transparent;
+    border: none;
+    color: var(--bs-light);
+    width: 280px;
+}
+
+.form-search:focus {
+    border: none;
+    flex: 1; /* Chiếm toàn bộ chiều rộng */
+    outline: none; /* Bỏ viền khi focus */
+}
+
+.form-search::placeholder {
+    color: var(--bs-light);
+    font-size: 14px;
+}
+
+.rounded-fill-header {
+    border-radius: 12px !important;
+}
+
+.fs-btn-fill-header {
+    font-size: 10px;
+}
+
+.outline-none:focus {
+    box-shadow: none !important;
+}
