@@ -44,6 +44,7 @@ $data = [
     'username' => $username,
     'show_modal' => $show_modal,
     'error_valid' => $error_valid,
+    'list_employee' => get_all_employee(),
 ];
 
 # [RENDER]

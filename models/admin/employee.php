@@ -2,8 +2,9 @@
 
 function get_all_employee() {
     return pdo_query(
-        'SELECT id_user, username
-        FROM user'
+        'SELECT u.*, r.name_role
+        FROM user u
+        JOIN role r ON u.id_role = r.id_role'
     );
 }
 

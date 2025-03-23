@@ -9,35 +9,52 @@
                     <thead>
                         <tr class="small">
                             <!-- <th class="w-min">ID</th> -->
-                            <th class="col-3 text-center">Mã nhân viên</th>
-                            <th class="col-3 text-center">Họ tên</th>
-                            <th class="col-3 text-center">Số điện thoại</th>
+                            <th class="col-2 text-center">Mã nhân viên</th>
+                            <th class="col-2 text-center">Họ tên</th>
+                            <th class="col-2 text-center">Số điện thoại</th>
                             <th class="col-2 text-center">Username</th>
                             <th class="col-2 text-center">Phân quyền</th>
+                            <th class="col-2 text-end">Hành động</th>
                         </tr>
                     </thead>
                     <tbody> 
-                        <?php
-                        for ($i = 0; $i < 50; $i++): ?>
+                        <?php if($list_employee) : ?>
+                        <?php foreach ($list_employee as $employee) : extract($employee) ?>
                             <tr class="small">
                                 <td class="small align-middle text-center">
-                                    <?= 'EMP_' . rand() ?>
+                                    <?= $id_user ?>
                                 </td>
                                 <td class="small align-middle text-center">
-                                    <?= 'ABC_' . rand() ?>
+                                    <?= $full_name ?>
                                 <td class="small align-middle text-center">
-                                    0<?=rand(300000000,999999999) ?>
+                                    <?= $phone ?>
                                 </td>
                                 <td class="small align-middle text-center">
-                                    <?= 'user_' . rand(100,9999) ?>
+                                    <?= $username ?>
                                 </td>
                                 <td class="small align-middle text-center">
-                                    <?= ARR_ROLE[array_rand(ARR_ROLE)] ?>
+                                    <?= $name_role ?>
+                                </td>
+                                <td class="small align-middle text-end">
+                                    <?php if($name_role == 'admin') : ?>
+                                        <button class="btn btn-sm btn-danger p-1 px-2 disabled">
+                                            <small>Không thể xoá</small>
+                                        </button>
+                                    <?php else : ?>
+                                        <button class="btn btn-sm btn-danger p-1 px-2">
+                                            <small>Xoá</small>
+                                        </button>
+                                    <?php endif ?>
                                 </td>
                             </tr>
-                            <?php
-                        endfor
-                        ?>
+                        <?php endforeach ?>
+                        <?php else : ?>
+                            <tr class="small text-center">
+                                <td colspan="6">
+                                    Danh sách trống
+                                </td>
+                            </tr>
+                        <?php endif ?>
                     </tbody>
                 </table>
             </div>
