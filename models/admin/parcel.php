@@ -58,18 +58,23 @@ function update_state_parcel($id_parcel,$new_state) {
 }
 
 function update_parcel($id_parcel,$brand_post,$username,$date_sent,$name_receiver,$phone_receiver,$address_receiver,$fee,$cod,$note,$state_parcel) {
+    // custom
+    (!$username) ? $username = "NULL" :  $username = "'".$username."'";
+    if(!$fee)  $fee = "0";
+    if(!$cod) $cod = "0";
+    (!$note) ? $note = "NULL" : $note = "'".$note."'";
     pdo_execute(
         "UPDATE parcel 
         SET 
         brand_post = '".$brand_post."',
-        username = '".$username."',
+        username = ".$username.",
         date_sent = '".$date_sent."',
         name_receiver = '".$name_receiver."',
         phone_receiver = '".$phone_receiver."',
         address_receiver = '".$address_receiver."',
         fee = ".$fee.",
         cod = ".$cod.",
-        note = '".$note."',
+        note = ".$note.",
         state_parcel = '".$state_parcel."'
         WHERE id_parcel = '".$id_parcel."'
     ");
