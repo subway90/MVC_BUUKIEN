@@ -40,12 +40,15 @@ if (isset($_FILES['file_request'])) {
             $continue = false;
             // Sắp xếp
             $data = $sheet->rangeToArray("A$row:L$row")[0];
-            
-            // Nếu thuộc mảng brand
-            if(in_array($data[1],ARR_POST_BRAND)) {
-                // Nếu thuộc mảng state
-                foreach (ARR_STATE_POST as $state) {
-                    if($state['name'] === $data[10]) $continue = true;
+
+            // Kiểm tra nếu chưa tồn tại tồn tại
+            if(!get_parcel_with_id($data[0])) {
+                // Nếu thuộc mảng brand
+                if(in_array($data[1],ARR_POST_BRAND)) {
+                    // Nếu thuộc mảng state
+                    foreach (ARR_STATE_POST as $state) {
+                        if($state['name'] === $data[10]) $continue = true;
+                    }
                 }
             }
             
