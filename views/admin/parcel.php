@@ -23,61 +23,7 @@
                             <th class="col-1 text-center">Ghi chú</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <?php if($list_parcel) : ?>
-                        <?php foreach ($list_parcel as $parcel) : ?>
-                            <tr class="small" onclick="getOnePost('<?= $parcel['id_parcel'] ?>')">
-                                <td class="small align-middle text-center">
-                                    <?= $parcel['id_parcel'] ?>
-                                </td>
-                                <td class="small align-middle text-center">
-                                    <?= $parcel['brand_post'] ?>
-                                </td>
-                                <td class="small align-middle text-center">
-                                    <?= $parcel['username'] ?>
-                                </td>
-                                <td class="small align-middle text-center">
-                                    <?= $parcel['date_sent'] ?>
-                                </td>
-                                <td class="small align-middle text-center">
-                                    <?= $parcel['name_receiver'] ?>
-                                </td>
-                                <td class="small align-middle text-center">
-                                    <?= $parcel['phone_receiver'] ?>
-                                </td>
-                                <td class="small align-middle text-center">
-                                    <?= $parcel['address_receiver'] ?>
-                                </td>
-                                <td class="small align-middle text-center">
-                                    <?= $parcel['fee'] ?>
-                                </td>
-                                <td class="small align-middle text-center">
-                                    <?= $parcel['cod'] ?>
-                                </td>
-                                <td class="small align-middle text-center">
-                                    <?= $parcel['name_product'] ?>
-                                </td>
-                                <td class="small align-middle text-center text-light">
-                                    <?php foreach (ARR_STATE_POST as $state) : extract($state) ?>
-                                    <?php if(strtolower($name) === strtolower($parcel['state_parcel'])) : ?>
-                                        <span class="p-2 small d-block text-center" style="background-color : <?= $color ?>">
-                                            <?= $parcel['state_parcel'] ?>
-                                        </span>
-                                    <?php endif ?>
-                                    <?php endforeach ?>
-                                </td>
-                                <td class="small align-middle text-center">
-                                    <?= $parcel['note'] ?>
-                                </td>
-                            </tr>
-                        <?php endforeach ?>
-                        <?php else : ?>
-                            <tr class="small">
-                                <td colspan="12" class="align-middle text-center">
-                                    Dữ liệu trống
-                                </td>
-                            </tr>
-                        <?php endif ?>
+                    <tbody id="resultParcel">
                     </tbody>
                 </table>
             </div>
@@ -93,10 +39,10 @@
         </div>
 
         <div class="col-1">
-            <select class="form-select form-select-sm border-0 bg-blue-light text-light rounded-0">
-                <option value="0" selected disabled>- Lọc đơn vị -</option>
+            <select name="filterPostParcel" class="form-select form-select-sm border-0 bg-blue-light text-light rounded-0">
+                <option value="0" selected >- Lọc đơn vị -</option>
                 <?php foreach (ARR_POST_BRAND as $i => $name): ?>
-                    <option value="<?= ++$i ?>"><?= $name ?></option>
+                    <option value="<?= $name ?>"><?= $name ?></option>
                 <?php endforeach ?>
             </select>
         </div>
@@ -118,16 +64,13 @@
                                 <span class="input-group-text w-25">
                                     <small>Từ ngày</small>
                                 </span>
-                                <input type="date" class="form-control" placeholder="Username" aria-label="Username">
+                                <input name="start_date" type="date" class="form-control" placeholder="Username" aria-label="Username">
                             </div>
-                            <div class="input-group mb-3">
+                            <div class="input-group">
                                 <span class="input-group-text w-25">
                                     <small>Đến ngày</small>
                                 </span>
-                                <input type="date" class="form-control" placeholder="Username" aria-label="Username">
-                            </div>
-                            <div class="text-center mt-4">
-                                <button class="btn btn-sm btn-primary text-light small">Xác nhận lọc</button>
+                                <input name="end_date" type="date" class="form-control" placeholder="Username" aria-label="Username">
                             </div>
                         </div>
                     </li>
@@ -140,10 +83,10 @@
         </div>
 
         <div class="col-1">
-            <select class="form-select form-select-sm border-0 bg-blue-light text-light rounded-0">
+            <select name="filterState" class="form-select form-select-sm border-0 bg-blue-light text-light rounded-0">
                 <option value="0" selected disabled>- Lọc trạng thái -</option>
                 <?php foreach (ARR_STATE_POST as $i => $item): extract($item)?>
-                    <option value="<?= ++$i ?>"><?= $name ?></option>
+                    <option value="<?= $name ?>"><?= $name ?></option>
                 <?php endforeach ?>
             </select>
         </div>

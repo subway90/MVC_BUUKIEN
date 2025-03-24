@@ -159,7 +159,7 @@
                         <?php if($page == 'parcel') : //Show chức năng quản lí bưu kiện ?>
                         <div class="sa-toolbar_item my-auto px-3 p-2 bg-blue-light rounded rounded-fill-header">
                             <i class="fas fa-search text-light small ms-1 me-3"></i>
-                            <input type="text" placeholder="Nhập thông tin tìm kiếm" class="form-search" id="table-search"/>                     
+                            <input name="searchParcel" type="text" placeholder="Nhập thông tin tìm kiếm" class="form-search"/>                     
                             <button class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header" data-bs-toggle="modal" data-bs-target="#modalAddParcel">
                                 Thêm bưu kiện
                             </button>
@@ -229,6 +229,52 @@
 <!-- Dùng toast -->
 <?=toast_show()?>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+function loadParcel(keyword) {
+    // Thay thế nội dung box-result bằng loading indicator
+    $("#resultParcel").html(`
+        <tr class="align-middle">
+            <td class="text-center" colspan="12">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </td>
+        </tr>
+    `);
+
+    $.ajax({
+        url: `/admin/filterParcel?keyword=${encodeURIComponent(keyword)}`,
+        method: 'GET',
+        dataType: 'json', // Dữ liệu trả về là JSON
+        success: function (response) {
+            // Kiểm tra mã trạng thái
+            if (response.status === 200) {
+                // Cập nhật nội dung mới
+                $("#resultParcel").html(response.data); // Cập nhật nội dung mới
+            } else {
+                // Hiển thị thông báo lỗi nếu có
+                $("#resultParcel").html("<p>Không tìm thấy dữ liệu.</p>");
+            }
+        },
+        error: function () {
+            console.log("Đã có lỗi xảy ra.");
+            $("#resultParcel").html("<p>Đã có lỗi khi tải dữ liệu.</p>"); // Thông báo lỗi
+        }
+    });
+}
+
+$(document).ready(function () {
+    // Gửi yêu cầu mặc định khi trang được tải
+    loadParcel('');
+
+    // Theo dõi sự kiện nhập liệu trong ô tìm kiếm
+    $('#searchParcel').on('input', function () {
+        var keyword = $(this).val();
+        loadParcel(keyword); // Gửi yêu cầu tìm kiếm
+    });
+});
+</script>
 
 <script>
     document.getElementById('importParcel').addEventListener('click', function() {
@@ -357,38 +403,113 @@
         fileInput.click(); // Kích hoạt dialog chọn tệp
     });
 </script>
-
 <script>
-document.getElementById('exportParcel').addEventListener('click', function() {
-    // Gửi yêu cầu POST
-    fetch('/admin/exportParcel', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+function loadParcel(keyword, postParcel) {
+    // Thay thế nội dung box-result bằng loading indicator
+    $("#resultParcel").html(`
+        <tr class="align-middle">
+            <td class="text-center" colspan="12">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </td>
+        </tr>
+    `);
+
+    $.ajax({
+        url: `/admin/filterParcel?keyword=${encodeURIComponent(keyword)}&postParcel=${encodeURIComponent(postParcel)}`,
+        method: 'GET',
+        dataType: 'json', // Dữ liệu trả về là JSON
+        success: function (response) {
+            // Kiểm tra mã trạng thái
+            if (response.status === 200) {
+                // Cập nhật nội dung mới
+                $("#resultParcel").html(response.data); // Cập nhật nội dung mới
+            } else {
+                // Hiển thị thông báo lỗi nếu có
+                $("#resultParcel").html("<p>Không tìm thấy dữ liệu.</p>");
+            }
         },
-        body: new URLSearchParams({
-            exportParcel: 'true' // Gửi giá trị true
-        })
-    })
-    .then(response => {
-        if (response.ok) {
-            return response.blob(); // Nhận phản hồi dưới dạng blob
+        error: function () {
+            console.log("Đã có lỗi xảy ra.");
+            $("#resultParcel").html("<p>Đã có lỗi khi tải dữ liệu.</p>"); // Thông báo lỗi
         }
-        throw new Error('Network response was not ok.');
-    })
-    .then(blob => {
-        // Tạo URL cho blob và tải xuống file
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'export_parcel.xlsx'; // Tên file tải về
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        window.URL.revokeObjectURL(url); // Giải phóng URL
-    })
-    .catch(error => {
-        console.error('Có lỗi xảy ra:', error);
+    });
+}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function () {
+    function loadParcel(keyword, filterPostParcel, startDate, endDate, filterState) {
+        // Thay thế nội dung box-result bằng loading indicator
+        $("#resultParcel").html(`
+            <tr class="align-middle">
+                <td class="text-center" colspan="12">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </td>
+            </tr>
+        `);
+
+        const url = `/admin/filterParcel?keyword=${encodeURIComponent(keyword)}` +
+                    `&postParcel=${encodeURIComponent(filterPostParcel)}` +
+                    `&start_date=${encodeURIComponent(startDate)}` +
+                    `&end_date=${encodeURIComponent(endDate)}` +
+                    `&filterState=${encodeURIComponent(filterState)}`;
+
+        $.ajax({
+            url: url,
+            method: 'GET',
+            dataType: 'json',
+            success: function (response) {
+                if (response.status === 200) {
+                    $("#resultParcel").html(response.data); // Cập nhật nội dung mới
+                } else {
+                    $("#resultParcel").html("<p>Không tìm thấy dữ liệu.</p>");
+                }
+            },
+            error: function () {
+                console.log("Đã có lỗi xảy ra.");
+                $("#resultParcel").html("<p>Đã có lỗi khi tải dữ liệu.</p>"); // Thông báo lỗi
+            }
+        });
+    }
+
+    // Biến để lưu trữ giá trị hiện tại
+    let currentKeyword = '';
+    let currentFilterPostParcel = 0; // Giá trị mặc định cho filterPostParcel
+    let currentStartDate = ''; // Giá trị mặc định cho ngày bắt đầu
+    let currentEndDate = ''; // Giá trị mặc định cho ngày kết thúc
+    let currentFilterState = 0; // Giá trị mặc định cho filterState
+
+    // Theo dõi sự kiện nhập liệu trong ô tìm kiếm
+    $('input[name="searchParcel"]').on('input', function () {
+        currentKeyword = $(this).val();
+        loadParcel(currentKeyword, currentFilterPostParcel, currentStartDate, currentEndDate, currentFilterState);
+    });
+
+    // Theo dõi sự kiện thay đổi trong dropdown lọc đơn vị
+    $('select[name="filterPostParcel"]').on('change', function () {
+        currentFilterPostParcel = $(this).val(); // Lấy giá trị của dropdown
+        loadParcel(currentKeyword, currentFilterPostParcel, currentStartDate, currentEndDate, currentFilterState);
+    });
+
+    // Theo dõi sự kiện thay đổi trong ô nhập ngày bắt đầu
+    $('input[name="start_date"]').on('change', function () {
+        currentStartDate = $(this).val();
+        loadParcel(currentKeyword, currentFilterPostParcel, currentStartDate, currentEndDate, currentFilterState);
+    });
+
+    // Theo dõi sự kiện thay đổi trong ô nhập ngày kết thúc
+    $('input[name="end_date"]').on('change', function () {
+        currentEndDate = $(this).val();
+        loadParcel(currentKeyword, currentFilterPostParcel, currentStartDate, currentEndDate, currentFilterState);
+    });
+
+    // Theo dõi sự kiện thay đổi trong dropdown lọc trạng thái
+    $('select[name="filterState"]').on('change', function () {
+        currentFilterState = $(this).val(); // Lấy giá trị của dropdown
+        loadParcel(currentKeyword, currentFilterPostParcel, currentStartDate, currentEndDate, currentFilterState);
     });
 });
 </script>
