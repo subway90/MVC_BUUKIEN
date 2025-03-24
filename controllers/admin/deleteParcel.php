@@ -22,7 +22,7 @@ if (isset($_FILES['file_request'])) {
         // Nếu tiêu đề đúng, lặp qua từng dòng
         for ($row = 2; $row <= $highestRow; $row++) {
             $data = $sheet->rangeToArray("A$row")[0]; // Chỉ lấy cột A
-
+            
             // Gán dữ liệu vào biến
             $id_parcel = trim($data[0]); // Mã bưu kiện
 
