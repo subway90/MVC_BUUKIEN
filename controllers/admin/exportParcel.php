@@ -7,7 +7,7 @@ require 'vendor/autoload.php'; // Đảm bảo đường dẫn đúng đến aut
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['exportParcel'])) {
+if (isset($_POST['exportParcel'])) {
     // Giả sử $data_export đã được lấy từ cơ sở dữ liệu
     $data_export = get_all_parcel();
 

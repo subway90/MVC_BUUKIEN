@@ -89,7 +89,6 @@
                         <li class="sa-nav__section">
                             <ul class="sa-nav__menu sa-nav__menu--root">
                                 <!-- Project Case -->
-                                <?php if(auth('name_role') == 'admin') : ?>
                                 <li class="sa-nav__menu-item sa-nav__menu-item--has-icon">
                                     <a href="<?=URL_ADMIN?>bieu-do" class="sa-nav__link <?=($page=='dashboard') ? 'bg-dark' : ''?>">
                                         <span class="sa-nav__icon">
@@ -98,7 +97,6 @@
                                         <span class="sa-nav__title">Biểu đồ</span>
                                     </a>
                                 </li>
-                                <?php endif ?>
                                 <li class="sa-nav__menu-item sa-nav__menu-item--has-icon">
                                     <a href="<?=URL_ADMIN?>quan-li-buu-kien" class="sa-nav__link <?=($page=='post') ? 'bg-dark' : ''?>">
                                         <span class="sa-nav__icon">
@@ -115,7 +113,6 @@
                                         <span class="sa-nav__title">Đối soát</span>
                                     </a>
                                 </li>
-                                <?php if(auth('name_role') == 'admin') : ?>
                                 <li class="sa-nav__menu-item sa-nav__menu-item--has-icon">
                                     <a href="<?=URL_ADMIN?>quan-li-nhan-vien" class="sa-nav__link <?=($page=='nhan-vien') ? 'bg-dark' : ''?>">
                                         <span class="sa-nav__icon">
@@ -124,7 +121,6 @@
                                         <span class="sa-nav__title">Quản lí nhân viên</span>
                                     </a>
                                 </li>
-                                <?php endif ?>
                                 <form action="/dang-xuat" method="post">
                                     <li class="sa-nav__menu-item sa-nav__menu-item--has-icon">
                                         <button type="submit" name="logout" href="<?=URL_ADMIN?>quan-li-buu-kien" class="sa-nav__link bg-transparent border-0 w-100">
@@ -157,6 +153,7 @@
                     
                     <div class="mx-auto d-flex my-auto py-2 flex-grow-1 justify-content-center">
                         <?php if($page == 'parcel') : //Show chức năng quản lí bưu kiện ?>
+                        <form action="/admin/exportParcel" method="post">
                         <div class="sa-toolbar_item my-auto px-3 p-2 bg-blue-light rounded rounded-fill-header">
                             <i class="fas fa-search text-light small ms-1 me-3"></i>
                             <input type="text" placeholder="Nhập thông tin tìm kiếm" class="form-search" id="table-search"/>                     
@@ -172,10 +169,11 @@
                             <button id="deleteParcel" class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
                                 Xoá dữ liệu
                             </button>
-                            <button id="exportParcel" class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
+                            <button type="submit" name="exportParcel" class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
                                 Print
                             </button>
                         </div>
+                        </form>
                         <?php endif ?>
                         <?php if($page == 'doi-soat') : //Show chức năng quản lí bưu kiện ?>
                         <div class="sa-toolbar_item my-auto px-3 p-2 bg-blue-light rounded rounded-fill-header">
@@ -356,39 +354,4 @@
         // Kích hoạt input file
         fileInput.click(); // Kích hoạt dialog chọn tệp
     });
-</script>
-
-<script>
-document.getElementById('exportParcel').addEventListener('click', function() {
-    // Gửi yêu cầu POST
-    fetch('/admin/exportParcel', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: new URLSearchParams({
-            exportParcel: 'true' // Gửi giá trị true
-        })
-    })
-    .then(response => {
-        if (response.ok) {
-            return response.blob(); // Nhận phản hồi dưới dạng blob
-        }
-        throw new Error('Network response was not ok.');
-    })
-    .then(blob => {
-        // Tạo URL cho blob và tải xuống file
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'export_parcel.xlsx'; // Tên file tải về
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        window.URL.revokeObjectURL(url); // Giải phóng URL
-    })
-    .catch(error => {
-        console.error('Có lỗi xảy ra:', error);
-    });
-});
 </script>
