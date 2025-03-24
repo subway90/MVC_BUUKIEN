@@ -67,7 +67,7 @@
                                     <?php endforeach ?>
                                 </td>
                                 <td class="small align-middle text-center">
-                                    Ghi chú nè
+                                    <?= $parcel['note'] ?>
                                 </td>
                             </tr>
                         <?php endforeach ?>
