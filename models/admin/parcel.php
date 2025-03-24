@@ -30,7 +30,7 @@ function create_parcel($id_parcel,$brand_post,$username,$date_sent,$name_receive
 
     // thực thi sql
     pdo_execute(
-        "INSERT INTO parcel (id_parcel, brand_post,username,date_sent,name_receiver,phone_receiver,address_receiver,fee,cod,name_product,state_parcel,note)
+        "INSERT INTO parcel (id_parcel, brand_post,username,date_sent,name_receiver,phone_receiver,address_receiver,fee,cod,name_product,state_parcel,note,created_at)
         VALUES (
         '".$id_parcel."',
         '".$brand_post."',
@@ -43,7 +43,8 @@ function create_parcel($id_parcel,$brand_post,$username,$date_sent,$name_receive
         ".$cod.",
         '".$name_product."',
         '".$state_parcel."',
-        ".$note."
+        ".$note.",
+        CURRENT_TIMESTAMP
         )
     ");
 }
@@ -77,7 +78,8 @@ function update_parcel($id_parcel,$brand_post,$username,$date_sent,$name_receive
         fee = ".$fee.",
         cod = ".$cod.",
         note = ".$note.",
-        state_parcel = '".$state_parcel."'
+        state_parcel = '".$state_parcel."',
+        created_at = CURRENT_TIMESTAMP
         WHERE id_parcel = '".$id_parcel."'
     ");
 }
