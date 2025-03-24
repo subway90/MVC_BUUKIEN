@@ -80,12 +80,12 @@ if (isset($_FILES['file_request'])) {
                 // Kiểm tra nếu chưa tồn tại tồn tại
                 if (empty(get_parcel_with_id($data[0]))) {
                     // Gọi hàm tạo bưu kiện
-                    create_parcel($id_parcel, $brand_post, $id_user, $date_sent, $name_receiver, $phone_receiver, $address_receiver, $fee, $cod, $name_product, $state_parcel, $note);
+                    create_parcel($id_parcel, $brand_post, $id_user, $date_sent, $name_receiver, $phone_receiver, $address_receiver, null, $fee, $cod, $name_product, $state_parcel, $note);
                 }
                 // Cập nhật
                 else {
                     // Gọi hàm tạo bưu kiện
-                    update_parcel($id_parcel, $brand_post, $id_user, $date_sent, $name_receiver, $phone_receiver, $address_receiver, $fee, $cod, $note, $state_parcel);
+                    update_parcel(true,$id_parcel, $brand_post, $id_user, $date_sent, $name_receiver, $phone_receiver, $address_receiver, null, $fee, $cod, $note, $state_parcel);
                 }
             }
 

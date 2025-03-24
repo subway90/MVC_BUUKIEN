@@ -10,14 +10,13 @@ model('admin','employee');
 $error_valid = []; // mảng lỗi valid
 $show_modal = '';
 $username = auth('username');
-$id_parcel = $brand_post = $date_sent = $name_receiver = $phone_receiver = $address_receiver = $note = $state_parcel = $name_product = '';
+$id_parcel = $brand_post = $date_sent = $name_receiver = $phone_receiver = $province_receiver = $address_receiver = $note = $state_parcel = $name_product = '';
 $fee = $cod = 0;
 
 # [HANDLE]
 
 // Thêm parcel mới
 if(isset($_POST['addParcel'])) {
-    
     // lấy input
     if(isset($_POST['id_parcel'])) $id_parcel = clear_input($_POST['id_parcel']);
     if(isset($_POST['username'])) $username = clear_input($_POST['username']);
@@ -26,6 +25,7 @@ if(isset($_POST['addParcel'])) {
     if(isset($_POST['name_receiver'])) $name_receiver = clear_input($_POST['name_receiver']);
     if(isset($_POST['phone_receiver'])) $phone_receiver = clear_input($_POST['phone_receiver']);
     if(isset($_POST['address_receiver'])) $address_receiver = clear_input($_POST['address_receiver']);
+    if(isset($_POST['province_receiver'])) $province_receiver = clear_input($_POST['province_receiver']);
     if(isset($_POST['fee'])) $fee = clear_input($_POST['fee']);
     if(isset($_POST['cod'])) $cod = clear_input($_POST['cod']);
     if(isset($_POST['name_product'])) $name_product = clear_input($_POST['name_product']);
@@ -45,7 +45,7 @@ if(isset($_POST['addParcel'])) {
     // nếu hợp lệ
     if (!$error_valid) {
         // insert
-        create_parcel($id_parcel,$brand_post,$username,$date_sent,$name_receiver,$phone_receiver,$address_receiver,$fee,$cod,$name_product,$state_parcel,$note);
+        create_parcel($id_parcel,$brand_post,$username,$date_sent,$name_receiver,$phone_receiver,$address_receiver,$province_receiver,$fee,$cod,$name_product,$state_parcel,$note);
         // thông báo
         toast_create('success','Thêm mới thành công');
         // chuyển route
@@ -66,6 +66,7 @@ if(isset($_POST['editParcel'])) {
     if(isset($_POST['name_receiver'])) $name_receiver = clear_input($_POST['name_receiver']);
     if(isset($_POST['phone_receiver'])) $phone_receiver = clear_input($_POST['phone_receiver']);
     if(isset($_POST['address_receiver'])) $address_receiver = clear_input($_POST['address_receiver']);
+    if(isset($_POST['province_receiver'])) $province_receiver = clear_input($_POST['province_receiver']);
     if(isset($_POST['fee'])) $fee = clear_input($_POST['fee']);
     if(isset($_POST['cod'])) $cod = clear_input($_POST['cod']);
     if(isset($_POST['name_product'])) $name_product = clear_input($_POST['name_product']);
@@ -83,7 +84,7 @@ if(isset($_POST['editParcel'])) {
     // nếu hợp lệ
     if (!$error_valid) {
         // insert
-        update_parcel($id_parcel,$brand_post,$username,$date_sent,$name_receiver,$phone_receiver,$address_receiver,$fee,$cod,$note,$state_parcel);
+        update_parcel(false,$id_parcel,$brand_post,$username,$date_sent,$name_receiver,$phone_receiver,$address_receiver,$province_receiver,$fee,$cod,$note,$state_parcel);
         // thông báo
         toast_create('success','Cập nhật thành công');
         // chuyển route
@@ -110,6 +111,7 @@ $data = [
     'name_product' => $name_product,
     'note' => $note,
     'state_parcel' => $state_parcel,
+    'province_receiver' => $province_receiver,
     'show_modal' => $show_modal,
 ];
 

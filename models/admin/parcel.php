@@ -20,9 +20,10 @@ function get_parcel_with_id($id) {
     );
 }
 
-function create_parcel($id_parcel,$brand_post,$username,$date_sent,$name_receiver,$phone_receiver,$address_receiver,$fee,$cod,$name_product,$state_parcel,$note) {
+function create_parcel($id_parcel,$brand_post,$username,$date_sent,$name_receiver,$phone_receiver,$address_receiver,$province_receiver,$fee,$cod,$name_product,$state_parcel,$note) {
     // custom
     (!$username) ? $username = "NULL" :  $username = "'".$username."'";
+    (!$province_receiver) ? $province_receiver = "NULL" :  $province_receiver = "'".$province_receiver."'";
     (!$date_sent) ? $date_sent = "NULL" :  $date_sent = "'".$date_sent."'";
     if(!$fee)  $fee = "0";
     if(!$cod) $cod = "0";
@@ -30,7 +31,7 @@ function create_parcel($id_parcel,$brand_post,$username,$date_sent,$name_receive
 
     // thực thi sql
     pdo_execute(
-        "INSERT INTO parcel (id_parcel, brand_post,username,date_sent,name_receiver,phone_receiver,address_receiver,fee,cod,name_product,state_parcel,note,created_at)
+        "INSERT INTO parcel (id_parcel,brand_post,username,date_sent,name_receiver,phone_receiver,address_receiver,province_receiver,fee,cod,name_product,state_parcel,note,created_at)
         VALUES (
         '".$id_parcel."',
         '".$brand_post."',
@@ -39,6 +40,7 @@ function create_parcel($id_parcel,$brand_post,$username,$date_sent,$name_receive
         '".$name_receiver."',
         '".$phone_receiver."',
         '".$address_receiver."',
+        ".$province_receiver.",
         ".$fee.",
         ".$cod.",
         '".$name_product."',
@@ -59,8 +61,11 @@ function update_state_parcel($id_parcel,$new_state) {
     ");
 }
 
-function update_parcel($id_parcel,$brand_post,$username,$date_sent,$name_receiver,$phone_receiver,$address_receiver,$fee,$cod,$note,$state_parcel) {
+function update_parcel($with_file,$id_parcel,$brand_post,$username,$date_sent,$name_receiver,$phone_receiver,$address_receiver,$province_receiver,$fee,$cod,$note,$state_parcel) {
     // custom
+    if($with_file) $currrent_time = ", created_at = CURRENT_TIMESTAMP";
+    else $currrent_time = "";
+    (!$province_receiver) ? $province_receiver = "NULL" :  $province_receiver = "'".$province_receiver."'";
     (!$username) ? $username = "NULL" :  $username = "'".$username."'";
     (!$date_sent) ? $date_sent = "NULL" :  $date_sent = "'".$date_sent."'";
     if(!$fee)  $fee = "0";
@@ -75,11 +80,12 @@ function update_parcel($id_parcel,$brand_post,$username,$date_sent,$name_receive
         name_receiver = '".$name_receiver."',
         phone_receiver = '".$phone_receiver."',
         address_receiver = '".$address_receiver."',
+        province_receiver = ".$province_receiver.",
         fee = ".$fee.",
         cod = ".$cod.",
         note = ".$note.",
-        state_parcel = '".$state_parcel."',
-        created_at = CURRENT_TIMESTAMP
+        state_parcel = '".$state_parcel."'
+        ".$currrent_time."
         WHERE id_parcel = '".$id_parcel."'
     ");
 }

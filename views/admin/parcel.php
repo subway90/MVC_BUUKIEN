@@ -197,18 +197,18 @@
                             </div>
                             <div class="col-6 py-2 px-3 text-start mb-4">
                                 <label class="small text-muted" for="fee">Phí gửi</label>
-                                <input name="fee" type="number" value="<?= $fee ?>"  placeholder="Nhập phí vận chuyển" class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
+                                <input id="fee" name="fee" type="number" value="<?= $fee ?>"  placeholder="Nhập phí vận chuyển" class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
                             </div>
                             <div class="col-6 py-2 px-3 text-start mb-4">
                                 <label class="small text-muted" for="cod">Tiền thu hộ COD</label>
-                                <input name="cod" type="number" value="<?= $cod ?>"  placeholder="Nhập COD" class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
+                                <input id="cod" name="cod" type="number" value="<?= $cod ?>"  placeholder="Nhập COD" class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
                             </div>
                             <div class="col-6 py-2 px-3 text-start mb-4">
-                                <label class="small text-muted" for="address_receiver">Tỉnh thành</label>
-                                <select name="address_receiver" id="address_receiver" class="form-select ps-0 border-0 border-bottom border-2 outline-none">
-                                    <option value="0" selected disabled>--- Chọn địa điểm ---</option>
-                                    <?php foreach (ARR_PROVINCE as $i => $name): ?>
-                                        <option <?= $address_receiver == $name ? 'selected' : '' ?> value="<?= $name ?>"><?= $name ?></option>
+                                <label class="small text-muted" for="province_receiver">Tỉnh thành</label>
+                                <select name="province_receiver" id="province_receiver" class="form-select ps-0 border-0 border-bottom border-2 outline-none">
+                                    <option value="0" selected disabled>--- Chọn tỉnh thành ---</option>
+                                    <?php foreach (ARR_PROVINCE as $i => $item): ?>
+                                        <option <?= $province_receiver == $item['name'] ? 'selected' : '' ?> value="<?= $item['name'] ?>"><?= $item['name'] ?></option>
                                     <?php endforeach ?>
                                 </select>
                             </div>
@@ -235,8 +235,8 @@
                                     class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
                             </div>
                             <div class="col-6 py-2 px-3 text-start mb-4">
-                                <label class="small text-muted" for="none">Địa chỉ</label>
-                                <input name="none" id="none" type="text" placeholder="Nhập địa chỉ người nhận"
+                                <label class="small text-muted" for="address_receiver">Địa chỉ</label>
+                                <input name="address_receiver" id="address_receiver" type="text" placeholder="Nhập địa chỉ người nhận"
                                     class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
                             </div>
                             <div class="col-6 py-2 px-3 text-start mb-4">
@@ -309,11 +309,11 @@
                                 <input name="cod" type="number" value="<?= $cod ?>"  placeholder="Nhập COD" class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
                             </div>
                             <div class="col-6 py-2 px-3 text-start mb-4">
-                                <label class="small text-muted" for="address_receiver">Tỉnh thành</label>
-                                <select name="address_receiver" id="address_receiver" class="form-select ps-0 border-0 border-bottom border-2 outline-none">
-                                    <option value="0" selected disabled>--- Chọn địa điểm ---</option>
-                                    <?php foreach (ARR_PROVINCE as $i => $name): ?>
-                                        <option <?= $address_receiver == $name ? 'selected' : '' ?> value="<?= $name ?>"><?= $name ?></option>
+                                <label class="small text-muted" for="province_receiver">Tỉnh thành</label>
+                                <select name="province_receiver" id="province_receiver" class="form-select ps-0 border-0 border-bottom border-2 outline-none">
+                                    <option value="0" selected disabled>--- Chọn tỉnh thành ---</option>
+                                    <?php foreach (ARR_PROVINCE as $i => $item): ?>
+                                        <option <?= $province_receiver == $item['name'] ? 'selected' : '' ?> value="<?= $item['name'] ?>"><?= $item['name'] ?></option>
                                     <?php endforeach ?>
                                 </select>
                             </div>
@@ -340,8 +340,8 @@
                                     class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
                             </div>
                             <div class="col-6 py-2 px-3 text-start mb-4">
-                                <label class="small text-muted" for="none">Địa chỉ</label>
-                                <input name="none" id="none" type="text" placeholder="Nhập địa chỉ người nhận"
+                                <label class="small text-muted" for="address_receiver">Địa chỉ</label>
+                                <input name="address_receiver" value="<?= $address_receiver ?>" id="address_receiver" type="text" placeholder="Nhập địa chỉ người nhận"
                                     class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
                             </div>
                             <div class="col-6 py-2 px-3 text-start mb-4">
@@ -392,6 +392,7 @@
                     $("#name_receiver").val(data.name_receiver || '');
                     $("#phone_receiver").val(data.phone_receiver || '');
                     $("#address_receiver").val(data.address_receiver || '');
+                    $("#province_receiver").val(data.province_receiver || '');
                     $("#fee").val(data.fee || '');
                     $("#cod").val(data.cod || '');
                     $("#name_product").val(data.name_product || '');
