@@ -41,8 +41,7 @@ if (isset($_FILES['file_request'])) {
             // Sắp xếp
             $data = $sheet->rangeToArray("A$row:L$row")[0];
 
-            // Kiểm tra nếu chưa tồn tại tồn tại
-            if(!get_parcel_with_id($data[0])) {
+            
                 // Nếu thuộc mảng brand
                 if(in_array($data[1],ARR_POST_BRAND)) {
                     // Nếu thuộc mảng state
@@ -50,15 +49,19 @@ if (isset($_FILES['file_request'])) {
                         if($state['name'] === $data[10]) $continue = true;
                     }
                 }
-            }
+            
             
                 if($continue) {
                     // Gán dữ liệu vào biến
                     $id_parcel = clear_input($data[0]);
                     $brand_post = clear_input($data[1]);
                     $id_user = clear_input($data[2]);
-                    $array_date = explode('/',$data[3]);
-                    $date_sent = clear_input($array_date[1].'/'.$array_date[0].'/'.$array_date[2]);
+                    if($data[3]) {
+                        $array_date = explode('/',$data[3]);
+                        if(strlen($array_date[1]) == 1) $array_date[1] = '0'.$array_date[1];
+                        if(strlen($array_date[0]) == 1) $array_date[0] = '0'.$array_date[0];
+                        $date_sent = clear_input($array_date[2].'-'.$array_date[0].'-'.$array_date[1]);
+                    }else $date_sent = null;
                     $name_receiver = clear_input($data[4]);
                     $phone_receiver = clear_input($data[5]);
                     $address_receiver = clear_input($data[6]);
@@ -68,8 +71,16 @@ if (isset($_FILES['file_request'])) {
                     $state_parcel = clear_input($data[10]);
                     $note = clear_input($data[11]);
 
-                    // Gọi hàm tạo bưu kiện
-                    create_parcel($id_parcel, $brand_post, $id_user, $date_sent, $name_receiver, $phone_receiver, $address_receiver, $fee, $cod, $name_product, $state_parcel, $note);
+                    // Kiểm tra nếu chưa tồn tại tồn tại
+                    if(empty(get_parcel_with_id($data[0]))) {
+                        // Gọi hàm tạo bưu kiện
+                        create_parcel($id_parcel, $brand_post, $id_user, $date_sent, $name_receiver, $phone_receiver, $address_receiver, $fee, $cod, $name_product, $state_parcel, $note);
+                    }
+                    // Cập nhật
+                    else {
+                        // Gọi hàm tạo bưu kiện
+                        update_parcel($id_parcel,$brand_post,$id_user,$date_sent,$name_receiver,$phone_receiver,$address_receiver,$fee,$cod,$note,$state_parcel);
+                    }
                 }
             
         }

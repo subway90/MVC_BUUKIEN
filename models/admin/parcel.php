@@ -8,7 +8,7 @@ function get_all_parcel() {
     return pdo_query(
         'SELECT *
         FROM parcel p
-        ORDER BY created_at DESC'
+        ORDER BY created_at ASC'
     );
 }
 
@@ -23,6 +23,7 @@ function get_parcel_with_id($id) {
 function create_parcel($id_parcel,$brand_post,$username,$date_sent,$name_receiver,$phone_receiver,$address_receiver,$fee,$cod,$name_product,$state_parcel,$note) {
     // custom
     (!$username) ? $username = "NULL" :  $username = "'".$username."'";
+    (!$date_sent) ? $date_sent = "NULL" :  $date_sent = "'".$date_sent."'";
     if(!$fee)  $fee = "0";
     if(!$cod) $cod = "0";
     (!$note) ? $note = "NULL" : $note = "'".$note."'";
@@ -34,7 +35,7 @@ function create_parcel($id_parcel,$brand_post,$username,$date_sent,$name_receive
         '".$id_parcel."',
         '".$brand_post."',
         ".$username.",
-        '".$date_sent."',
+        ".$date_sent.",
         '".$name_receiver."',
         '".$phone_receiver."',
         '".$address_receiver."',
@@ -60,6 +61,7 @@ function update_state_parcel($id_parcel,$new_state) {
 function update_parcel($id_parcel,$brand_post,$username,$date_sent,$name_receiver,$phone_receiver,$address_receiver,$fee,$cod,$note,$state_parcel) {
     // custom
     (!$username) ? $username = "NULL" :  $username = "'".$username."'";
+    (!$date_sent) ? $date_sent = "NULL" :  $date_sent = "'".$date_sent."'";
     if(!$fee)  $fee = "0";
     if(!$cod) $cod = "0";
     (!$note) ? $note = "NULL" : $note = "'".$note."'";
@@ -68,7 +70,7 @@ function update_parcel($id_parcel,$brand_post,$username,$date_sent,$name_receive
         SET 
         brand_post = '".$brand_post."',
         username = ".$username.",
-        date_sent = '".$date_sent."',
+        date_sent = ".$date_sent.",
         name_receiver = '".$name_receiver."',
         phone_receiver = '".$phone_receiver."',
         address_receiver = '".$address_receiver."',
