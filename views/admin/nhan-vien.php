@@ -19,29 +19,32 @@
                     </thead>
                     <tbody> 
                         <?php if($list_employee) : ?>
-                        <?php foreach ($list_employee as $employee) : extract($employee) ?>
+                        <?php foreach ($list_employee as $employee) : ?>
                             <tr class="small">
                                 <td class="small align-middle text-center">
-                                    <?= $id_user ?>
+                                    <?= $employee['code_user'] ?>
                                 </td>
                                 <td class="small align-middle text-center">
-                                    <?= $full_name ?>
+                                    <?= $employee['full_name'] ?>
                                 <td class="small align-middle text-center">
-                                    <?= $phone ?>
+                                    <?= $employee['phone'] ?>
                                 </td>
                                 <td class="small align-middle text-center">
-                                    <?= $username ?>
+                                    <?= $employee['username'] ?>
                                 </td>
                                 <td class="small align-middle text-center">
-                                    <?= $name_role ?>
+                                    <?= $employee['name_role'] ?>
                                 </td>
                                 <td class="small align-middle text-end">
-                                    <?php if($name_role == 'admin') : ?>
+                                    <?php if($employee['username'] == 'admin') : ?>
                                         <button class="btn btn-sm btn-danger p-1 px-2 disabled">
                                             <small>Không thể xoá</small>
                                         </button>
                                     <?php else : ?>
-                                        <button type="button" class="btn btn-sm btn-danger p-1 px-2" onclick="delete_employee(<?= $id_user ?>)">
+                                        <button type="button" class="btn btn-sm btn-warning p-1 px-2 me-2" onclick="getOnePost('<?= $employee['id_user'] ?>')">
+                                            <small>Sửa</small>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-danger p-1 px-2" onclick="delete_employee(<?= $employee['code_user'] ?>)">
                                             <small>Xoá</small>
                                         </button>
                                     <?php endif ?>
@@ -134,6 +137,66 @@
     }
 </style>
 
+<!-- Modal sửa nhân viên -->
+<div class="modal fade" id="modalEditEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <form method="post">
+                <input type="hidden" name="id_force" value="">
+                <div class="modal-body text-center px-5">
+                    <div class="row justify-content-between">
+                        <div class="col-12 text-center h4 fw-normal mb-5 pb-2">
+                            Cập nhật thông tin nhân viên
+                        </div>
+                        <input id="id_user" type="hidden" name="id_user" value="<?= $id_user ?>" >
+                        <div class="py-2 col-12 text-start">
+                            <?= show_error($error_valid) ?>
+                        </div>
+                        <div class="col-6 py-2 px-3 text-start mb-4">
+                            <label class="small text-muted" for="code_user">Mã nhân viên</label>
+                            <input id="code_user" name="code_user" value="<?= $code_user ?>" type="text" placeholder="Mã nhân viên"
+                                class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
+                        </div>
+                        <div class="col-6 py-2 px-3 text-start mb-4">
+                            <label class="small text-muted" for="full_name">Họ tên</label>
+                            <input name="full_name" value="<?= $full_name ?>" id="full_name" type="text" placeholder="Nhập họ và tên"
+                                class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
+                        </div>
+                        <div class="col-6 py-2 px-3 text-start mb-4">
+                            <label class="small text-muted" for="id_role">Phân quyền</label>
+                            <select name="id_role" id="id_role" class="form-select ps-0 border-0 border-bottom border-2 outline-none">
+                                <option value="0" selected disabled>--- Chọn phân quyền ---</option>
+                                <option value="1" selected> Adminitrator </option>
+                                <option value="2" selected> Employee </option>
+                            </select>
+                        </div>
+                        <div class="col-6 py-2 px-3 text-start mb-4">
+                            <label class="small text-muted" for="phone">Số điện thoại</label>
+                            <input name="phone" value="<?= $phone ?>" id="phone" type="text" placeholder="Nhập số điện thoại"
+                                class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
+                        </div>
+                        <div class="col-6 py-2 px-3 text-start mb-4">
+                            <label class="small text-muted" for="username">Email/Username</label>
+                            <input name="username" value="<?= $username ?>" id="username" type="text" placeholder="Nhập email/username để đăng nhập"
+                                class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
+                        </div>
+                        <div class="col-6 py-2 px-3 text-start mb-4">
+                            <label class="small text-muted" for="password">Thay đổi mật khẩu</label>
+                            <input name="password" id="password" type="password" placeholder="Nhập mật khẩu mới"
+                                class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
+                        </div>
+                        <div class="col-12 mt-4">
+                            <button name="editEmployee" type="submit" class="w-btn-fill btn btn-primary text-light ms-2">Cập nhật</button>
+                            <button type="button" class="w-btn-fill btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <!-- Modal thêm nhân viên -->
 <div class="modal fade" id="modalAddEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
@@ -145,29 +208,42 @@
                         <div class="col-12 text-center h4 fw-normal mb-5 pb-2">
                             Thông tin nhân viên
                         </div>
-                        <div class="ps-2 col-12 text-start">
+                        <div class="py-2 col-12 text-start">
                             <?= show_error($error_valid) ?>
                         </div>
                         <div class="col-6 py-2 px-3 text-start mb-4">
-                                <label class="small text-muted" for="full_name">Họ tên</label>
-                                <input name="full_name" value="<?= $full_name ?>" id="full_name" type="text" placeholder="Nhập họ và tên"
-                                    class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
-                            </div>
-                            <div class="col-6 py-2 px-3 text-start mb-4">
-                                <label class="small text-muted" for="phone">Số điện thoại</label>
-                                <input name="phone" value="<?= $phone ?>" id="phone" type="text" placeholder="Nhập số điện thoại"
-                                    class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
-                            </div>
-                            <div class="col-6 py-2 px-3 text-start mb-4">
-                                <label class="small text-muted" for="username">Email/Username</label>
-                                <input name="username" value="<?= $username ?>" id="username" type="text" placeholder="Nhập email đăng nhập"
-                                    class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
-                            </div>
-                            <div class="col-6 py-2 px-3 text-start mb-4">
-                                <label class="small text-muted" for="password">Mật khẩu</label>
-                                <input name="password" id="password" type="password" placeholder="Nhập mật khẩu"
-                                    class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
-                            </div>
+                            <label class="small text-muted" for="code_user">Mã nhân viên</label>
+                            <input name="code_user" id="code_user" value="<?= $code_user ?>" type="text" placeholder="Mã nhân viên"
+                                class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
+                        </div>
+                        <div class="col-6 py-2 px-3 text-start mb-4">
+                            <label class="small text-muted" for="full_name">Họ tên</label>
+                            <input name="full_name" value="<?= $full_name ?>" id="full_name" type="text" placeholder="Nhập họ và tên"
+                                class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
+                        </div>
+                        <div class="col-6 py-2 px-3 text-start mb-4">
+                            <label class="small text-muted" for="id_role">Phân quyền</label>
+                            <select name="id_role" id="id_role" class="form-select ps-0 border-0 border-bottom border-2 outline-none">
+                                <option value="0" selected disabled>--- Chọn phân quyền ---</option>
+                                <option value="1" selected> Adminitrator </option>
+                                <option value="2" selected> Employee </option>
+                            </select>
+                        </div>
+                        <div class="col-6 py-2 px-3 text-start mb-4">
+                            <label class="small text-muted" for="phone">Số điện thoại</label>
+                            <input name="phone" value="<?= $phone ?>" id="phone" type="text" placeholder="Nhập số điện thoại"
+                                class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
+                        </div>
+                        <div class="col-6 py-2 px-3 text-start mb-4">
+                            <label class="small text-muted" for="username">Email/Username</label>
+                            <input name="username" value="<?= $username ?>" id="username" type="text" placeholder="Nhập email/username để đăng nhập"
+                                class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
+                        </div>
+                        <div class="col-6 py-2 px-3 text-start mb-4">
+                            <label class="small text-muted" for="password">Mật khẩu</label>
+                            <input name="password" id="password" type="password" placeholder="Nhập mật khẩu"
+                                class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
+                        </div>
                         <div class="col-12 mt-4">
                             <button name="addEmployee" type="submit" class="w-btn-fill btn btn-primary text-light ms-2">Xác nhận</button>
                             <button type="button" class="w-btn-fill btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
@@ -179,6 +255,7 @@
         </div>
     </div>
 </div>
+
 
 
 <!-- Modal xoá nhân viên -->
@@ -208,5 +285,40 @@
         document.querySelector('input[name="id"]').value = id;
         var myModal = new bootstrap.Modal(document.getElementById('modalDeleteEmployee'));
         myModal.show();
+    }
+</script>
+
+<script>
+    function getOnePost(id) {
+        // Hiện modal
+        var myModal = new bootstrap.Modal(document.getElementById('modalEditEmployee'));
+        
+        // Gửi yêu cầu AJAX để lấy dữ liệu
+        $.ajax({
+            url: `/admin/getEmployee?id=${id}`, // Sử dụng template string để chèn ID
+            method: 'GET',
+            dataType: 'json',
+            success: function (response) {
+                // Kiểm tra nếu status là 200
+                if (response.status === 200) {
+                    const data = response.data; // Lấy dữ liệu
+
+                    // Gán giá trị vào các input có ID tương ứng
+                    $("#id_user").val(data.id_user || '');
+                    $("#code_user").val(data.code_user || '');
+                    $("#id_role").val(data.id_role || '');
+                    $("#full_name").val(data.full_name || '');
+                    $("#phone").val(data.phone || '');
+                    $("#username").val(data.username || '');
+                    // Hiện modal sau khi đã gán giá trị
+                    myModal.show();
+                } else {
+                    console.error('Error: ', response.message); // Xử lý nếu status không phải 200
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('Error fetching data:', error);
+            }
+        });
     }
 </script>
