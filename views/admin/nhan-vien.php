@@ -166,8 +166,8 @@
                             <label class="small text-muted" for="id_role">Phân quyền</label>
                             <select name="id_role" id="id_role" class="form-select ps-0 border-0 border-bottom border-2 outline-none">
                                 <option value="0" selected disabled>--- Chọn phân quyền ---</option>
-                                <option value="1" selected> Adminitrator </option>
-                                <option value="2" selected> Employee </option>
+                                <option value="1" <?= $id_role == 1 ? 'selected' : '' ?>> Adminitrator </option>
+                                <option value="2" <?= $id_role == 2 ? 'selected' : '' ?>> Employee </option>
                             </select>
                         </div>
                         <div class="col-6 py-2 px-3 text-start mb-4">
@@ -225,8 +225,8 @@
                             <label class="small text-muted" for="id_role">Phân quyền</label>
                             <select name="id_role" id="id_role" class="form-select ps-0 border-0 border-bottom border-2 outline-none">
                                 <option value="0" selected disabled>--- Chọn phân quyền ---</option>
-                                <option value="1" selected> Adminitrator </option>
-                                <option value="2" selected> Employee </option>
+                                <option value="1" <?= $id_role == 1 ? 'selected' : '' ?>> Adminitrator </option>
+                                <option value="2" <?= $id_role == 2 ? 'selected' : '' ?>> Employee </option>
                             </select>
                         </div>
                         <div class="col-6 py-2 px-3 text-start mb-4">
