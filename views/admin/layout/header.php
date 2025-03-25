@@ -91,7 +91,7 @@
                                 <!-- Project Case -->
                                 <?php if(auth('name_role') == 'admin') : ?>
                                 <li class="sa-nav__menu-item sa-nav__menu-item--has-icon">
-                                    <a href="<?=URL_ADMIN?>bieu-do" class="sa-nav__link <?=($page=='dashboard') ? 'bg-dark' : ''?>">
+                                    <a href="<?=URL_ADMIN?>bieu-do?type_show=day&time_start=2023-09-05" class="sa-nav__link <?=($page=='dashboard') ? 'bg-dark' : ''?>">
                                         <span class="sa-nav__icon">
                                             <i class="fas fa-chart-bar"></i>
                                         </span>

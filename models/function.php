@@ -465,3 +465,14 @@ function get_action_uri($order) {
     else if(!empty($array_uri[$order])) return $array_uri[$order];
     return false;
 }
+
+/**
+ * Kiểm tra có đúng định dạng (YYYY-MM-DD) hay không
+ * @param mixed $date
+ * @return bool
+ */
+function is_date($date) {
+    // Kiểm tra định dạng 'Y-m-d' (ví dụ: 2023-09-05)
+    $d = DateTime::createFromFormat('Y-m-d', $date);
+    return $d && $d->format('Y-m-d') === $date;
+}
