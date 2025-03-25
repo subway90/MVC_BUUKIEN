@@ -7,13 +7,13 @@ const URL_STORAGE = URL."assets/file/";
 const PATH_FILE_AVATAR = "assets/file/avatar/";
 const PATH_FILE_MENU = "assets/file/menu/";
 
-const WEB_NAME = 'example.com';
-const WEB_LOGO = '';
-const WEB_FAVICON = '';
-const WEB_ADDRESS = 'Việt Nam';
-const WEB_HOTLINE = '0123 456 789';
+const WEB_NAME = 'Parcel Management';
+const WEB_LOGO = 'https://cdn-icons-png.flaticon.com/512/3638/3638895.png';
+const WEB_FAVICON = 'https://cdn-icons-png.flaticon.com/512/3638/3638895.png';
+const WEB_ADDRESS = '01 Trần Hưng Đạo, Phường 5, Quận 1, Hồ Chí Minh';
+const WEB_HOTLINE = '0979 68 68 68';
 const WEB_EMAIL = 'contact@example.com';
-const WEB_DESCRIPTION = '';
+const WEB_DESCRIPTION = 'Hệ thống quản lí bưu kiện PMS';
 
 const DB_HOST = 'localhost';
 const DB_USER = 'root';
@@ -24,10 +24,116 @@ const TOAST_TIME = 3000;
 
 const LIMIT_SIZE_FILE = 4; // đơn vị MB (megabyte)
 
-const DEFAULT_IMAGE = '';
-const DEFAULT_AVATAR = '';
+const LIMIT_DAY_LOADED = 30; // giới hạn số ngày request chart
 
-const ARR_POST_BRAND = ['Giaohangtietkiem', 'J&T Express', 'Vietnam POST', 'Giaohangnhanh', 'Viettel POST', 'Nhật Tín POST'];
-const ARR_STATE_POST = ['Đang gửi', 'Đang đi phát', 'Chưa phát được', 'Chuyển hoàn', 'Chưa nhận COD', 'Đã nhận COD',' Đã nhận CH'];
-const ARR_PROVINCE = ['Hà Nội', 'Đà Nẵng', 'Nha Trang', 'Thừa Thiên Huế', 'Hồ Chí Minh', 'Cần Thơ',' Đà Lạt'];
-const ARR_COD = [0,15000,20000,25000,30000,50000,100000,150000];
+const LIMIT_ROW_PAGINATE = 100; // giới hạn số dòng hiển thị
+
+const BOOL_SPINNER = false; // công tắt spinner ở UI
+
+const DEFAULT_IMAGE = 'https://img.freepik.com/premium-vector/default-image-icon-vector-missing-picture-page-website-design-mobile-app-no-photo-available_87543-11093.jpg';
+const DEFAULT_AVATAR = 'https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png';
+
+const ARR_POST_BRAND = [
+    'Giao hàng nhanh',
+    'Giao hàng TK',
+    'J&T Express',
+    'VNPost',
+    'Ninja Van',
+    'BEST Express',
+    'Viettel Post'
+];
+
+const ARR_PROVINCE = [
+    ['id' => 1, 'name' => 'Lai Châu'],
+    ['id' => 2, 'name' => 'Hà Nội'],
+    ['id' => 3, 'name' => 'Hải Phòng'],
+    ['id' => 4, 'name' => 'Đà Nẵng'],
+    ['id' => 5, 'name' => 'Hồ Chí Minh'],
+    ['id' => 6, 'name' => 'An Giang'],
+    ['id' => 7, 'name' => 'Bà Rịa - Vũng Tàu'],
+    ['id' => 8, 'name' => 'Bắc Giang'],
+    ['id' => 9, 'name' => 'Bắc Ninh'],
+    ['id' => 10, 'name' => 'Bến Tre'],
+    ['id' => 11, 'name' => 'Bình Định'],
+    ['id' => 12, 'name' => 'Bình Dương'],
+    ['id' => 13, 'name' => 'Bình Phước'],
+    ['id' => 14, 'name' => 'Cà Mau'],
+    ['id' => 15, 'name' => 'Cần Thơ'],
+    ['id' => 16, 'name' => 'Đắk Lắk'],
+    ['id' => 17, 'name' => 'Đắk Nông'],
+    ['id' => 18, 'name' => 'Điện Biên'],
+    ['id' => 19, 'name' => 'Gia Lai'],
+    ['id' => 20, 'name' => 'Hà Giang'],
+    ['id' => 21, 'name' => 'Hà Nam'],
+    ['id' => 22, 'name' => 'Hà Tĩnh'],
+    ['id' => 23, 'name' => 'Hòa Bình'],
+    ['id' => 24, 'name' => 'Hưng Yên'],
+    ['id' => 25, 'name' => 'Khánh Hòa'],
+    ['id' => 26, 'name' => 'Kiên Giang'],
+    ['id' => 27, 'name' => 'Kon Tum'],
+    ['id' => 28, 'name' => 'Lai Châu'],
+    ['id' => 29, 'name' => 'Lâm Đồng'],
+    ['id' => 30, 'name' => 'Lạng Sơn'],
+    ['id' => 31, 'name' => 'Nam Định'],
+    ['id' => 32, 'name' => 'Nghệ An'],
+    ['id' => 33, 'name' => 'Ninh Bình'],
+    ['id' => 34, 'name' => 'Ninh Thuận'],
+    ['id' => 35, 'name' => 'Phú Thọ'],
+    ['id' => 36, 'name' => 'Phú Yên'],
+    ['id' => 37, 'name' => 'Quảng Bình'],
+    ['id' => 38, 'name' => 'Quảng Nam'],
+    ['id' => 39, 'name' => 'Quảng Ngãi'],
+    ['id' => 40, 'name' => 'Quảng Ninh'],
+    ['id' => 41, 'name' => 'Sóc Trăng'],
+    ['id' => 42, 'name' => 'Sơn La'],
+    ['id' => 43, 'name' => 'Tây Ninh'],
+    ['id' => 44, 'name' => 'Thái Bình'],
+    ['id' => 45, 'name' => 'Thái Nguyên'],
+    ['id' => 46, 'name' => 'Thanh Hóa'],
+    ['id' => 47, 'name' => 'Thừa Thiên - Huế'],
+    ['id' => 48, 'name' => 'Tiền Giang'],
+    ['id' => 49, 'name' => 'Trà Vinh'],
+    ['id' => 50, 'name' => 'Tuyên Quang'],
+    ['id' => 51, 'name' => 'Vĩnh Long'],
+    ['id' => 52, 'name' => 'Vĩnh Phúc'],
+    ['id' => 53, 'name' => 'Yên Bái'],
+    ['id' => 54, 'name' => 'Hải Dương'],
+    ['id' => 55, 'name' => 'Thành phố Hồ Chí Minh'],
+    ['id' => 56, 'name' => 'Ninh Thuận'],
+    ['id' => 57, 'name' => 'Hà Tĩnh'],
+    ['id' => 58, 'name' => 'Thanh Hóa'],
+    ['id' => 59, 'name' => 'Đà Nẵng'],
+    ['id' => 60, 'name' => 'Hải Phòng'],
+    ['id' => 61, 'name' => 'Hà Nội'],
+    ['id' => 62, 'name' => 'Cần Thơ'],
+    ['id' => 63, 'name' => 'Kiên Giang'],
+];
+
+const ARR_STATE_POST = [
+    [
+        'color' => '#e4e75a; color : black',
+        'name' => 'Đang gửi',
+    ],
+    [
+        
+        'color' => '#70ca34; color: black',
+        'name' => 'Hoàn thành',
+    ],
+    [
+        'color' => '#325801',
+        'name' => 'Đã nhận cod',
+    ],
+    [
+        'color' => '#e65b5b',
+        'name' => 'Chuyển hoàn',
+    ],
+    [
+        'color' => '#a10909',
+        'name' => 'Đã nhận chuyển hoàn',
+        'value_example' => [0,3,4,5,5,3,1,5,3,4,5,5,3,1],
+    ],
+    [
+        'color' => '#0B0B0B',
+        'name' => 'Chuẩn bị chuyển hoàn',
+    ],
+];
