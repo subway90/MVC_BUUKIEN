@@ -174,7 +174,7 @@
                             <button id="deleteParcel" class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
                                 Xoá dữ liệu
                             </button>
-                            <button id="exportParcel" class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
+                            <button id="printParcel" class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header">
                                 Print
                             </button>
                         </div>
