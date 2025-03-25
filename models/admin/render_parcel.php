@@ -9,6 +9,8 @@ function render_row_parcel($data) {
             $label_state = '<span class="p-2 small d-block text-center" style="background-color : '.$color.'">'.$name.'</span>';
         }
     }
+    // format ngày
+    if($date_sent == '0000-00-00') $date_sent = null;
 
     //return
     return <<<HTML
