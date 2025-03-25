@@ -11,7 +11,7 @@
                             <!-- <th class="w-min">ID</th> -->
                             <th class="col-1 text-center">Mã bưu kiện</th>
                             <th class="col-1 text-center">Chuyển phát</th>
-                            <th class="col-1 text-center">Mã NV</th>
+                            <th class="col-1 text-center">Mã nhân viên</th>
                             <th class="col-1 text-center">Ngày gửi</th>
                             <th class="col-1 text-center">Người nhận</th>
                             <th class="col-1 text-center">Điện thoại</th>
@@ -373,52 +373,68 @@
         });
     }
 </script>
-
 <script>
     document.getElementById('printParcel').addEventListener('click', function() {
-        // Lấy dữ liệu từ bảng
-        var table = document.getElementById('dataTable');
-        
-        // Kiểm tra xem bảng có dữ liệu hay không
-        if (table.querySelector('tbody tr')) {
-            var workbook = XLSX.utils.table_to_book(table, { sheet: "Sheet1" });
+    // Lấy dữ liệu từ bảng
+    var table = document.getElementById('dataTable');
+    var data = [];
 
-            // Đặt độ rộng cho các cột
-            var ws = workbook.Sheets["Sheet1"];
-            ws['!cols'] = [
-                { wpx: 100 },
-                { wpx: 100 },
-                { wpx: 100 },
-                { wpx: 100 },
-                { wpx: 200 },
-                { wpx: 100 },
-                { wpx: 200 },
-                { wpx: 80 },
-                { wpx: 80 },
-                { wpx: 120 },
-                { wpx: 120 },
-                { wpx: 120 }
-            ];
+    // Lấy tiêu đề cột
+    var headers = Array.from(table.querySelectorAll('thead th')).map(th => th.innerText);
+    data.push(headers);
 
-            // Tạo thời gian
-            var now = new Date();
-            var formattedDate = [
-                String(now.getDate()).padStart(2, '0'),
-                String(now.getMonth() + 1).padStart(2, '0'),
-                now.getFullYear(),
-                String(now.getHours()).padStart(2, '0'),
-                String(now.getMinutes()).padStart(2, '0'),
-                String(now.getSeconds()).padStart(2, '0')
-            ].join('_');
-
-            // Tải file Excel
-            XLSX.writeFile(workbook, 'du_lieu_buu_kien' + formattedDate + '.xlsx');
-        } else {
-            alert('Không có dữ liệu để xuất.');
-        }
+    // Lấy dữ liệu các hàng
+    table.querySelectorAll('tbody tr').forEach(row => {
+        var rowData = Array.from(row.querySelectorAll('td')).map(td => {
+            return {
+                v: td.innerText, // Lấy giá trị văn bản
+                t: 's', // Đặt kiểu dữ liệu là string
+                s: { // Đặt thuộc tính kiểu cho ô
+                    alignment: { 
+                        horizontal: 'center' // Căn giữa
+                    }
+                }
+            };
+        });
+        data.push(rowData);
     });
-</script>
 
+    // Tạo workbook từ dữ liệu
+    var worksheet = XLSX.utils.aoa_to_sheet(data);
+    var workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+
+    // Đặt độ rộng cho các cột
+    worksheet['!cols'] = [
+        { wpx: 100 },
+        { wpx: 100 },
+        { wpx: 100 },
+        { wpx: 100 },
+        { wpx: 200 },
+        { wpx: 100 },
+        { wpx: 200 },
+        { wpx: 80 },
+        { wpx: 80 },
+        { wpx: 120 },
+        { wpx: 120 },
+        { wpx: 120 }
+    ];
+
+    // Tạo thời gian
+    var now = new Date();
+    var formattedDate = [
+        String(now.getDate()).padStart(2, '0'),
+        String(now.getMonth() + 1).padStart(2, '0'),
+        now.getFullYear(),
+        String(now.getHours()).padStart(2, '0'),
+        String(now.getMinutes()).padStart(2, '0'),
+        String(now.getSeconds()).padStart(2, '0')
+    ].join('_');
+
+    // Tải file Excel
+    XLSX.writeFile(workbook, 'du_lieu_buu_kien_' + formattedDate + '.xlsx');
+});
+</script>
 <script>
 $(document).ready(function () {
     function loadParcel(keyword, filterPostParcel, startDate, endDate, filterState, paginate) {
