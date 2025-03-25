@@ -5,7 +5,7 @@
             <div class="card">
                 <div class="sa-divider"></div>
                 <!-- <table class="sa-datatables-init table table-hover border-muted" data-order="[[ 9, &quot;asc&quot; ]]" data-sa-search-input="#table-search"> -->
-                <table class="table table-hover border-muted mb-5">
+                <table id="dataTable" class="table table-hover border-muted mb-5">
                     <thead>
                         <tr class="small">
                             <!-- <th class="w-min">ID</th> -->
@@ -242,3 +242,44 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('printDoiSoat').addEventListener('click', function() {
+        // Lấy dữ liệu từ bảng
+        var table = document.getElementById('dataTable');
+        
+        // Kiểm tra xem bảng có dữ liệu hay không
+        if (table.querySelector('tbody tr')) {
+            var workbook = XLSX.utils.table_to_book(table, { sheet: "Sheet1" });
+
+            // Đặt độ rộng cho các cột
+            var ws = workbook.Sheets["Sheet1"];
+            ws['!cols'] = [
+                { wpx: 100 },
+                { wpx: 100 },
+                { wpx: 100 },
+                { wpx: 100 },
+                { wpx: 100 },
+                { wpx: 100 },
+                { wpx: 100 },
+                { wpx: 200 } 
+            ];
+
+            // Tạo thời gian
+            var now = new Date();
+            var formattedDate = [
+                String(now.getDate()).padStart(2, '0'),
+                String(now.getMonth() + 1).padStart(2, '0'),
+                now.getFullYear(),
+                String(now.getHours()).padStart(2, '0'),
+                String(now.getMinutes()).padStart(2, '0'),
+                String(now.getSeconds()).padStart(2, '0')
+            ].join('_');
+
+            // Tải file Excel
+            XLSX.writeFile(workbook, 'du_lieu_doi_soat' + formattedDate + '.xlsx');
+        } else {
+            alert('Không có dữ liệu để xuất.');
+        }
+    });
+</script>
