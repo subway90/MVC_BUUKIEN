@@ -279,15 +279,14 @@ function loadParcel(keyword) {
             // Kiểm tra mã trạng thái
             if (response.status === 200) {
                 // Cập nhật nội dung mới
-                $("#resultParcel").html(response.data); // Cập nhật nội dung mới
-            } else {
-                // Hiển thị thông báo lỗi nếu có
-                $("#resultParcel").html("<p>Không tìm thấy dữ liệu.</p>");
+                $("#resultParcel").html(response.data);
+                $("#resultPaginate").html(response.paginate);
+                $("#resultCount").html(response.count);
             }
         },
         error: function () {
             console.log("Đã có lỗi xảy ra.");
-            $("#resultParcel").html("<p>Đã có lỗi khi tải dữ liệu.</p>"); // Thông báo lỗi
+            $("#resultParcel").html("<tr class='align-middle'><td class='text-center' colspan='12'>Đã có lỗi khi tải dữ liệu. Vui lòng liên hệ ADMIN để hỗ trợ</td></tr>"); // Thông báo lỗi
         }
     });
 }
@@ -423,121 +422,11 @@ $(document).ready(function () {
 
                 // Thêm form vào body và gửi đi
                 document.body.appendChild(form);
-                form.submit(); // Gửi form
+                form.zsubmit(); // Gửi form
             }
         });
 
         // Kích hoạt input file
         fileInput.click(); // Kích hoạt dialog chọn tệp
     });
-</script>
-<script>
-function loadParcel(keyword, postParcel) {
-    // Thay thế nội dung box-result bằng loading indicator
-    $("#resultParcel").html(`
-        <tr class="align-middle">
-            <td class="text-center" colspan="12">
-                <div class="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-            </td>
-        </tr>
-    `);
-
-    $.ajax({
-        url: `/admin/filterParcel?keyword=${encodeURIComponent(keyword)}&postParcel=${encodeURIComponent(postParcel)}`,
-        method: 'GET',
-        dataType: 'json', // Dữ liệu trả về là JSON
-        success: function (response) {
-            // Kiểm tra mã trạng thái
-            if (response.status === 200) {
-                // Cập nhật nội dung mới
-                $("#resultParcel").html(response.data); // Cập nhật nội dung mới
-            } else {
-                // Hiển thị thông báo lỗi nếu có
-                $("#resultParcel").html("<p>Không tìm thấy dữ liệu.</p>");
-            }
-        },
-        error: function () {
-            console.log("Đã có lỗi xảy ra.");
-            $("#resultParcel").html("<p>Đã có lỗi khi tải dữ liệu.</p>"); // Thông báo lỗi
-        }
-    });
-}
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function () {
-    function loadParcel(keyword, filterPostParcel, startDate, endDate, filterState) {
-        // Thay thế nội dung box-result bằng loading indicator
-        $("#resultParcel").html(`
-            <tr class="align-middle">
-                <td class="text-center" colspan="12">
-                    <div class="spinner-border text-primary" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
-                </td>
-            </tr>
-        `);
-
-        const url = `/admin/filterParcel?keyword=${encodeURIComponent(keyword)}` +
-                    `&postParcel=${encodeURIComponent(filterPostParcel)}` +
-                    `&start_date=${encodeURIComponent(startDate)}` +
-                    `&end_date=${encodeURIComponent(endDate)}` +
-                    `&filterState=${encodeURIComponent(filterState)}`;
-
-        $.ajax({
-            url: url,
-            method: 'GET',
-            dataType: 'json',
-            success: function (response) {
-                if (response.status === 200) {
-                    $("#resultParcel").html(response.data); // Cập nhật nội dung mới
-                } else {
-                    $("#resultParcel").html("<p>Không tìm thấy dữ liệu.</p>");
-                }
-            },
-            error: function () {
-                console.log("Đã có lỗi xảy ra.");
-                $("#resultParcel").html("<p>Đã có lỗi khi tải dữ liệu.</p>"); // Thông báo lỗi
-            }
-        });
-    }
-
-    // Biến để lưu trữ giá trị hiện tại
-    let currentKeyword = '';
-    let currentFilterPostParcel = 0; // Giá trị mặc định cho filterPostParcel
-    let currentStartDate = ''; // Giá trị mặc định cho ngày bắt đầu
-    let currentEndDate = ''; // Giá trị mặc định cho ngày kết thúc
-    let currentFilterState = 0; // Giá trị mặc định cho filterState
-
-    // Theo dõi sự kiện nhập liệu trong ô tìm kiếm
-    $('input[name="searchParcel"]').on('input', function () {
-        currentKeyword = $(this).val();
-        loadParcel(currentKeyword, currentFilterPostParcel, currentStartDate, currentEndDate, currentFilterState);
-    });
-
-    // Theo dõi sự kiện thay đổi trong dropdown lọc đơn vị
-    $('select[name="filterPostParcel"]').on('change', function () {
-        currentFilterPostParcel = $(this).val(); // Lấy giá trị của dropdown
-        loadParcel(currentKeyword, currentFilterPostParcel, currentStartDate, currentEndDate, currentFilterState);
-    });
-
-    // Theo dõi sự kiện thay đổi trong ô nhập ngày bắt đầu
-    $('input[name="start_date"]').on('change', function () {
-        currentStartDate = $(this).val();
-        loadParcel(currentKeyword, currentFilterPostParcel, currentStartDate, currentEndDate, currentFilterState);
-    });
-
-    // Theo dõi sự kiện thay đổi trong ô nhập ngày kết thúc
-    $('input[name="end_date"]').on('change', function () {
-        currentEndDate = $(this).val();
-        loadParcel(currentKeyword, currentFilterPostParcel, currentStartDate, currentEndDate, currentFilterState);
-    });
-
-    // Theo dõi sự kiện thay đổi trong dropdown lọc trạng thái
-    $('select[name="filterState"]').on('change', function () {
-        currentFilterState = $(this).val(); // Lấy giá trị của dropdown
-        loadParcel(currentKeyword, currentFilterPostParcel, currentStartDate, currentEndDate, currentFilterState);
-    });
-});
 </script>

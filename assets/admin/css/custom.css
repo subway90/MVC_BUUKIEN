@@ -2,6 +2,21 @@
     background-color: #3ea2b9 !important;
 }
 
+.bg-blue-light:hover {
+  background-color: #52cce8 !important;
+}
+
+.bg-blue-light-active {
+  background-color: #15434e !important;
+}
+
+.bg-blue-light-disabled {
+  cursor: not-allowed !important;
+  color: #ffffff78 !important;
+  background-color: #226b7c !important;
+}
+
+
 .bg-error {
     background-color: #ffccc9 !important;
 }
@@ -191,4 +206,9 @@ button {
 .btn-primary-active, .btn-primary-active:hover {
   background-color: #0f3e6c;
   border: #0f3e6c;
+}
+
+.btn-blue-light, .btn-blue-light:hover {
+  background-color: #3ea2b9;
+  border: #3ea2b9;
 }

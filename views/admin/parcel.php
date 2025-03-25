@@ -78,8 +78,27 @@
             </div>
         </div>
 
-        <div class="col-6 invisible">
-            space
+        <div class="col-6 d-flex justify-content-between align-items-center px-5">
+            <div id="resultPaginate" class="d-flex gap-2">
+                <button value="0" class="sa-toolbar-user btn-sm bg-primary small fw-normal text-light rounded-0 bg-blue-light-disabled">
+                    <small>Trước</small>
+                </button>
+                <button value="0" class="sa-toolbar-user btn-sm bg-primary small fw-normal text-light rounded-0 bg-blue-light-active">
+                    <small>1</small>
+                </button>
+                <button value="2" class="sa-toolbar-user btn-sm bg-primary small fw-normal text-light rounded-0 bg-blue-light">
+                    <small>2</small>
+                </button>
+                <button value="3" class="sa-toolbar-user btn-sm bg-primary small fw-normal text-light rounded-0 bg-blue-light">
+                    <small>3</small>
+                </button>
+                <button value="2" class="sa-toolbar-user btn-sm bg-primary small fw-normal text-light rounded-0 bg-blue-light">
+                    <small>Sau</small>
+                </button>
+            </div>
+            <div class="small text-light">
+                <small>Số dòng của trang này : <span id="resultCount"></span></small>
+            </div>
         </div>
 
         <div class="col-1">
@@ -398,4 +417,98 @@
             alert('Không có dữ liệu để xuất.');
         }
     });
+</script>
+
+<script>
+$(document).ready(function () {
+    function loadParcel(keyword, filterPostParcel, startDate, endDate, filterState, paginate) {
+        // Thay thế nội dung box-result bằng loading indicator
+        $("#resultParcel").html(`
+            <tr class="align-middle">
+                <td class="text-center" colspan="12">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </td>
+            </tr>
+        `);
+
+        const url = `/admin/filterParcel?keyword=${encodeURIComponent(keyword)}` +
+                    `&postParcel=${encodeURIComponent(filterPostParcel)}` +
+                    `&start_date=${encodeURIComponent(startDate)}` +
+                    `&end_date=${encodeURIComponent(endDate)}` +
+                    `&filterState=${encodeURIComponent(filterState)}` +
+                    `&paginate=${encodeURIComponent(paginate)}`;
+
+        $.ajax({
+            url: url,
+            method: 'GET',
+            dataType: 'json',
+            success: function (response) {
+                if (response.status === 200) {
+                    $("#resultParcel").html(response.data); // Cập nhật nội dung mới
+                    $("#resultPaginate").html(response.paginate); // Cập nhật nội dung mới
+                    $("#resultCount").html(response.count); // Cập nhật nội dung mới
+                } else {
+                    $("#resultParcel").html("<tr class='align-middle'><td class='text-center' colspan='12'>Lỗi khi tải dữ liệu ! Vui lòng kiểm tra kết nối mạng hoặc đợi Admin hỗ trợ.</td></tr>");
+                }
+            },
+            error: function () {
+                console.log("Đã có lỗi xảy ra.");
+                $("#resultParcel").html("<tr class='align-middle'><td class='text-center' colspan='12'>Lỗi khi tải dữ liệu ! Vui lòng kiểm tra kết nối mạng hoặc đợi Admin hỗ trợ.</td></tr>");
+            }
+        });
+    }
+
+    // Biến để lưu trữ giá trị hiện tại
+    let currentKeyword = '';
+    let currentFilterPostParcel = 0; // Giá trị mặc định cho filterPostParcel
+    let currentStartDate = ''; // Giá trị mặc định cho ngày bắt đầu
+    let currentEndDate = ''; // Giá trị mặc định cho ngày kết thúc
+    let currentFilterState = 0; // Giá trị mặc định cho filterState
+    let currentPaginate = 1;
+
+    // Theo dõi sự kiện nhập liệu trong ô tìm kiếm
+    $('input[name="searchParcel"]').on('input', function () {
+        currentKeyword = $(this).val();
+        loadParcel(currentKeyword, currentFilterPostParcel, currentStartDate, currentEndDate, currentFilterState,currentPaginate);
+    });
+
+    // Theo dõi sự kiện thay đổi trong dropdown lọc đơn vị
+    $('select[name="filterPostParcel"]').on('change', function () {
+        currentFilterPostParcel = $(this).val();
+        loadParcel(currentKeyword, currentFilterPostParcel, currentStartDate, currentEndDate, currentFilterState,currentPaginate);
+    });
+
+    // Theo dõi sự kiện thay đổi trong ô nhập ngày bắt đầu
+    $('input[name="start_date"]').on('change', function () {
+        currentStartDate = $(this).val();
+        loadParcel(currentKeyword, currentFilterPostParcel, currentStartDate, currentEndDate, currentFilterState,currentPaginate);
+    });
+
+    // Theo dõi sự kiện thay đổi trong ô nhập ngày kết thúc
+    $('input[name="end_date"]').on('change', function () {
+        currentEndDate = $(this).val();
+        loadParcel(currentKeyword, currentFilterPostParcel, currentStartDate, currentEndDate, currentFilterState,currentPaginate);
+    });
+
+    // Theo dõi sự kiện thay đổi trong dropdown lọc trạng thái
+    $('select[name="filterState"]').on('change', function () {
+        currentFilterState = $(this).val();
+        loadParcel(currentKeyword, currentFilterPostParcel, currentStartDate, currentEndDate, currentFilterState,currentPaginate);
+    });
+
+    // Sử dụng event delegation để bắt sự kiện click
+    $('#resultPaginate').on('click', '.btn-paginate', function () {
+        console.log("Button clicked!"); // Kiểm tra xem sự kiện click có hoạt động hay không
+        const paginateValue = $(this).val();
+
+        // Kiểm tra nếu paginateValue không có hoặc bằng 0
+        if (!paginateValue || paginateValue == '0') {
+            console.log("Không thể fetch dữ liệu vì giá trị phân trang không hợp lệ.");
+            return; // Dừng lại nếu điều kiện không thỏa mãn
+        }
+        loadParcel(currentKeyword, currentFilterPostParcel, currentStartDate, currentEndDate, currentFilterState, paginateValue);
+    });
+});
 </script>

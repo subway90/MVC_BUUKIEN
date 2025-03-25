@@ -62,3 +62,64 @@ function render_row_empty() {
     </tr>
     HTML;
 }
+
+function render_paginate_parcel($total_row, $page_active) {
+    // khởi tạo
+    $content = '';
+    // tính tổng số lần trang
+    $total_page = ceil($total_row/LIMIT_ROW_PAGINATE);
+
+    // Render trang trước
+        if($page_active == 1 ) {
+            $state_before_page = '-disabled';
+            $value_before_page = 0;
+        }
+        else {
+            $state_before_page = '';
+            $value_before_page = $page_active - 1;
+        }
+        $content .= <<<HTML
+        <button value=" {$value_before_page}" class="btn-paginate sa-toolbar-user btn-sm bg-primary small fw-normal text-light rounded-0 bg-blue-light{$state_before_page}">
+            <small>Trước</small>
+        </button>
+        HTML;
+
+    //return
+    for ($i=1; $i <= $total_page; $i++) {
+        // format
+        if($i == $page_active) {
+            $state_inner_page = '-active';
+            $value_inner_page = 0;
+        }else {
+            $state_inner_page = '';
+            $value_inner_page = $i;
+        };
+
+        // render
+        $content .= <<<HTML
+        <button value="{$value_inner_page}" class="btn-paginate sa-toolbar-user btn-sm bg-primary small fw-normal text-light rounded-0 bg-blue-light{$state_inner_page}">
+            <small>{$i}</small>
+        </button>
+        HTML;
+    };
+
+    // Render trang sau
+    if($total_page > 1) {
+        if($page_active == $total_page ) {
+            $state_after_page = '-disabled';
+            $value_after_page = 0;
+        }
+        else {
+            $state_after_page = '';
+            $value_after_page = $page_active + 1;
+        }
+        
+        $content .= <<<HTML
+        <button value="{$value_after_page}" class="btn-paginate sa-toolbar-user btn-sm bg-primary small fw-normal text-light rounded-0 bg-blue-light{$state_after_page}">
+            <small>Sau</small>
+        </button>
+        HTML;
+    
+        return $content;
+    };
+}

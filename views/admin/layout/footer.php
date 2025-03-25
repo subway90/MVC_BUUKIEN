@@ -4,13 +4,6 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="<?=URL?>assets/admin/lib/easing/easing.min.js"></script>
-    <script src="<?=URL?>assets/admin/lib/owlcarousel/owl.carousel.min.js"></script>
-    <!-- Contact Javascript File -->
-    <script src="<?=URL?>assets/admin/mail/jqBootstrapValidation.min.js"></script>
-    <script src="<?=URL?>assets/admin/mail/contact.js"></script>
-    <!-- Template Javascript -->
-    <script src="<?=URL?>assets/admin/js/main.js"></script>
     <!-- js của template chuẩn -->
     <script src="<?=URL?>assets/admin/vendor/jquery/jquery.min.js"></script>
     <script src="<?=URL?>assets/admin/vendor/feather-icons/feather.min.js"></script>
@@ -34,8 +27,6 @@
     <script src="<?=URL?>assets/admin/js/demo-chart-js.js"></script>
     <!-- js custom by subway90 -->
     <script src="<?=URL?>assets/admin/js/image.js"></script>
-    <!-- Summernote JS - CDN Link -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
     <script>
