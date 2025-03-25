@@ -84,7 +84,7 @@
 
         <div class="col-1">
             <select name="filterState" class="form-select form-select-sm border-0 bg-blue-light text-light rounded-0">
-                <option value="0" selected disabled>- Lọc trạng thái -</option>
+                <option value="0" selected>- Lọc trạng thái -</option>
                 <?php foreach (ARR_STATE_POST as $i => $item): extract($item)?>
                     <option value="<?= $name ?>"><?= $name ?></option>
                 <?php endforeach ?>

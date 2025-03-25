@@ -56,7 +56,7 @@
             visibility: visible; /* Hiển thị spinner ban đầu */
         }
     </style>
-
+    <?php if(BOOL_SPINNER) : ?>
     <div id="spinner">
         <div  style="width: 8px; height: 8px;" class="spinner-grow text-danger" role="status">
         </div>
@@ -69,6 +69,7 @@
         <div  style="width: 24px; height: 24px;" class="spinner-grow text-warning" role="status">
         </div>
     </div>
+    <?php endif ?>
 
     <!-- sa-app -->
     <?php if(is_login()) : // Nếu đăng nhập sẽ show?>
@@ -93,7 +94,7 @@
                                 <!-- Project Case -->
                                 <?php if(auth('name_role') == 'admin') : ?>
                                 <li class="sa-nav__menu-item sa-nav__menu-item--has-icon">
-                                    <a href="<?=URL_ADMIN?>bieu-do?type_show=day&time_start=2023-09-05" class="sa-nav__link <?=($page=='dashboard') ? 'bg-dark' : ''?>">
+                                    <a href="<?=URL_ADMIN?>bieu-do" class="sa-nav__link <?=($page=='dashboard') ? 'bg-dark' : ''?>">
                                         <span class="sa-nav__icon">
                                             <i class="fas fa-chart-bar"></i>
                                         </span>
@@ -179,7 +180,7 @@
                             </button>
                         </div>
                         <?php endif ?>
-                        <?php if($page == 'doi-soat') : //Show chức năng quản lí bưu kiện ?>
+                        <?php if($page == 'doi-soat') : //Show chức năng quản lí đối soát ?>
                         <div class="sa-toolbar_item my-auto px-3 p-2 bg-blue-light rounded rounded-fill-header">
                             <i class="fas fa-search text-light small ms-1 me-3"></i>
                             <input type="text" placeholder="Nhập thông tin tìm kiếm" class="form-search" id="table-search"/>                     
@@ -200,7 +201,7 @@
                             </button>
                         </div>
                         <?php endif ?>
-                        <?php if($page == 'nhan-vien') : //Show chức năng quản lí bưu kiện ?>
+                        <?php if($page == 'nhan-vien') : //Show chức năng quản lí nhân viên ?>
                         <div class="sa-toolbar_item my-auto px-3 p-2 bg-blue-light rounded rounded-fill-header">
                             <i class="fas fa-search text-light small ms-1 me-3"></i>
                             <input type="text" placeholder="Nhập thông tin tìm kiếm" class="form-search" id="table-search"/>                     
@@ -218,6 +219,31 @@
                             </button>
                             <button class="min-w-10x btn btn-sm btn-primary text-light fs-btn-fill-header" data-bs-toggle="modal" data-bs-target="#modalAddEmployee">
                                 Thêm
+                            </button>
+                        </div>
+                        <?php endif ?>
+                        <?php if($page == 'dashboard') : // Chức năng biểu đồ ?>
+                        <div class="sa-toolbar_item my-auto px-3 p-2 bg-blue-light rounded rounded-fill-header">
+                            <i class="fas fa-filter text-light small ms-1 me-3"></i>
+                            <input type="hidden" id="type_show" name = "type_show" value="<?= $type_show?>">
+                            <input id="time_start" name="time_start" style="width: 130px" type="date" class="form-search" value="<?= $timeStart->format('Y-m-d') ?>"/>
+                            <span class="text-light mx-2">&rarr;</span>
+                            <input id="time_end" name="time_end" style="width: 130px" type="date" class="form-search" value="<?= $timeEnd->format('Y-m-d') ?>"/>
+             
+                            <button class="invisible min-w-5x btn btn-sm btn-primary text-light fs-btn-fill-header">
+                                space
+                            </button>
+                            <button id="showDay" class="min-w-5x btn btn-sm text-light fs-btn-fill-header <?= $type_show == 'day' ? 'btn-primary-active' : 'btn-primary' ?>">
+                                Ngày
+                            </button>
+                            <button id="showWeek" class="min-w-5x btn btn-sm text-light fs-btn-fill-header <?= $type_show == 'week' ? 'btn-primary-active' : 'btn-primary' ?>">
+                                Tuần
+                            </button>
+                            <button id="showMonth" class="min-w-5x btn btn-sm text-light fs-btn-fill-header <?= $type_show == 'month' ? 'btn-primary-active' : 'btn-primary' ?>">
+                                Tháng
+                            </button>
+                            <button id="showYear" class="min-w-5x btn btn-sm text-light fs-btn-fill-header <?= $type_show == 'year' ? 'btn-primary-active' : 'btn-primary' ?>">
+                                Năm
                             </button>
                         </div>
                         <?php endif ?>

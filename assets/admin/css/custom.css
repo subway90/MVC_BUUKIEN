@@ -115,15 +115,6 @@ button {
   font-size: 12px;
 }
 
-button:hover {
-  background-color: #e8e8e8;
-}
-
-button.selected {
-  background-color: #007bff;
-  color: white;
-  border-color: #0069d9;
-}
 
 .chartContent {
   display: flex;
@@ -139,13 +130,11 @@ button.selected {
 }
 
 .colLarge {
-  width: calc(100% - 65px);
   overflow-x: auto;
   position: relative;
 }
 
 .box {
-  width: 1400px;
   height: 460px;
 }
 
@@ -197,4 +186,9 @@ button.selected {
 
 .colLarge::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.btn-primary-active, .btn-primary-active:hover {
+  background-color: #0f3e6c;
+  border: #0f3e6c;
 }

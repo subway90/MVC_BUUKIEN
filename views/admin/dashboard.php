@@ -1,54 +1,16 @@
 <!-- sa-app__body -->
-<div id="top" class="sa-app__body px-2 px-lg-4">
+<div id="top" class="sa-app__body">
     <div class="container-fluid">
-        <div class="row g-4 g-xl-5 mt-2">
-            <div class="col-12 d-flex">
+        <div class="row">
+            <div class="col-12 d-flex p-0">
                 <div class="card flex-grow-1">
-                    <div class="sa-chart-toolbar mb-5 mt-n2">
-                        <div class="sa-chart-toolbar__body p-5 pb-0">
-                            <div class="sa-chart-toolbar__item ms-0 me-auto">
-                                <div class="sa-chart-toolbar__item-range">
-                                    <div class="text-muted mx-3 my-auto small">
-                                        Từ ngày
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm datepicker-here"
-                                        placeholder="Từ ngày" data-auto-close="true" data-language="en"
-                                        aria-label="Datepicker" />
-                                    <div class="text-muted mx-3 my-auto small">
-                                        Đến ngày
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm datepicker-here"
-                                        placeholder="Đến ngày" data-auto-close="true" data-language="en"
-                                        aria-label="Datepicker" />
-                                </div>
-                            </div>
-                            <div class="sa-chart-toolbar__item">
-                                <span class="text-muted small me-2">Hiển thị theo :</span>
-                                <button class="btn btn-sm btn-outline-dark me-2 active">
-                                    Ngày
-                                </button>
-                                <button class="btn btn-sm btn-outline-dark me-2">
-                                    Tuần
-                                </button>
-                                <button class="btn btn-sm btn-outline-dark me-2">
-                                    Tháng
-                                </button>
-                                <button class="btn btn-sm btn-outline-dark">
-                                    Năm
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
+                    <div style="height: 93vh !important" class="card-body">
 
                             <div class="chartCard">
                                 <div class="chartBox">
                                     <div class="chartContent">
-                                        <div class="colSmall">
-                                            <canvas id="myChart2"></canvas>
-                                        </div>
                                         <div class="colLarge">
-                                            <div class="box">
+                                            <div style="width: 2400px" class="box">
                                                 <canvas id="myChart"></canvas>
                                             </div>
                                         </div>
@@ -57,72 +19,20 @@
 
                                 </div>
                             </div>
-                            <script type="text/javascript"
-                                src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
+                            <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
                             <script>
                                 // Setup data for stacked bar chart with new labels matching the image
-                                const labels = [
-                                    '01 Thg 5',
-                                    '02 Thg 5',
-                                ];
+                                const labels = [<?= $arrayDate ?>];
 
                                 // Total orders for each day (visible on top of each bar in the image)
-                                const totals = [5, 10, 25, 20, 45, 41, 18, 60, 38, 52, 31, 14, 20, 13];
-
+                                const totals = [<?= $arrayTotal ?>];
+                                // Tìm giá trị tối đa trong mảng totals
+                                const maxTotal = Math.max(...totals);
+                                
                                 // Data based on the image
                                 const data = {
                                     labels: labels,
-                                    datasets: [
-                                        {
-                                            label: 'Đang gửi',
-                                            data: [0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0],
-                                            backgroundColor: '#FFEB3B',
-                                            borderColor: '#FFEB3B',
-                                            borderWidth: 1
-                                        },
-                                        {
-                                            label: 'Đang đi phát',
-                                            data: [0, 0, 0, 0, 0, 0, 0, 5, 6, 0, 0, 0, 3, 0],
-                                            backgroundColor: '#FFC107',
-                                            borderColor: '#FFC107',
-                                            borderWidth: 1
-                                        },
-                                        {
-                                            label: 'Chưa phát được',
-                                            data: [0, 1, 1, 0, 2, 2, 1, 0, 0, 2, 0, 1, 0, 1],
-                                            backgroundColor: '#FF9800',
-                                            borderColor: '#FF9800',
-                                            borderWidth: 1
-                                        },
-                                        {
-                                            label: 'Chuyển hoàn',
-                                            data: [0, 0, 0, 0, 3, 6, 0, 0, 0, 0, 0, 0, 0, 0],
-                                            backgroundColor: '#F44336',
-                                            borderColor: '#F44336',
-                                            borderWidth: 1
-                                        },
-                                        {
-                                            label: 'Chưa nhận COD',
-                                            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 45, 0, 0, 0, 0],
-                                            backgroundColor: '#8BC34A',
-                                            borderColor: '#8BC34A',
-                                            borderWidth: 1
-                                        },
-                                        {
-                                            label: 'Đã nhận COD',
-                                            data: [4, 7, 22, 16, 37, 31, 16, 45, 27, 0, 28, 13, 16, 12],
-                                            backgroundColor: '#4CAF50',
-                                            borderColor: '#4CAF50',
-                                            borderWidth: 1
-                                        },
-                                        {
-                                            label: 'Đã nhận CH',
-                                            data: [1, 2, 2, 4, 3, 2, 1, 7, 5, 5, 3, 0, 1, 0],
-                                            backgroundColor: '#9C27B0',
-                                            borderColor: '#9C27B0',
-                                            borderWidth: 1
-                                        }
-                                    ]
+                                    datasets: [<?= $arrayCount ?>]
                                 };
 
                                 // Configuration for main chart (scrollable)
@@ -133,7 +43,7 @@
                                         maintainAspectRatio: false,
                                         layout: {
                                             padding: {
-                                                top: 30
+                                                // top: 30
                                             }
                                         },
                                         scales: {
@@ -146,13 +56,13 @@
                                             y: {
                                                 stacked: true,
                                                 beginAtZero: true,
-                                                max: 65, // Match the scale in the image
+                                                max: maxTotal, // Match the scale in the image
                                                 ticks: {
-                                                    display: false
+                                                    display: true
                                                 },
                                                 grid: {
-                                                    color: '#eeeeee',
-                                                    drawTicks: false
+                                                    // color: '#eeeeee',
+                                                    // drawTicks: false
                                                 },
                                                 border: {
                                                     display: false
@@ -189,7 +99,7 @@
                                                     ctx.textBaseline = 'bottom';
                                                     ctx.font = 'bold 12px Arial';
                                                     ctx.fillStyle = '#333';
-                                                    ctx.fillText(total + ' Đơn', x, y);
+                                                    ctx.fillText(total, x, y);
                                                     ctx.restore();
                                                 });
                                             }
@@ -201,68 +111,6 @@
                                 const myChart = new Chart(
                                     document.getElementById('myChart'),
                                     config
-                                );
-
-                                // Setup data for y-axis chart
-                                const data2 = {
-                                    labels: ['', '', '', '', '', '', ''],
-                                    datasets: [{
-                                        label: '',
-                                        data: [0, 10, 20, 30, 40, 50, 60],
-                                        backgroundColor: 'rgba(0, 0, 0, 0)',
-                                        borderColor: 'rgba(0, 0, 0, 0)'
-                                    }]
-                                };
-
-                                // Configuration for y-axis chart
-                                const config2 = {
-                                    type: 'bar',
-                                    data: data2,
-                                    options: {
-                                        indexAxis: 'y',
-                                        maintainAspectRatio: false,
-                                        layout: {
-                                            padding: {
-                                                bottom: 28.5
-                                            }
-                                        },
-                                        scales: {
-                                            x: {
-                                                display: false
-                                            },
-                                            y: {
-                                                position: 'right',
-                                                beginAtZero: true,
-                                                reverse: true,
-                                                ticks: {
-                                                    padding: 8,
-                                                    callback: function (value) {
-                                                        return value;
-                                                    },
-                                                    font: {
-                                                        size: 10
-                                                    }
-                                                },
-                                                afterFit: (ctx) => {
-                                                    ctx.width = 65;
-                                                },
-                                                grid: {
-                                                    display: false
-                                                }
-                                            }
-                                        },
-                                        plugins: {
-                                            legend: {
-                                                display: false,
-                                            }
-                                        }
-                                    }
-                                };
-
-                                // Render y-axis chart
-                                const myChart2 = new Chart(
-                                    document.getElementById('myChart2'),
-                                    config2
                                 );
 
                                 // Add event listeners for view option buttons
@@ -307,3 +155,50 @@
         </div>
     </div>
     <!-- sa-app__body / end -->
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Lấy các phần tử input
+        const typeShowInput = document.getElementById('type_show');
+        const timeStartInput = document.getElementById('time_start'); // Đổi tên để tránh trùng ID
+        const timeEndInput = document.getElementById('time_end'); // Đổi tên để tránh trùng ID
+
+        // Hàm chuyển hướng
+        function redirectToUrl() {
+            const typeShow = typeShowInput.value;
+            const timeStart = timeStartInput.value;
+            const timeEnd = timeEndInput.value;
+
+            // Tạo URL
+            const url = `/admin/bieu-do?type_show=${encodeURIComponent(typeShow)}&time_start=${encodeURIComponent(timeStart)}&time_end=${encodeURIComponent(timeEnd)}`;
+
+            // Chuyển hướng
+            window.location.href = url;
+        }
+
+        // Lắng nghe sự kiện input trên các trường ngày
+        timeStartInput.addEventListener('input', redirectToUrl);
+        timeEndInput.addEventListener('input', redirectToUrl);
+
+        // Lắng nghe sự kiện click trên các nút
+        document.getElementById('showDay').addEventListener('click', function() {
+            typeShowInput.value = 'day';
+            redirectToUrl();
+        });
+
+        document.getElementById('showWeek').addEventListener('click', function() {
+            typeShowInput.value = 'week';
+            redirectToUrl();
+        });
+
+        document.getElementById('showMonth').addEventListener('click', function() {
+            typeShowInput.value = 'month';
+            redirectToUrl();
+        });
+
+        document.getElementById('showYear').addEventListener('click', function() {
+            typeShowInput.value = 'year';
+            redirectToUrl();
+        });
+    });
+</script>
