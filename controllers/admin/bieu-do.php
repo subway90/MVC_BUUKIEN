@@ -63,7 +63,7 @@ if($type_show == 'day') {
             WHERE date_sent = "'.$date.'"'
         ).",";
     }
-    
+
     //format lại arrayDate
     $format_date_range = '';
     foreach ($dateRange as $date) $format_date_range .= '"'.format_time($date.' 00:00:00','DD Thg MM YYYY').'",';
@@ -96,7 +96,7 @@ elseif ($type_show == 'week') {
     while ($time <= $timeEnd) {
         $weekStart = clone $time;
         $weekStart->modify('monday this week');
-        
+
         $weekEnd = clone $weekStart;
         $weekEnd->modify('sunday this week');
 
@@ -112,7 +112,7 @@ elseif ($type_show == 'week') {
 
         // Di chuyển đến tuần tiếp theo
         $time = $weekEnd->modify('+1 day'); // Bắt đầu từ ngày tiếp theo
-    } 
+    }
 
     // test_array($dateRange);
 
@@ -130,7 +130,7 @@ elseif ($type_show == 'week') {
             );
         }
     }
-    
+
     // Lặp theo timeline lấy tổng count
     $totalRange = '';
     foreach ($dateRange as $date) {
@@ -196,7 +196,7 @@ elseif ($type_show == 'month') {
             );
         }
     }
-    
+
     // Lặp theo timeline lấy tổng count
     $totalRange = '';
     foreach ($dateRange as $date) {
@@ -264,7 +264,7 @@ elseif ($type_show == 'year') {
             );
         }
     }
-    
+
     // Lặp theo timeline lấy tổng count
     $totalRange = '';
     foreach ($dateRange as $date) {
@@ -282,28 +282,33 @@ elseif ($type_show == 'year') {
     }
 }
 
-//format lại array Count
-$format_data_count = "";
+$format_data_count = "["; // Start JSON array
 foreach (ARR_STATE_POST as $state) {
-    $array_value = "";
-    foreach ($array_count_state[$state['name']] as $value) $array_value .= $value.",";
-    $format_data_count .= "
+    $array_value = implode(",", $array_count_state[$state['name']]); // Convert array to comma-separated values
+    $format_data_count .= '
     {
-        label: '".$state['name']."',
-        data: [".substr($array_value,0,-1)."],
-        backgroundColor: '".$state['color']."',
-        borderColor: '".$state['color']."',
-        borderWidth: 1,
-    },";
+        "label": "'.$state['name'].'",
+        "data": ['.$array_value.'],
+        "backgroundColor": "'.$state['color'].'",
+        "borderColor": "'.$state['color'].'",
+        "borderWidth": 1,
+        "width": '.match ($type_show) {
+            'day' => 0.3,
+            'week' => 0.5,
+            'month' => 0.7,
+            'year' => 0.9,
+        }.'
+    },';
 }
-
+$format_data_count = rtrim($format_data_count, ","); // Remove last comma
+$format_data_count .= "]"; // End JSON array
 
 # [DATA]
 $data = [
     'type_show' => $type_show,
     'timeStart' => $timeStart,
     'timeEnd' => $timeEnd,
-    'arrayCount' => substr($format_data_count,0,-1),
+    'arrayCount' => $format_data_count,
     'arrayDate' => substr($format_date_range,0,-1),
     'arrayTotal' => substr($totalRange,0,-1),
 ];
