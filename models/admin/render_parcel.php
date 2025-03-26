@@ -4,9 +4,12 @@ function render_row_parcel($data) {
     extract($data);
     $id_parcel_after = "'".$id_parcel."'";
     //format state
-    foreach (ARR_STATE_POST as $state){ extract($state);
-        if(strtolower(trim($name)) === strtolower(trim($state_parcel))) {
-            $label_state = '<span class="p-2 small d-block text-center" style="background-color : '.$color.'">'.$name.'</span>';
+    foreach (ARR_STATE_POST as $state){ ;
+        if(strtolower(trim($state['name'])) === strtolower(trim($state_parcel))) {
+            $css_attributes = '';
+            if(isset($state['color'])) $css_attributes .= 'background-color : '.$state['color'].';';
+            if(isset($state['text_color'])) $css_attributes .= 'color : '.$state['text_color'].';';
+            $label_state = '<span class="p-2 small d-block text-center" style="'.$css_attributes.'">'.$state['name'].'</span>';
         }
     }
     // format ngày
