@@ -67,6 +67,22 @@
                                                 border: {
                                                     display: false
                                                 }
+                                            },
+                                            y2: {
+                                                stacked: true,
+                                                beginAtZero: true,
+                                                position : 'right',
+                                                max: maxTotal, // Match the scale in the image
+                                                ticks: {
+                                                    display: true
+                                                },
+                                                grid: {
+                                                    // color: '#eeeeee',
+                                                    // drawTicks: false
+                                                },
+                                                border: {
+                                                    display: false
+                                                }
                                             }
                                         },
                                         plugins: {

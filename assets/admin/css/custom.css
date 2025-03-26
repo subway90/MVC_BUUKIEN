@@ -16,6 +16,16 @@
   background-color: #226b7c !important;
 }
 
+.btn-primary-active, .btn-primary-active:hover {
+  background-color: #0f3e6c;
+  border: #0f3e6c;
+}
+
+.btn-blue-light, .btn-blue-light:hover {
+  background-color: #3ea2b9;
+  border: #3ea2b9;
+}
+
 
 .bg-error {
     background-color: #ffccc9 !important;
@@ -59,16 +69,15 @@
     width: 120px;
 }
 
-.chartMenu {
-  padding: 10px 20px;
-  background-color: #006064;
-  color: white;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
+button {
+  padding: 5px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  cursor: pointer;
+  font-size: 12px;
 }
+
 
 .chartCard {
   display: flex;
@@ -84,104 +93,20 @@
   flex-direction: column;
 }
 
-.viewOptions {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 15px;
-  align-items: center;
-}
-
-.viewLabel {
-  font-size: 14px;
-  color: #666;
-}
-
-.viewButtons {
-  display: flex;
-  gap: 5px;
-}
-
-.legendContainer {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin: 10px 0 20px 0;
-}
-
-.legendItem {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 12px;
-}
-
-.legendColor {
-  width: 12px;
-  height: 12px;
-  border-radius: 2px;
-}
-
-button {
-  padding: 5px 15px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  background-color: #f8f8f8;
-  cursor: pointer;
-  font-size: 12px;
-}
-
-
 .chartContent {
   display: flex;
   height: 500px;
   position: relative;
 }
 
-.colSmall {
-  width: 65px;
-  flex-shrink: 0;
-  position: relative;
-  z-index: 2;
-}
-
 .colLarge {
   overflow-x: auto;
   position: relative;
+  direction: rtl; /* Thay đổi hướng thanh cuộn từ phải qua trái */
 }
 
 .box {
   height: 460px;
-}
-
-.timelineSlider {
-  height: 40px;
-  width: 100%;
-  position: relative;
-  background-color: #f3f7fc;
-  border-top: 1px solid #e0e0e0;
-}
-
-.sliderTrack {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background-color: #ccc;
-  transform: translateY(-50%);
-}
-
-.sliderHandle {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background-color: white;
-  border: 2px solid #007bff;
-  transform: translate(-50%, -50%);
-  cursor: pointer;
 }
 
 /* Custom scrollbar */
@@ -201,14 +126,4 @@ button {
 
 .colLarge::-webkit-scrollbar-thumb:hover {
   background: #555;
-}
-
-.btn-primary-active, .btn-primary-active:hover {
-  background-color: #0f3e6c;
-  border: #0f3e6c;
-}
-
-.btn-blue-light, .btn-blue-light:hover {
-  background-color: #3ea2b9;
-  border: #3ea2b9;
 }
