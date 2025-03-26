@@ -111,7 +111,7 @@ function compare_parcel($id_parcel,$new_fee,$new_cod,$new_state) {
             'new_fee' => $new_fee,
             'old_cod' => null,
             'new_cod' => $new_cod,
-            'old_state' => $get_old['state_parcel'],
+            'old_state' => null,
             'new_state' => $new_state,
             'reason' => 'Mã vận đơn không tồn tại',
         ];
