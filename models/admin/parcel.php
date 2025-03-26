@@ -103,8 +103,19 @@ function compare_parcel($id_parcel,$new_fee,$new_cod,$new_state) {
         FROM parcel
         WHERE id_parcel = "'.$id_parcel.'"'
     );
-    // Trả false nếu không tìm thấy
-    if(!$get_old) return false;
+    // Nếu không tìm thấy
+    if(!$get_old) {
+        return [
+            'id_parcel' => $id_parcel,
+            'old_fee' => null,
+            'new_fee' => $new_fee,
+            'old_cod' => null,
+            'new_cod' => $new_cod,
+            'old_state' => $get_old['state_parcel'],
+            'new_state' => $new_state,
+            'reason' => 'Mã vận đơn không tồn tại',
+        ];
+    }
 
     // So sánh
     $reason = [];

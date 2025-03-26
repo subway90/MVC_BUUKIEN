@@ -43,7 +43,7 @@ if (isset($_FILES['file_request'])) {
         }
     } else {
         // Thông báo lỗi
-        toast_create('danger','File import không đúng địng dạng | Mã bưu điện | Phí gửi | COD | Trạng thái mới |');
+        toast_create('danger','File import không đúng địng dạng head : Mã bưu điện | Phí gửi | COD | Trạng thái mới ');
         route('admin/doi-soat');
     }
 }

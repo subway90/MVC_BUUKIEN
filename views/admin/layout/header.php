@@ -422,7 +422,7 @@ $(document).ready(function () {
 
                 // Thêm form vào body và gửi đi
                 document.body.appendChild(form);
-                form.zsubmit(); // Gửi form
+                form.submit(); // Gửi form
             }
         });
 

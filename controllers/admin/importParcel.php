@@ -91,11 +91,11 @@ if (isset($_FILES['file_request'])) {
 
         }
         // thông báo và chuyển route
-        toast_create('success', 'Nhập thành công !');
+        toast_create('info', 'Quá trình nhập XLSX đã hoàn tất.');
         route('admin/quan-li-buu-kien');
     } else {
         // thông báo và chuyển route
-        toast_create('danger', 'Các cột không đúng định dạng !');
+        toast_create('danger', 'File import không đúng định dạng dòng head : Mã bưu kiện | Chuyển phát | Mã nhân viên | Ngày gửi	Người nhận | Điện thoại | Địa chỉ | Phí gửi | COD | Sản phẩm | Trạng thái | Ghi chú');
         route('admin/quan-li-buu-kien');
     }
 }
