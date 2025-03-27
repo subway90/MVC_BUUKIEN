@@ -52,13 +52,13 @@ function create_employee($code_user, $id_role,$full_name,$phone,$username,$passw
  * @param mixed $username
  * @return bool Trả về true nếu tồn tại, false nếu không tồn tại
  */
-function check_exist_username_update($username) {
+function check_exist_username_update($username,$username_old) {
     $query = pdo_query_value(
         'SELECT username 
         FROM user
         WHERE username = "'.$username.'"'
     );
-    if(!$query || $query === auth('username')) return false;
+    if($query && $query != $username_old) return true;
 
     return false;
 
@@ -69,16 +69,15 @@ function check_exist_username_update($username) {
  * @param mixed $id
  * @return bool Trả về true nếu tồn tại, false nếu không tồn tại
  */
-function check_exist_code_user_update($code_user) {
+function check_exist_code_user_update($code_user,$code_user_old) {
     $query = pdo_query_value(
         'SELECT code_user 
         FROM user
-        WHERE code_user = "'.$code_user.'"
-        AND id_user = "'.auth('id_user').'"'
+        WHERE code_user = "'.$code_user.'"'
     );
-
+    
     // nếu tồn tại
-    if($query && $query !== auth('code_user')) return true;
+    if($query && $query != $code_user_old) return true;
     return false;
 
 }
