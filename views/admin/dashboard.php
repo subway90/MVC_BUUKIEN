@@ -11,7 +11,6 @@
                         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
                         <script>
                             var dataLabels = JSON.parse(`<?= $arrayCount?>`)
-                            console.log([<?= $arrayDate ?>])
                             dataLabels = dataLabels.map(data => {
                                 return {
                                     x: [<?= $arrayDate ?>],
@@ -19,7 +18,22 @@
                                     name: data.label,
                                     marker: {color: data.backgroundColor},
                                     width: data.width,
-                                    type: 'bar'
+                                    type: 'bar',
+                                }
+                            })
+                            dataLabels.push({
+                                x: dataLabels[0].x,
+                                y: [<?= $arrayTotal ?>], // nâng nhẹ để text không bị đè
+                                mode: 'text',
+                                type: 'scatter',
+                                text: [<?= $arrayTotal ?>],
+                                textposition: 'top center',
+                                showlegend: false,
+                                hoverinfo: 'skip', // không cần tooltip
+                                textfont: {
+                                    size: 14,
+                                    color: 'black',
+                                    weight: 'bold'
                                 }
                             })
                             var layout = {
