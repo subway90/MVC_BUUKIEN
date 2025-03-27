@@ -2,7 +2,7 @@
 
 function get_all_employee() {
     return pdo_query(
-        'SELECT u.*, r.name_role
+        'SELECT u.id_user, u.code_user, u.full_name, u.phone, u.username, u.id_role, r.name_role
         FROM user u
         JOIN role r ON u.id_role = r.id_role'
     );
@@ -101,5 +101,15 @@ function update_employee($id_user,$code_user, $id_role,$full_name,$phone,$userna
         username = '".$username."'".
         $change_password."
         WHERE id_user = '".$id_user."'"
+    );
+}
+
+function get_all_employee_with_filter($keyword) {
+    
+    return pdo_query(
+        'SELECT u.id_user, u.code_user, u.full_name, u.phone, u.username, u.id_role, r.name_role
+        FROM user u
+        JOIN role r ON u.id_role = r.id_role
+        WHERE u.full_name LIKE "%'.$keyword.'%"'
     );
 }

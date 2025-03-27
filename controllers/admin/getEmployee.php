@@ -10,6 +10,19 @@ model('admin','employee');
 
 # [HANDLE]
 
+
+# Lấy danh sách
+if(isset($_GET['filter'])) {
+    // lấy input
+    $keyword = clear_input($_GET['filter']);
+    
+    view_json(200,[
+        'data' => get_all_employee_with_filter($keyword),
+    ]);
+}
+
+
+# Lấy theo id
 if(isset($_GET['id']) && $_GET['id']) {
     
     // lấy input
