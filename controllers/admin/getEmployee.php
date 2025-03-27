@@ -1,7 +1,7 @@
 <?php
 
 # [AUTHOR]
-// author('admin');
+author('admin');
 
 # [MODEL]
 model('admin','employee');

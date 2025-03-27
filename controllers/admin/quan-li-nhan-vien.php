@@ -1,5 +1,7 @@
 <?php
 
+author('admin');
+
 # [MODEL]
 model('admin','employee');
 
