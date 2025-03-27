@@ -23,19 +23,32 @@ if (isset($_FILES['file_request'])) {
         for ($row = 2; $row <= $highestRow; $row++) {
             $data = $sheet->rangeToArray("A$row:B$row")[0]; // Chỉ lấy 2 cột
 
+            
             // Gán dữ liệu vào biến
             $id_parcel = clear_input($data[0]); // Mã bưu kiện
             $new_state = clear_input($data[1]); // Trạng thái mới
 
-            // Gọi hàm cập nhật trạng thái
-            update_state_parcel($id_parcel, $new_state);
+            //Bool continue
+            $continue = false;
+
+            // Nếu thuộc mảng state
+            foreach (ARR_STATE_POST as $state) {
+                if (strtolower($state['name']) === strtolower($new_state)) {
+                    $continue = true; // Gán true nếu tên trùng khớp
+                    break; // Ngừng vòng lặp ngay khi tìm thấy
+                }
+            }
+            
+            // Update
+            if($continue) update_state_parcel($id_parcel, $new_state);
+                
         }
         // thông báo và chuyển route
         toast_create('success','Cập nhật thành công !');
         route('admin/quan-li-buu-kien');
     } else {
         // thông báo và chuyển route
-        toast_create('danger','Cột dữ liệu không đún định dạng | Mã bưu điện | Trạng thái mới |');
+        toast_create('danger','Cột dữ liệu không đúng định dạng | Mã bưu điện | Trạng thái mới |');
         route('admin/quan-li-buu-kien');
     }
 }
