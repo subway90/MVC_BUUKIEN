@@ -44,7 +44,7 @@
                                         <button type="button" class="btn btn-sm btn-warning p-1 px-2 me-2" onclick="getOnePost('<?= $employee['id_user'] ?>')">
                                             <small>Sửa</small>
                                         </button>
-                                        <button type="button" class="btn btn-sm btn-danger p-1 px-2" onclick="delete_employee(<?= $employee['code_user'] ?>)">
+                                        <button type="button" class="btn btn-sm btn-danger p-1 px-2" onclick="delete_employee('<?= $employee['id_user'] ?>')">
                                             <small>Xoá</small>
                                         </button>
                                     <?php endif ?>
