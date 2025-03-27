@@ -20,7 +20,7 @@
                     <tbody> 
                         <?php if($list_employee) : ?>
                         <?php foreach ($list_employee as $employee) : ?>
-                            <tr class="small">
+                            <tr class="small <?= $employee['name_role'] === 'admin' ? 'bg-warning bg-opacity-10' : '' ?>">
                                 <td class="small align-middle text-center">
                                     <?= $employee['code_user'] ?>
                                 </td>
@@ -29,25 +29,19 @@
                                 <td class="small align-middle text-center">
                                     <?= $employee['phone'] ?>
                                 </td>
-                                <td class="small align-middle text-center">
+                                <td class="small align-middle text-center ">
                                     <?= $employee['username'] ?>
                                 </td>
                                 <td class="small align-middle text-center">
-                                    <?= $employee['name_role'] ?>
+                                    <?= ($employee['username'] === 'admin' ? '<span class="text-danger fw-bold">Quản trị viên</span>' : ($employee['name_role'] === 'admin' ? '<span class="text-danger">'.$employee['name_role'].'</span>' : $employee['name_role'])) ?>
                                 </td>
                                 <td class="small align-middle text-end">
-                                    <?php if($employee['username'] == 'admin') : ?>
-                                        <button class="btn btn-sm btn-danger p-1 px-2 disabled">
-                                            <small>Không thể xoá</small>
-                                        </button>
-                                    <?php else : ?>
-                                        <button type="button" class="btn btn-sm btn-warning p-1 px-2 me-2" onclick="getOnePost('<?= $employee['id_user'] ?>')">
-                                            <small>Sửa</small>
-                                        </button>
-                                        <button type="button" class="btn btn-sm btn-danger p-1 px-2" onclick="delete_employee('<?= $employee['id_user'] ?>')">
-                                            <small>Xoá</small>
-                                        </button>
-                                    <?php endif ?>
+                                    <button type="button" class="btn btn-sm btn-warning p-1 px-2 me-2 <?= ($employee['username'] == 'admin' && auth('username') !== 'admin') ? 'invisible' : '' ?>" onclick="getOnePost('<?= $employee['id_user'] ?>')">
+                                        <small>Sửa</small>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-danger p-1 px-2 <?= ($employee['username'] == 'admin') ? 'invisible' : '' ?>" onclick="delete_employee('<?= $employee['id_user'] ?>')">
+                                        <small>Xoá</small>
+                                    </button>
                                 </td>
                             </tr>
                         <?php endforeach ?>
@@ -177,7 +171,7 @@
                         </div>
                         <div class="col-6 py-2 px-3 text-start mb-4">
                             <label class="small text-muted" for="username">Email/Username</label>
-                            <input name="username" value="<?= $username ?>" id="username" type="text" placeholder="Nhập email/username để đăng nhập"
+                            <input <?= ($username === 'admin') ? 'readonly' : '' ?> name="username" value="<?= $username ?>" id="username" type="text" placeholder="Nhập email/username để đăng nhập"
                                 class="form-control ps-0 border-0 border-bottom border-2 outline-none" />
                         </div>
                         <div class="col-6 py-2 px-3 text-start mb-4">
