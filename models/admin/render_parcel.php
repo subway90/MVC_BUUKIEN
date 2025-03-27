@@ -84,7 +84,7 @@ function render_paginate_parcel($total_row, $page_active) {
             $value_before_page = $page_active - 1;
         }
         $content .= <<<HTML
-        <button value=" {$value_before_page}" class="btn-paginate sa-toolbar-user btn-sm bg-primary small fw-normal text-light rounded-0 bg-blue-light{$state_before_page}">
+        <button value="{$value_before_page}" class="btn-paginate sa-toolbar-user btn-sm bg-primary small fw-normal text-light rounded-0 bg-blue-light{$state_before_page}">
             <small>Trước</small>
         </button>
         HTML;
