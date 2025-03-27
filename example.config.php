@@ -1,19 +1,19 @@
 <?php
 
-const URL = 'https://example.com/';
+const URL = 'https://cuananh.com/';
 const URL_ADMIN = URL.'admin/';
 const URL_STORAGE = URL."assets/file/";
 
 const PATH_FILE_AVATAR = "assets/file/avatar/";
 const PATH_FILE_MENU = "assets/file/menu/";
 
-const WEB_NAME = 'Parcel Management';
+const WEB_NAME = 'Evii';
 const WEB_LOGO = 'https://cdn-icons-png.flaticon.com/512/3638/3638895.png';
 const WEB_FAVICON = 'https://cdn-icons-png.flaticon.com/512/3638/3638895.png';
 const WEB_ADDRESS = '01 Trần Hưng Đạo, Phường 5, Quận 1, Hồ Chí Minh';
-const WEB_HOTLINE = '0979 68 68 68';
-const WEB_EMAIL = 'contact@example.com';
-const WEB_DESCRIPTION = 'Hệ thống quản lí bưu kiện PMS';
+const WEB_HOTLINE = '0965 279 041';
+const WEB_EMAIL = 'contact@cuananh.com';
+const WEB_DESCRIPTION = 'Hệ thống quản lí bưu kiện Evii';
 
 const DB_HOST = 'localhost';
 const DB_USER = 'root';
@@ -26,9 +26,9 @@ const LIMIT_SIZE_FILE = 4; // đơn vị MB (megabyte)
 
 const LIMIT_DAY_LOADED = 30; // giới hạn số ngày request chart
 
-const LIMIT_ROW_PAGINATE = 100; // giới hạn số dòng hiển thị
+const LIMIT_ROW_PAGINATE = 1000; // giới hạn số dòng hiển thị
 
-const BOOL_SPINNER = false; // công tắt spinner ở UI
+const BOOL_SPINNER = true; // công tắt spinner ở UI
 
 const DEFAULT_IMAGE = 'https://img.freepik.com/premium-vector/default-image-icon-vector-missing-picture-page-website-design-mobile-app-no-photo-available_87543-11093.jpg';
 const DEFAULT_AVATAR = 'https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png';
@@ -111,12 +111,14 @@ const ARR_PROVINCE = [
 
 const ARR_STATE_POST = [
     [
-        'color' => '#e4e75a; color : black',
+        'color' => '#e4e75a',
+        'text_color' => 'black',
         'name' => 'Đang gửi',
     ],
     [
         
-        'color' => '#70ca34; color: black',
+        'color' => '#70ca34',
+        'text_color' => 'black',
         'name' => 'Hoàn thành',
     ],
     [
@@ -130,7 +132,6 @@ const ARR_STATE_POST = [
     [
         'color' => '#a10909',
         'name' => 'Đã nhận chuyển hoàn',
-        'value_example' => [0,3,4,5,5,3,1,5,3,4,5,5,3,1],
     ],
     [
         'color' => '#0B0B0B',
