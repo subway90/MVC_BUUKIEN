@@ -54,7 +54,7 @@
                                 <td colspan="8">
                                     <span class="text-muted">Vui lòng nhấn button <span class="text-primary fw-bold">Tải XLSX ở phía trên</span> để dùng chức năng.</span>
                                     <br>
-                                    <span class="text-danger">Lưu ý :</span> file phải đúng định dạng head : <span class="fw-bold">Mã bưu kiện <span class="text-muted fw-semi">|</span> Phí gửi <span class="text-muted fw-semi">|</span> COD <span class="text-muted fw-semi">|</span> Trạng thái mới</span>
+                                    <span class="text-danger">Lưu ý :</span> File phải đúng định dạng head : <span class="fw-bold">Mã bưu kiện <span class="text-muted fw-semi">|</span> Phí gửi <span class="text-muted fw-semi">|</span> COD <span class="text-muted fw-semi">|</span> Trạng thái mới</span>
                                 </td>
                             </tr>
                         <?php endif ?>
