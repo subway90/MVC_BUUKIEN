@@ -386,11 +386,22 @@
     // Lấy dữ liệu các hàng
     table.querySelectorAll('tbody tr').forEach(row => {
         var rowData = Array.from(row.querySelectorAll('td')).map(td => {
+            var cellValue = td.innerText;
+            var cellType = 's';
+
+            // Kiểm tra xem ô có chứa ngày không
+            if (Date.parse(cellValue)) {
+                // Nếu có, chuyển đổi kiểu dữ liệu thành ngày
+                let date = new Date(cellValue);
+                cellValue = date; // Truyền trực tiếp đối tượng Date
+                cellType = 'd'; // Đặt kiểu dữ liệu là date
+            }
+
             return {
-                v: td.innerText, // Lấy giá trị văn bản
-                t: 's', // Đặt kiểu dữ liệu là string
-                s: { // Đặt thuộc tính kiểu cho ô
-                    alignment: { 
+                v: cellValue,
+                t: cellType,
+                s: {
+                    alignment: {
                         horizontal: 'center' // Căn giữa
                     }
                 }
