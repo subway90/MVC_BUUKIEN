@@ -137,7 +137,7 @@ elseif ($type_show == 'week') {
     $totalRange = '';
     foreach ($dateRange as $date) {
         $totalRange .= pdo_query_value(
-            sql: 'SELECT COUNT(*)
+            'SELECT COUNT(*)
             FROM parcel
             WHERE date_sent >= "'.$date['start'].'" AND date_sent <= "'.$date['end'].'"'
         ).",";
