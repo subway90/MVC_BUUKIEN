@@ -60,7 +60,7 @@ if($type_show == 'day') {
     $totalRange = '';
     foreach ($dateRange as $date) {
         $totalRange .= pdo_query_value(
-            sql: 'SELECT COUNT(*)
+            'SELECT COUNT(*)
             FROM parcel
             WHERE date_sent = "'.$date.'"'
         ).",";
