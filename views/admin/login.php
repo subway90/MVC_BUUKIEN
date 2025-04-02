@@ -19,7 +19,7 @@
     <div class="card w-25x flex-grow-1 flex-sm-grow-0 m-sm-auto">
         <div class="card-body p-sm-5 m-sm-3 flex-grow-0">
             <h1 class="mb-0 fs-3">Đăng nhập</h1>
-            <div class="fs-exact-14 text-muted mt-2 pt-1 mb-5 pb-2">Hệ thống quản lí bưu kiện <?= WEB_NAME ?></div>
+            <div class="fs-exact-14 text-muted mt-2 pt-1 mb-5 pb-2"><?= WEB_DESCRIPTION ?></div>
             <form action="/dang-nhap" method="post">
                 <div class="mb-2">
                     <label class="form-label">Tài khoản</label>
